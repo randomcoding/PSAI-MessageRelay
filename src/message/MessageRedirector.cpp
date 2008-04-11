@@ -4,6 +4,8 @@
 
 #include <net/messages.h>
 
+using namespace std;
+
 MessageRedirector::MessageRedirector()
 {
 }
@@ -53,56 +55,60 @@ void MessageRedirector::redirect(MsgEntry* messageEntry)
 			handleUserActionMessage(userActionMessage);
 			break;
 		default:
-			std::cout << "Unknown Message Type: " + messageEntry.GetType();
+			cout << "Unknown Message Type: " << messageEntry.GetType();
 	}	
-}
-
-void MessageRedirector::handleUserCommandMessage(psUserCmdMessage& msg)
-{
-	// TODO: write method
 }
 
 void MessageRedirector::handleChatMessage(psChatMessage& msg)
 {
+	cout << "Handle Chat Message from " << msg.sPerson << " to " << msg.sOther << " saying " << msg.sText;
 	// TODO: write method
 }
 
 void MessageRedirector::handleCombatEventMessage(psCombatEventMessage& msg)
 {
+	cout << "Handle Combat Event Message on target " << msg.target_id << " for " << msg.damage << " damage.";
 	// TODO: write method
 }
 
 void MessageRedirector::handleEquipmentMessage(psEquipmentMessage& msg)
 {
+	cout << "Handle Equipment Message for part " << msg.part;
 	// TODO: write method
 }
 
 void MessageRedirector::handleHeartbeatMessage(psHeartBeatMsg& msg)
 {
+	cout << "Handle heartbeat message";
 	// TODO: write method
 }
 
 void MessageRedirector::handleLootMessage(psLootMessage& msg)
 {
+	cout << "Handle Loot Message: " << msg.lootxml;
 	// TODO: write method
 }
 
 void MessageRedirector::handleMoveInfoMessage(psMovementInfoMessage& msg)
 {
+	cout << "Handle Move Info Message: " << msg.GetMessageTypeName();
 	// TODO: write method
 }
 
 void MessageRedirector::handleMoveModMessage(psMoveModMsg& msg)
 {
+	cout << "Handle Move Mod Message: " << msg.movementMod;
 	// TODO: write method
 }
 
 void MessageRedirector::handleUserActionMessage(psUserActionMessage& msg)
 {
+	cout << "Handle User Action Message: " << msg.action;
 	// TODO: write method
 }
 
 void MessageRedirector::handleUserCommandMessage(psUserCmdMessage& msg)
 {
+	cout << "Handle User Command Message: " << msg.command;
 	// TODO: write method
 }
