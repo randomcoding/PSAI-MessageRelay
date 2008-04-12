@@ -1,0 +1,4 @@
+# Jamfile for src directory just call all next level jam files
+SubDir TOP src ;
+
+SubInclude TOP src message ;

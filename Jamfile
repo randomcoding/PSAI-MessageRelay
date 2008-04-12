@@ -1,0 +1,54 @@
+# Top, project level jamfile for Message Redirector project
+
+TOP ?= "." ;
+BUILDTOP ?= "." ;
+
+SubDir TOP ;
+
+# Common include directories.
+
+IncludeDir ;
+IncludeDir "include" ;
+IncludeDir src message;
+IncludeDir $(BUILDTOP) : : literal transient ;
+
+
+# Delete the following dir and subdirs on running 'jam clean'.
+
+CleanDir clean :
+    out ;
+	
+# Delete the following files on running 'jam distclean'.
+
+Clean distclean :
+	
+# Delete the following dir and subdirs on running 'jam distclean'.
+
+CleanDir distclean :
+    autom4te.cache ;
+	
+# Invokes 'jam clean' on running 'jam distclean'.
+
+Depends distclean : clean ;
+
+# Description for 'jam help'.
+
+Help distclean : "Remove built targets and configuration" ;
+
+# Write a description of each compile group for 'jam help'
+Description redirector : "Builds the Message Redirector" ;
+#Description server : "Server components" ;
+#Description client : "Client components" ;
+#Description tools : "Tools" ;
+#Description client_static : "Static client components" ;
+#Description server_static : "Static server components" ;
+
+# Register the compile groups. To add a project to a compile group, add the line CompileGroups project : compilegroup ; in the projects Jamfile.
+
+RegisterCompileGroups redirector ;
+# server client tools client_static server_static ;
+
+# List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensistive.
+# Library targets must be seen by Jam before Application and Plugin targets.
+
+SubInclude TOP src ;
