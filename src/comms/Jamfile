@@ -1,0 +1,13 @@
+SubDir TOP src comms ;
+
+# specify the library to be built
+Library agentcomms
+	: [ Wildcard *.cpp *.h ]
+	: noinstall
+;
+
+# specify the required libs for the build - none at present
+#ExternalLibs messageredirect : CRYSTAL CEL ;
+
+# specify compile group membership
+CompileGroups agentcomms : comms ;

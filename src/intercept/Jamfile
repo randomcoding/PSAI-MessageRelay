@@ -1,0 +1,13 @@
+SubDir TOP src intercept ;
+
+# specify the library to be built
+Library messageredirect
+	: [ Wildcard *.cpp *.h ]
+	: noinstall
+;
+
+# specify the required libs for the build
+ExternalLibs messageredirect : CRYSTAL CEL ;
+
+# specify compile group membership
+CompileGroups messageredirect : redirector ;
