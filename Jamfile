@@ -6,11 +6,34 @@ BUILDTOP ?= "." ;
 SubDir TOP ;
 
 # Common include directories.
-
 IncludeDir ;
 IncludeDir "include" ;
-IncludeDir src message;
-IncludeDir $(BUILDTOP) : : literal transient ;
+
+# project includes
+IncludeDir src ;
+IncludeDir src intercept ;
+#IncludeDir src comms ;
+#IncludeDir src util ;
+
+# other library includes
+IncludeDir $(TOP) .. .. cal3d include ;
+IncludeDir $(TOP) .. .. cel include ;
+IncludeDir $(TOP) .. .. cs include ;
+
+# PlaneShift include directories
+IncludeDir $(TOP) .. PlaneShift_SB include ;
+IncludeDir $(TOP) .. PlaneShift_SB src client ;
+IncludeDir $(TOP) .. PlaneShift_SB src common ;
+IncludeDir $(TOP) .. PlaneShift_SB src eedit ;
+IncludeDir $(TOP) .. PlaneShift_SB src npcclient ;
+IncludeDir $(TOP) .. PlaneShift_SB src pslaunch ;
+IncludeDir $(TOP) .. PlaneShift_SB src server ;
+IncludeDir $(TOP) .. PlaneShift_SB src setup ;
+IncludeDir $(TOP) .. PlaneShift_SB src tools ;
+
+
+
+#IncludeDir $(BUILDTOP) : : literal transient ;
 
 
 # Delete the following dir and subdirs on running 'jam clean'.
@@ -37,16 +60,11 @@ Help distclean : "Remove built targets and configuration" ;
 
 # Write a description of each compile group for 'jam help'
 Description redirector : "Builds the Message Redirector" ;
-#Description server : "Server components" ;
-#Description client : "Client components" ;
-#Description tools : "Tools" ;
-#Description client_static : "Static client components" ;
-#Description server_static : "Static server components" ;
-
+Description comms : "Builds the library for communications between the agent system(s) and the redirectors/client interface" ;
+ 
 # Register the compile groups. To add a project to a compile group, add the line CompileGroups project : compilegroup ; in the projects Jamfile.
 
-RegisterCompileGroups redirector ;
-# server client tools client_static server_static ;
+RegisterCompileGroups redirector comms ;
 
 # List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensistive.
 # Library targets must be seen by Jam before Application and Plugin targets.
