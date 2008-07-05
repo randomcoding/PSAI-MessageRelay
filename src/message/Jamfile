@@ -1,0 +1,13 @@
+SubDir TOP src message ;
+
+# specify the library to be built
+Library psaimessageredirect
+	: [ Wildcard *.cpp *.h ]
+	: noinstall
+;
+
+# specify the required libs for the build
+ExternalLibs psaimessageredirect : CRYSTAL CEL ;
+
+# specify compile group membership
+CompileGroups psaimessageredirect : redirector ;

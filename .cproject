@@ -25,19 +25,19 @@
 <option id="gnu.cpp.compiler.exe.debug.option.optimization.level.1195824123" name="Optimization Level" superClass="gnu.cpp.compiler.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.exe.debug.option.debugging.level.700440139" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.include.paths.66516307" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/src/client}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/src/common}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/src/eedit}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/src/npcclient}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/src/pslaunch}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/src/server}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/src/setup}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/src/tools}&quot;"/>
 <listOptionValue builtIn="false" value="/home/tim/development/planeshift/cal3d/include"/>
 <listOptionValue builtIn="false" value="/home/tim/development/planeshift/cel/include"/>
 <listOptionValue builtIn="false" value="/home/tim/development/planeshift/cs/include"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_Steel_Blue/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShiftMessageRedirector/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/client}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/common}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/eedit}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/npcclient}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/pslaunch}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/server}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/setup}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/tools}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/include}&quot;"/>
 </option>
 <option id="gnu.cpp.compiler.option.preprocessor.nostdinc.839974476" name="Do not search system directories (-nostdinc)" superClass="gnu.cpp.compiler.option.preprocessor.nostdinc"/>
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.189049189" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
@@ -350,6 +350,7 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
+<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
