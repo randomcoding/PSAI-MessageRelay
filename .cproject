@@ -4,7 +4,7 @@
 <cproject>
 <storageModule moduleId="org.eclipse.cdt.core.settings">
 <cconfiguration id="cdt.managedbuild.config.gnu.exe.debug.1519546945">
-<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.debug.1519546945" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.debug.1519546945" moduleId="org.eclipse.cdt.core.settings" name="Subscription Redirector">
 <externalSettings/>
 <extensions>
 <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -15,7 +15,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactName="PlaneShiftMessageRedirector" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.exe.debug.1519546945" name="Debug" parent="cdt.managedbuild.config.gnu.exe.debug">
+<configuration artifactName="PlaneShiftMessageRedirector" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="Build the redirector that uses the subscription mechanism" id="cdt.managedbuild.config.gnu.exe.debug.1519546945" name="Subscription Redirector" parent="cdt.managedbuild.config.gnu.exe.debug">
 <folderInfo id="cdt.managedbuild.config.gnu.exe.debug.1519546945." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.573248434" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.debug.26396621" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.debug"/>
@@ -26,18 +26,17 @@
 <option id="gnu.cpp.compiler.exe.debug.option.debugging.level.700440139" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.include.paths.66516307" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="/home/tim/development/planeshift/cal3d/include"/>
-<listOptionValue builtIn="false" value="/home/tim/development/planeshift/cel/include"/>
 <listOptionValue builtIn="false" value="/home/tim/development/planeshift/cs/include"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShiftMessageRedirector/include}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/client}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/common}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/eedit}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/npcclient}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/pslaunch}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/server}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/setup}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/src/tools}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift_SB/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/client}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/common}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/eedit}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/npcclient}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/pslaunch}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/server}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/setup}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/tools}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/include}&quot;"/>
 </option>
 <option id="gnu.cpp.compiler.option.preprocessor.nostdinc.839974476" name="Do not search system directories (-nostdinc)" superClass="gnu.cpp.compiler.option.preprocessor.nostdinc"/>
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.189049189" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
