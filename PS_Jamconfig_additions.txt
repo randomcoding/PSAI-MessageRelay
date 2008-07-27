@@ -1,0 +1,4 @@
+PSAI.AVAILABLE ?= yes ;
+PSAI.CFLAGS ?= -I/home/tim/development/planeshift/workspace-psai/PlaneShiftMessageRedirector/src ;
+PSAI.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShiftMessageRedirector/out/linux/optimize/libs -lpsaimessageredirect-0.1 -lz -lpthread -lm -ldl -lnsl -L/usr/local/lib ;
+PSAI.INCLUDE_DIR ?= /home/tim/development/planeshift/workspace-psai/PlaneShiftMessageRedirector/src ;
