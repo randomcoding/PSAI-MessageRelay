@@ -8,8 +8,6 @@
 #ifndef PSAIMESSAGEREDIRECTOR_H_
 #define PSAIMESSAGEREDIRECTOR_H_
 
-//#include <net/cmdbase.h>
-
 class psClientNetSubscriber;
 class MsgHandler;
 class psChatMessage;
