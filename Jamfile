@@ -21,15 +21,15 @@ IncludeDir $(TOP) .. .. cel include ;
 IncludeDir $(TOP) .. .. cs include ;
 
 # PlaneShift include directories
-IncludeDir $(TOP) .. PlaneShift_SB include ;
-IncludeDir $(TOP) .. PlaneShift_SB src client ;
-IncludeDir $(TOP) .. PlaneShift_SB src common ;
-IncludeDir $(TOP) .. PlaneShift_SB src eedit ;
-IncludeDir $(TOP) .. PlaneShift_SB src npcclient ;
-IncludeDir $(TOP) .. PlaneShift_SB src pslaunch ;
-IncludeDir $(TOP) .. PlaneShift_SB src server ;
-IncludeDir $(TOP) .. PlaneShift_SB src setup ;
-IncludeDir $(TOP) .. PlaneShift_SB src tools ;
+IncludeDir $(TOP) .. PlaneShift include ;
+IncludeDir $(TOP) .. PlaneShift src client ;
+IncludeDir $(TOP) .. PlaneShift src common ;
+IncludeDir $(TOP) .. PlaneShift src eedit ;
+IncludeDir $(TOP) .. PlaneShift src npcclient ;
+IncludeDir $(TOP) .. PlaneShift src pslaunch ;
+IncludeDir $(TOP) .. PlaneShift src server ;
+IncludeDir $(TOP) .. PlaneShift src setup ;
+IncludeDir $(TOP) .. PlaneShift src tools ;
 
 
 
