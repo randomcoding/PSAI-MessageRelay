@@ -12,12 +12,12 @@ IncludeDir "include" ;
 # project includes
 IncludeDir src ;
 IncludeDir src intercept ;
+IncludeDir src message ;
 #IncludeDir src comms ;
 #IncludeDir src util ;
 
 # other library includes
 IncludeDir $(TOP) .. .. cal3d include ;
-IncludeDir $(TOP) .. .. cel include ;
 IncludeDir $(TOP) .. .. cs include ;
 
 # PlaneShift include directories
