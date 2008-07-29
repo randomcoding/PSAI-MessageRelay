@@ -78,6 +78,8 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 
 		void handleStatsMessage(psStatsMessage& msg);
 
+		void handleSystemMessage(psSystemMessage& msg);
+
 		void handleWeatherMessage(psWeatherMessage& msg);
 };
 
