@@ -8,6 +8,7 @@
 #include <stdio.h>
 
 #include <psconfig.h>
+#include <globals.h>
 
 #include <net/messages.h>
 #include <net/msghandler.h>
@@ -18,11 +19,16 @@
 PsaiMessageRedirector::PsaiMessageRedirector(MsgHandler* messageHandler)
 {
 	setupSubscriptions(messageHandler);
+	msgStrings =NULL;
 }
 
 PsaiMessageRedirector::~PsaiMessageRedirector()
 {
 	// TODO Auto-generated destructor stub
+	if (msgStrings)
+	{
+		delete msgStrings;
+	}
 }
 
 void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
@@ -47,12 +53,16 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 			handleCombatEventMessage(combatMsg);
 			break;
 		}
-			/*case MSGTYPE_DEAD_RECKONING:
-			 {
-			 psDRMessage drMsg(msg);
-			 handleDeadReckonMessage(drMsg);
-			 break;
-			 }*/
+		case MSGTYPE_MSGSTRINGS:
+		{
+			break;
+		}
+		case MSGTYPE_DEAD_RECKONING:
+		{
+			psDRMessage drMsg(msg, msgStrings, psengine->GetEngine());
+			handleDeadReckonMessage(drMsg);
+			break;
+		}
 		case MSGTYPE_EFFECT:
 		{
 			psEffectMessage effectMsg(msg);
@@ -89,12 +99,12 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 			handlePersistActionLocationMessage(persistActionLocationMessage);
 			break;
 		}
-		/*case MSGTYPE_PERSIST_ACTOR:
+		case MSGTYPE_PERSIST_ACTOR:
 		{
-			psPersistActor persistActorMsg(msg);
+			psPersistActor persistActorMsg(msg, msgStrings, psengine->GetEngine());
 			handlePersistActorMessage(persistActorMsg);
 			break;
-		}*/
+		}
 		case MSGTYPE_PERSIST_ITEM:
 		{
 			psPersistItem persistItemMsg(msg);
@@ -107,12 +117,12 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 			handleRemoveObjectMessage(removeObjectMsg);
 			break;
 		}
-		case MSGTYPE_SOUND_EVENT:
+		/*case MSGTYPE_PLAYSOUND:
 		{
 			psSoundEventMessage soundEventMsg(msg);
-			//handleSoundEventMessage(soundEventMsg);
+			handleSoundEventMessage(soundEventMsg);
 			break;
-		}
+		}*/
 		case MSGTYPE_SPELL_CANCEL:
 		{
 			psSpellCancelMessage spellCancelMsg(msg);
@@ -171,6 +181,7 @@ void PsaiMessageRedirector::setupSubscriptions(MsgHandler* messageHandler)
 	messageHandler->Subscribe(this, MSGTYPE_SPELL_CANCEL);
 	messageHandler->Subscribe(this, MSGTYPE_SPELL_CAST);
 	messageHandler->Subscribe(this, MSGTYPE_WEATHER);
+	messageHandler->Subscribe(this, MSGTYPE_MSGSTRINGS);
 }
 
 void PsaiMessageRedirector::handleChatMessage(psChatMessage& msg)
@@ -184,7 +195,8 @@ void PsaiMessageRedirector::handleChatMessage(psChatMessage& msg)
 
 void PsaiMessageRedirector::handleCombatEventMessage(psCombatEventMessage& msg)
 {
-	printf("Handle Combat Message of type %s. Attack by %u on %u for %f damage on location %i\n", msg.GetMessageTypeName().GetDataSafe(), msg.attacker_id, msg.target_id, msg.damage, msg.target_location);
+	printf("Handle Combat Message of type %s. Attack by %u on %u for %f damage on location %i\n", msg.GetMessageTypeName().GetDataSafe(), msg.attacker_id, msg.target_id, msg.damage,
+			msg.target_location);
 }
 
 void PsaiMessageRedirector::handleDeadReckonMessage(psDRMessage& msg)
@@ -270,4 +282,9 @@ void PsaiMessageRedirector::handleWeatherMessage(psWeatherMessage& msg)
 void PsaiMessageRedirector::handleSystemMessage(psSystemMessage& msg)
 {
 	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe(), msg.msgline.GetDataSafe(), msg.type);
+}
+
+void PsaiMessageRedirector::handleMessageStringsMessage(psMsgStringsMessage& msg)
+{
+	msgStrings = msg.msgstrings;
 }

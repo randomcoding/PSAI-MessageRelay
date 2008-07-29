@@ -8,6 +8,11 @@
 #ifndef PSAIMESSAGEREDIRECTOR_H_
 #define PSAIMESSAGEREDIRECTOR_H_
 
+#include <csutil/strhashr.h>
+
+//class csStringHashReversible;
+
+// message types
 class psClientNetSubscriber;
 class MsgHandler;
 class psChatMessage;
@@ -30,6 +35,8 @@ class psSpellCancelMessage;
 class psStatsMessage;
 class psSystemMessage;
 class psWeatherMessage;
+class psMsgStringsMessage;
+
 
 class PsaiMessageRedirector: public psClientNetSubscriber
 {
@@ -81,6 +88,10 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 		void handleSystemMessage(psSystemMessage& msg);
 
 		void handleWeatherMessage(psWeatherMessage& msg);
+
+		void handleMessageStringsMessage(psMsgStringsMessage& msg);
+
+		csStringHashReversible* msgStrings;
 };
 
 #endif /* PSAIMESSAGEREDIRECTOR_H_ */
