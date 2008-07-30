@@ -13,6 +13,7 @@ IncludeDir "include" ;
 IncludeDir src ;
 IncludeDir src intercept ;
 IncludeDir src message ;
+IncludeDir src xml ;
 #IncludeDir src comms ;
 #IncludeDir src util ;
 
@@ -64,7 +65,7 @@ Description comms : "Builds the library for communications between the agent sys
  
 # Register the compile groups. To add a project to a compile group, add the line CompileGroups project : compilegroup ; in the projects Jamfile.
 
-RegisterCompileGroups redirector comms ;
+RegisterCompileGroups redirector comms xml ;
 
 # List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensistive.
 # Library targets must be seen by Jam before Application and Plugin targets.

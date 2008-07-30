@@ -1,0 +1,13 @@
+SubDir TOP src message ;
+
+# specify the library to be built
+Library psaixml
+	: [ Wildcard *.cpp *.h ]
+	: noinstall
+;
+
+# specify the required libs for the build
+ExternalLibs psaixml : CRYSTAL CEL ;
+
+# specify compile group membership
+CompileGroups psaixml : redirector xml ;

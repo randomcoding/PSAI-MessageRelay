@@ -3,4 +3,5 @@ SubDir TOP src ;
 
 SubInclude TOP src intercept ;
 SubInclude TOP src message ;
+SubInclude TOP src xml ;
 SubInclude TOP src comms ;

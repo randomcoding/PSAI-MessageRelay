@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/psaiXmlMessages"
+	xmlns:tns="http://www.example.org/psaiXmlMessages" elementFormDefault="qualified">
+
+	<complexType name="psmessage" type="psMessage>
+		<sequence>
+			<element name="messageType" type="string" />
+		</sequence>
+	</complexType>
+    
+    <element name="psChatMessage" type="pschatmessgae" />
+    
+    <complexType name="pschatmessage" type="psMessage">
+    	<complexContent>
+    		<extension base="psMessage">
+    			<sequence>
+			    	<element name="text" type="string"></element>
+			    	<choice>
+				    	<element name="from" type="string"></element>
+				    	<element name="to" type="string"></element>
+			    	</choice>
+		    	</sequence>	
+    		</extension>
+    	</complexContent>
+    </complexType>
+    
+
+    <complexType name="pscombatmessage">
+    	<complexContent>
+    		<extension base="tns:psmessage">
+    			<sequence>
+    				<element name="attackerId" type="string" />
+    				<element name="targetId" type="string" />
+    				<element name="damage" type="float" />
+    				<element name="targetLocation" type="int" />
+    			</sequence>
+    		</extension>
+    	</complexContent>
+    </complexType>
+</schema>
