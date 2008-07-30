@@ -12,6 +12,8 @@
 
 //class csStringHashReversible;
 
+class psEngine;
+
 // message types
 class psClientNetSubscriber;
 class MsgHandler;
@@ -41,7 +43,7 @@ class psMsgStringsMessage;
 class PsaiMessageRedirector: public psClientNetSubscriber
 {
 	public:
-		PsaiMessageRedirector(MsgHandler* messageHandler);
+		PsaiMessageRedirector(MsgHandler* messageHandler, psEngine* engine);
 		virtual ~PsaiMessageRedirector();
 
 		virtual void HandleMessage(MsgEntry* msg);
@@ -92,6 +94,8 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 		void handleMessageStringsMessage(psMsgStringsMessage& msg);
 
 		csStringHashReversible* msgStrings;
+
+		psEngine* engine;
 };
 
 #endif /* PSAIMESSAGEREDIRECTOR_H_ */

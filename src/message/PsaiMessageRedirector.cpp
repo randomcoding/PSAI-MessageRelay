@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 #include <psconfig.h>
-#include <globals.h>
+#include <psengine.h>
 
 #include <net/messages.h>
 #include <net/msghandler.h>
@@ -16,15 +16,15 @@
 
 #include "PsaiMessageRedirector.h"
 
-PsaiMessageRedirector::PsaiMessageRedirector(MsgHandler* messageHandler)
+PsaiMessageRedirector::PsaiMessageRedirector(MsgHandler* messageHandler, psEngine* engine)
 {
 	setupSubscriptions(messageHandler);
-	msgStrings =NULL;
+	this->engine = engine;
+	msgStrings = NULL;
 }
 
 PsaiMessageRedirector::~PsaiMessageRedirector()
 {
-	// TODO Auto-generated destructor stub
 	if (msgStrings)
 	{
 		delete msgStrings;
@@ -55,12 +55,17 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		}
 		case MSGTYPE_MSGSTRINGS:
 		{
+			psMsgStringsMessage messageStringsMessage(msg);
+			handleMessageStringsMessage(messageStringsMessage);
 			break;
 		}
 		case MSGTYPE_DEAD_RECKONING:
 		{
-			psDRMessage drMsg(msg, msgStrings, psengine->GetEngine());
-			handleDeadReckonMessage(drMsg);
+			if (msgStrings)
+			{
+				psDRMessage drMsg(msg, msgStrings, engine->GetEngine());
+				handleDeadReckonMessage(drMsg);
+			}
 			break;
 		}
 		case MSGTYPE_EFFECT:
@@ -101,8 +106,11 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		}
 		case MSGTYPE_PERSIST_ACTOR:
 		{
-			psPersistActor persistActorMsg(msg, msgStrings, psengine->GetEngine());
-			handlePersistActorMessage(persistActorMsg);
+			if (msgStrings)
+			{
+				psPersistActor persistActorMsg(msg, msgStrings, engine->GetEngine());
+				handlePersistActorMessage(persistActorMsg);
+			}
 			break;
 		}
 		case MSGTYPE_PERSIST_ITEM:
@@ -117,12 +125,12 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 			handleRemoveObjectMessage(removeObjectMsg);
 			break;
 		}
-		/*case MSGTYPE_PLAYSOUND:
-		{
-			psSoundEventMessage soundEventMsg(msg);
-			handleSoundEventMessage(soundEventMsg);
-			break;
-		}*/
+			/*case MSGTYPE_PLAYSOUND:
+			 {
+			 psSoundEventMessage soundEventMsg(msg);
+			 handleSoundEventMessage(soundEventMsg);
+			 break;
+			 }*/
 		case MSGTYPE_SPELL_CANCEL:
 		{
 			psSpellCancelMessage spellCancelMsg(msg);
@@ -201,7 +209,7 @@ void PsaiMessageRedirector::handleCombatEventMessage(psCombatEventMessage& msg)
 
 void PsaiMessageRedirector::handleDeadReckonMessage(psDRMessage& msg)
 {
-	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s. Entity %u message is %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.entityid, (msg.valid ? "valid" : "not valid"));
 }
 
 void PsaiMessageRedirector::handleEffectMessage(psEffectMessage& msg)
@@ -231,7 +239,7 @@ void PsaiMessageRedirector::handlePersistActionLocationMessage(psPersistActionLo
 
 void PsaiMessageRedirector::handlePersistActorMessage(psPersistActor& msg)
 {
-	printf("Handle message of type %s. PLayer id %u - name %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.playerID, msg.name.GetDataSafe());
+	printf("Handle message of type %s. Player id %u - name %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.playerID, msg.name.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handlePersistItemMessage(psPersistItem& msg)
