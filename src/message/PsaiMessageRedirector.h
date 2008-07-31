@@ -10,13 +10,11 @@
 
 #include <csutil/strhashr.h>
 
-//class csStringHashReversible;
-
 class psEngine;
-
-// message types
 class psClientNetSubscriber;
 class MsgHandler;
+
+// message types
 class psChatMessage;
 class psPlaySoundMessage;
 class psSoundEventMessage;
@@ -38,6 +36,21 @@ class psStatsMessage;
 class psSystemMessage;
 class psWeatherMessage;
 class psMsgStringsMessage;
+
+// possible events
+class psCharacterDetailsMessage;
+class psGUIInventoryMessage;
+class psGUIActiveMagicMessage;
+class psGUIInteractMessage;
+class psGUIMerchantMessage;
+class psGUISkillMessage;
+class psGUITargetUpdateMessage;
+class psLootMessage;
+class psQuestListMessage;
+class psQuestRewardMessage;
+class psUpdateObjectNameMessage;
+class psViewItemDescription;
+class psViewItemUpdate;
 
 
 class PsaiMessageRedirector: public psClientNetSubscriber
@@ -92,6 +105,33 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 		void handleWeatherMessage(psWeatherMessage& msg);
 
 		void handleMessageStringsMessage(psMsgStringsMessage& msg);
+
+		void handleCharacterDetailsMessage(psCharacterDetailsMessage& msg);
+
+		void handleGguiINventoryMessage(psGUIInventoryMessage& msg);
+
+		void handleGuiActiveMagicMessage(psGUIActiveMagicMessage& msg);
+
+		void handleGuiInteractMessage(psGUIInteractMessage& msg);
+
+		void handleGuiMerchantMessage(psGUIMerchantMessage& msg);
+
+		void handleGuiSkillMessage(psGUISkillMessage& msg);
+
+		void handleGuiTargetUpdateMessage(psGUITargetUpdateMessage& msg);
+
+		void handleLootMessage(psLootMessage& msg);
+
+		void handleQuestListMessage(psQuestListMessage& msg);
+
+		void handleQuestRewardMessage(psQuestRewardMessage& msg);
+
+		void handleUpdateObjectNameMessage(psUpdateObjectNameMessage& msg);
+
+		void handleViewItemDescriptionMessage(psViewItemDescription msg);
+
+		void handleViewItemUpdateMessage(psViewItemUpdate& msg);
+
 
 		csStringHashReversible* msgStrings;
 
