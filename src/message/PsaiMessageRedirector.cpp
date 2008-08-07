@@ -170,51 +170,78 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 
 		case MSGTYPE_CHARACTERDETAILS:
 		{
+			psCharacterDetailsMessage charDetailsMessage(msg);
+			handleCharacterDetailsMessage(charDetailsMessage);
 			break;
 		}
 		case MSGTYPE_GUIINVENTORY:
 		{
+			psGUIInventoryMessage guiInvMessage(msg);
+			handleGuiInventoryMessage(guiInvMessage);
 			break;
 		}
 		case MSGTYPE_ACTIVEMAGIC:
 		{
+			psGUIActiveMagicMessage guiActiveMagicMessage(msg);
+			handleGuiActiveMagicMessage(guiActiveMagicMessage);
 			break;
 		}
 		case MSGTYPE_GUIINTERACT:
 		{
+			psGUIInteractMessage guiInteractMessage(msg);
+			handleGuiInteractMessage(guiInteractMessage);
 			break;
 		}
 		case MSGTYPE_GUIMERCHANT:
 		{
+			psGUIMerchantMessage guiMerchantMessage(msg);
+			handleGuiMerchantMessage(guiMerchantMessage);
 			break;
 		}
 		case MSGTYPE_GUISKILL:
 		{
+			psGUISkillMessage guiSkillMessage(msg);
+			handleGuiSkillMessage(guiSkillMessage);
 			break;
 		}
 		case MSGTYPE_GUITARGETUPDATE:
 		{
+			psGUITargetUpdateMessage guiTargetUpdateMessage(msg);
+			handleGuiTargetUpdateMessage(guiTargetUpdateMessage);
 			break;
 		}
 		case MSGTYPE_LOOT:
 		{
+			psLootMessage lootMessage(msg);
+			handleLootMessage(lootMessage);
 			break;
 		}
 		case MSGTYPE_QUESTLIST:
 		{
+			psQuestListMessage questListMessage(msg);
+			handleQuestListMessage(questListMessage);
 			break;
 		}
 		case MSGTYPE_QUESTREWARD:
 		{
+			psQuestRewardMessage questRewardMessage(msg);
+			handleQuestRewardMessage(questRewardMessage);
 			break;
 		}
 		case MSGTYPE_UPDATE_ITEM:
 		{
+			printf("Received update item message type");
 			break;
 		}
 		case MSGTYPE_VIEW_ITEM:
 		{
+			printf("Received view item message type");
 			break;
+		}
+		case MSGTYPE_EQUIPMENT:
+		{
+			psEquipmentMessage equipmentMessage(msg);
+			handleEquipmentMessage(equipmentMessage);
 		}
 	}
 }
@@ -253,6 +280,7 @@ void PsaiMessageRedirector::setupSubscriptions(MsgHandler* messageHandler)
 	messageHandler->Subscribe(this, MSGTYPE_QUESTREWARD);
 	messageHandler->Subscribe(this, MSGTYPE_UPDATE_ITEM);
 	messageHandler->Subscribe(this, MSGTYPE_VIEW_ITEM);
+	messageHandler->Subscribe(this, MSGTYPE_EQUIPMENT);
 }
 
 void PsaiMessageRedirector::handleChatMessage(psChatMessage& msg)
@@ -368,65 +396,70 @@ void PsaiMessageRedirector::handleMessageStringsMessage(psMsgStringsMessage& msg
 
 void PsaiMessageRedirector::handleCharacterDetailsMessage(psCharacterDetailsMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
-void PsaiMessageRedirector::handleGguiINventoryMessage(psGUIInventoryMessage& msg)
+void PsaiMessageRedirector::handleGuiInventoryMessage(psGUIInventoryMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleGuiActiveMagicMessage(psGUIActiveMagicMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleGuiInteractMessage(psGUIInteractMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleGuiMerchantMessage(psGUIMerchantMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleGuiSkillMessage(psGUISkillMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleGuiTargetUpdateMessage(psGUITargetUpdateMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleLootMessage(psLootMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleQuestListMessage(psQuestListMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleQuestRewardMessage(psQuestRewardMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleUpdateObjectNameMessage(psUpdateObjectNameMessage& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleViewItemDescriptionMessage(psViewItemDescription msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleViewItemUpdateMessage(psViewItemUpdate& msg)
 {
-	printf("Handle message of type %s. Content %s, type %i\n", msg.GetMessageTypeName().GetDataSafe());
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
+}
+
+void PsaiMessageRedirector::handleEquipmentMessage(psEquipmentMessage& msg)
+{
+	printf("Handle message of type %s.\n", msg.GetMessageTypeName().GetDataSafe());
 }

@@ -36,8 +36,6 @@ class psStatsMessage;
 class psSystemMessage;
 class psWeatherMessage;
 class psMsgStringsMessage;
-
-// possible events
 class psCharacterDetailsMessage;
 class psGUIInventoryMessage;
 class psGUIActiveMagicMessage;
@@ -51,6 +49,7 @@ class psQuestRewardMessage;
 class psUpdateObjectNameMessage;
 class psViewItemDescription;
 class psViewItemUpdate;
+class psEquipmentMessage;
 
 
 class PsaiMessageRedirector: public psClientNetSubscriber
@@ -108,7 +107,7 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 
 		void handleCharacterDetailsMessage(psCharacterDetailsMessage& msg);
 
-		void handleGguiINventoryMessage(psGUIInventoryMessage& msg);
+		void handleGuiInventoryMessage(psGUIInventoryMessage& msg);
 
 		void handleGuiActiveMagicMessage(psGUIActiveMagicMessage& msg);
 
@@ -131,6 +130,8 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 		void handleViewItemDescriptionMessage(psViewItemDescription msg);
 
 		void handleViewItemUpdateMessage(psViewItemUpdate& msg);
+
+		void handleEquipmentMessage(psEquipmentMessage& msg);
 
 
 		csStringHashReversible* msgStrings;
