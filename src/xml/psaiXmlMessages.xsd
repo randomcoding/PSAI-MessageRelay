@@ -1,40 +1,978 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/psaiXmlMessages"
-	xmlns:tns="http://www.example.org/psaiXmlMessages" elementFormDefault="qualified">
-
-	<complexType name="psmessage" type="psMessage>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.psaidoesnt-exist.org/psaiXmlMessages" xmlns:tns="http://www.psaidoesnt-exist.org/psaiXmlMessages"
+	xmlns:psai="http://www.psaidoesnt-exist.org/psaiXmlMessages" elementFormDefault="qualified"
+>
+	
+	<!-- Global types -->
+	
+	<!-- 3D Vector -->
+	<complexType name="vector3d">
 		<sequence>
-			<element name="messageType" type="string" />
+			<element name="x" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="y" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="z" type="float" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<!-- Container Contents -->
+	<complexType name="containercontents">
+		<sequence>
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="icon" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="slotid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="stackCount" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="purifystatus" type="int" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<!-- Item Description in GUI Inventory Message-->
+	<complexType name="itemdescription">
+		<sequence>
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="slot" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="weight" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="size" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="stackcount" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="iconimage" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="container" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="purifystatus" type="int" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<!--Skills details  -->
+	<complexType name="networkdetailskill">
+		<sequence>
+			<element name="category" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="text" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<!-- Network weather info -->
+	<complexType name="netweatherinfo">
+		<sequence>
+			<element name="hasdownfall" type="boolean" />
+			<element name="downfallissnow" type="boolean" />
+			<element name="hasfog" type="boolean" />
+			<element name="haslightning" type="boolean" />
+			<element name="sector" type="string" />
+			<element name="downfalldrops" type="int" />
+			<element name="downfallfade" type="int" />
+			<element name="fogdensity" type="int" />
+			<element name="fogfade" type="int" />
+			<element name="fogred" type="int" />
+			<element name="foggreen" type="int" />
+			<element name="fogblue" type="int" />
+		</sequence>
+	</complexType>
+	
+	<!-- Money object -->
+	<complexType name="psmoney">
+		<sequence>
+			<element name="circles" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="octas" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="hexas" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="trias" type="int" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<!-- Enumerated types -->
+	
+	<!-- Message types -->
+	<complexType name="messagetype">
+		<choice>
+			<element name="MSGTYPE_PING" type="string" fixed="MSGTYPE_PING" />
+			<element name="MSGTYPE_AUTHENTICATE" type="string" fixed="MSGTYPE_AUTHENTICATE" />
+			<element name="MSGTYPE_PREAUTHENTICATE" type="string" fixed="MSGTYPE_PREAUTHENTICATE" />
+			<element name="MSGTYPE_PREAUTHAPPROVED" type="string" fixed="MSGTYPE_PREAUTHAPPROVED" />
+			<element name="MSGTYPE_AUTHAPPROVED" type="string" fixed="MSGTYPE_AUTHAPPROVED" />
+			<element name="MSGTYPE_AUTHREJECTED" type="string" fixed="MSGTYPE_AUTHREJECTED" />
+			<element name="MSGTYPE_DISCONNECT" type="string" fixed="MSGTYPE_DISCONNECT" />
+			<element name="MSGTYPE_CHAT" type="string" fixed="MSGTYPE_CHAT" />
+			<element name="MSGTYPE_GUILDCMD" type="string" fixed="MSGTYPE_GUILDCMD" />
+			<element name="MSGTYPE_USERCMD" type="string" fixed="MSGTYPE_USERCMD" />
+			<element name="MSGTYPE_SYSTEM" type="string" fixed="MSGTYPE_SYSTEM" />
+			<element name="MSGTYPE_CHARREJECT" type="string" fixed="MSGTYPE_CHARREJECT" />
+			<element name="MSGTYPE_DEAD_RECKONING" type="string" fixed="MSGTYPE_DEAD_RECKONING" />
+			<element name="MSGTYPE_CELPERSIST" type="string" fixed="MSGTYPE_CELPERSIST" />
+			<element name="MSGTYPE_CONFIRMQUESTION" type="string" fixed="MSGTYPE_CONFIRMQUESTION" />
+			<element name="MSGTYPE_USERACTION" type="string" fixed="MSGTYPE_USERACTION" />
+			<element name="MSGTYPE_ADMINCMD" type="string" fixed="MSGTYPE_ADMINCMD" />
+			<element name="MSGTYPE_GUIINTERACT" type="string" fixed="MSGTYPE_GUIINTERACT" />
+			<element name="MSGTYPE_GUIINVENTORY" type="string" fixed="MSGTYPE_GUIINVENTORY" />
+			<element name="MSGTYPE_VIEW_ITEM" type="string" fixed="MSGTYPE_VIEW_ITEM" />
+			<element name="MSGTYPE_VIEW_CONTAINER" type="string" fixed="MSGTYPE_VIEW_CONTAINER" />
+			<element name="MSGTYPE_VIEW_SKETCH" type="string" fixed="MSGTYPE_VIEW_SKETCH" />
+			<element name="MSGTYPE_VIEW_ACTION_LOCATION" type="string" fixed="MSGTYPE_VIEW_ACTION_LOCATION" />
+			<element name="MSGTYPE_READ_BOOK" type="string" fixed="MSGTYPE_READ_BOOK" />
+			<element name="MSGTYPE_WRITE_BOOK" type="string" fixed="MSGTYPE_WRITE_BOOK" />
+			<element name="MSGTYPE_UPDATE_ITEM" type="string" fixed="MSGTYPE_UPDATE_ITEM" />
+			<element name="MSGTYPE_MODE" type="string" fixed="MSGTYPE_MODE" />
+			<element name="MSGTYPE_WEATHER" type="string" fixed="MSGTYPE_WEATHER" />
+			<element name="MSGTYPE_NEWSECTOR" type="string" fixed="MSGTYPE_NEWSECTOR" />
+			<element name="MSGTYPE_GUIGUILD" type="string" fixed="MSGTYPE_GUIGUILD" />
+			<element name="MSGTYPE_EQUIPMENT" type="string" fixed="MSGTYPE_EQUIPMENT" />
+			<element name="MSGTYPE_GUIEXCHANGE" type="string" fixed="MSGTYPE_GUIEXCHANGE" />
+			<element name="MSGTYPE_EXCHANGE_REQUEST" type="string" fixed="MSGTYPE_EXCHANGE_REQUEST" />
+			<element name="MSGTYPE_EXCHANGE_ADD_ITEM" type="string" fixed="MSGTYPE_EXCHANGE_ADD_ITEM" />
+			<element name="MSGTYPE_EXCHANGE_REMOVE_ITEM" type="string" fixed="MSGTYPE_EXCHANGE_REMOVE_ITEM" />
+			<element name="MSGTYPE_EXCHANGE_ACCEPT" type="string" fixed="MSGTYPE_EXCHANGE_ACCEPT" />
+			<element name="MSGTYPE_EXCHANGE_STATUS" type="string" fixed="MSGTYPE_EXCHANGE_STATUS" />
+			<element name="MSGTYPE_EXCHANGE_END" type="string" fixed="MSGTYPE_EXCHANGE_END" />
+			<element name="MSGTYPE_EXCHANGE_MONEY" type="string" fixed="MSGTYPE_EXCHANGE_MONEY" />
+			<element name="MSGTYPE_GUIMERCHANT" type="string" fixed="MSGTYPE_GUIMERCHANT" />
+			<element name="MSGTYPE_GROUPCMD" type="string" fixed="MSGTYPE_GROUPCMD" />
+			<element name="MSGTYPE_GUIGROUP" type="string" fixed="MSGTYPE_GUIGROUP" />
+			<element name="MSGTYPE_STATDRUPDATE" type="string" fixed="MSGTYPE_STATDRUPDATE" />
+			<element name="MSGTYPE_SPELL_BOOK" type="string" fixed="MSGTYPE_SPELL_BOOK" />
+			<element name="MSGTYPE_GLYPH_REQUEST" type="string" fixed="MSGTYPE_GLYPH_REQUEST" />
+			<element name="MSGTYPE_GLYPH_ASSEMBLE" type="string" fixed="MSGTYPE_GLYPH_ASSEMBLE" />
+			<element name="MSGTYPE_PURIFY_GLYPH" type="string" fixed="MSGTYPE_PURIFY_GLYPH" />
+			<element name="MSGTYPE_SPELL_CAST" type="string" fixed="MSGTYPE_SPELL_CAST" />
+			<element name="MSGTYPE_SPELL_CANCEL" type="string" fixed="MSGTYPE_SPELL_CANCEL" />
+			<element name="MSGTYPE_EFFECT" type="string" fixed="MSGTYPE_EFFECT" />
+			<element name="MSGTYPE_EFFECT_STOP" type="string" fixed="MSGTYPE_EFFECT_STOP" />
+			<element name="MSGTYPE_NPCAUTHENT" type="string" fixed="MSGTYPE_NPCAUTHENT" />
+			<element name="MSGTYPE_NPCLIST" type="string" fixed="MSGTYPE_NPCLIST" />
+			<element name="MSGTYPE_GUITARGETUPDATE" type="string" fixed="MSGTYPE_GUITARGETUPDATE" />
+			<element name="MSGTYPE_MAPLIST" type="string" fixed="MSGTYPE_MAPLIST" />
+			<element name="MSGTYPE_NPCOMMANDLIST" type="string" fixed="MSGTYPE_NPCOMMANDLIST" />
+			<element name="MSGTYPE_ALLENTITYPOS" type="string" fixed="MSGTYPE_ALLENTITYPOS" />
+			<element name="MSGTYPE_NEW_NPC" type="string" fixed="MSGTYPE_NEW_NPC" />
+			<element name="MSGTYPE_PETITION" type="string" fixed="MSGTYPE_PETITION" />
+			<element name="MSGTYPE_MSGSTRINGS" type="string" fixed="MSGTYPE_MSGSTRINGS" />
+			<element name="MSGTYPE_CHARACTERDATA" type="string" fixed="MSGTYPE_CHARACTERDATA" />
+			<element name="MSGTYPE_AUTHCHARACTER" type="string" fixed="MSGTYPE_AUTHCHARACTER" />
+			<element name="MSGTYPE_AUTHCHARACTERAPPROVED" type="string" fixed="MSGTYPE_AUTHCHARACTERAPPROVED" />
+			<element name="MSGTYPE_CHAR_CREATE_CP" type="string" fixed="MSGTYPE_CHAR_CREATE_CP" />
+			<element name="MSGTYPE_COMBATEVENT" type="string" fixed="MSGTYPE_COMBATEVENT" />
+			<element name="MSGTYPE_LOOT" type="string" fixed="MSGTYPE_LOOT" />
+			<element name="MSGTYPE_LOOTITEM" type="string" fixed="MSGTYPE_LOOTITEM" />
+			<element name="MSGTYPE_LOOTREMOVE" type="string" fixed="MSGTYPE_LOOTREMOVE" />
+			<element name="MSGTYPE_GUISKILL" type="string" fixed="MSGTYPE_GUISKILL" />
+			<element name="MSGTYPE_OVERRIDEACTION" type="string" fixed="MSGTYPE_OVERRIDEACTION" />
+			<element name="MSGTYPE_QUESTLIST" type="string" fixed="MSGTYPE_QUESTLIST" />
+			<element name="MSGTYPE_QUESTINFO" type="string" fixed="MSGTYPE_QUESTINFO" />
+			<element name="MSGTYPE_GMGUI" type="string" fixed="MSGTYPE_GMGUI" />
+			<element name="MSGTYPE_WORKCMD" type="string" fixed="MSGTYPE_WORKCMD" />
+			<element name="MSGTYPE_BUDDY_LIST" type="string" fixed="MSGTYPE_BUDDY_LIST" />
+			<element name="MSGTYPE_BUDDY_STATUS" type="string" fixed="MSGTYPE_BUDDY_STATUS" />
+			<element name="MSGTYPE_MOTD" type="string" fixed="MSGTYPE_MOTD" />
+			<element name="MSGTYPE_MOTDREQUEST" type="string" fixed="MSGTYPE_MOTDREQUEST" />
+			<element name="MSGTYPE_QUESTION" type="string" fixed="MSGTYPE_QUESTION" />
+			<element name="MSGTYPE_QUESTIONRESPONSE" type="string" fixed="MSGTYPE_QUESTIONRESPONSE" />
+			<element name="MSGTYPE_SLOT_MOVEMENT" type="string" fixed="MSGTYPE_SLOT_MOVEMENT" />
+			<element name="MSGTYPE_QUESTIONCANCEL" type="string" fixed="MSGTYPE_QUESTIONCANCEL" />
+			<element name="MSGTYPE_GUILDMOTDSET" type="string" fixed="MSGTYPE_GUILDMOTDSET" />
+			<element name="MSGTYPE_PLAYSOUND" type="string" fixed="MSGTYPE_PLAYSOUND" />
+			<element name="MSGTYPE_CHARACTERDETAILS" type="string" fixed="MSGTYPE_CHARACTERDETAILS" />
+			<element name="MSGTYPE_CHARDETAILSREQUEST" type="string" fixed="MSGTYPE_CHARDETAILSREQUEST" />
+			<element name="MSGTYPE_CHARDESCUPDATE" type="string" fixed="MSGTYPE_CHARDESCUPDATE" />
+			<element name="MSGTYPE_FACTION_INFO" type="string" fixed="MSGTYPE_FACTION_INFO" />
+			<element name="MSGTYPE_QUESTREWARD" type="string" fixed="MSGTYPE_QUESTREWARD" />
+			<element name="MSGTYPE_NAMECHANGE" type="string" fixed="MSGTYPE_NAMECHANGE" />
+			<element name="MSGTYPE_GUILDCHANGE" type="string" fixed="MSGTYPE_GUILDCHANGE" />
+			<element name="MSGTYPE_LOCKPICK" type="string" fixed="MSGTYPE_LOCKPICK" />
+			<element name="MSGTYPE_GMSPAWNITEMS" type="string" fixed="MSGTYPE_GMSPAWNITEMS" />
+			<element name="MSGTYPE_GMSPAWNTYPES" type="string" fixed="MSGTYPE_GMSPAWNTYPES" />
+			<element name="MSGTYPE_GMSPAWNITEM" type="string" fixed="MSGTYPE_GMSPAWNITEM" />
+			<element name="MSGTYPE_ADVICE" type="string" fixed="MSGTYPE_ADVICE" />
+			<element name="MSGTYPE_ACTIVEMAGIC" type="string" fixed="MSGTYPE_ACTIVEMAGIC" />
+			<element name="MSGTYPE_GROUPCHANGE" type="string" fixed="MSGTYPE_GROUPCHANGE" />
+			<element name="MSGTYPE_MAPACTION" type="string" fixed="MSGTYPE_MAPACTION" />
+			<element name="MSGTYPE_CLIENTSTATUS" type="string" fixed="MSGTYPE_CLIENTSTATUS" />
+			<element name="MSGTYPE_TUTORIAL" type="string" fixed="MSGTYPE_TUTORIAL" />
+			<element name="MSGTYPE_BANKING" type="string" fixed="MSGTYPE_BANKING" />
+			<element name="MSGTYPE_REQUESTMOVEMENTS" type="string" fixed="MSGTYPE_REQUESTMOVEMENTS" />
+			<element name="MSGTYPE_MOVEINFO" type="string" fixed="MSGTYPE_MOVEINFO" />
+			<element name="MSGTYPE_MOVEMOD" type="string" fixed="MSGTYPE_MOVEMOD" />
+			<element name="MSGTYPE_MOVELOCK" type="string" fixed="MSGTYPE_MOVELOCK" />
+			<element name="MSGTYPE_CHAR_DELETE" type="string" fixed="MSGTYPE_CHAR_DELETE" />
+			<element name="MSGTYPE_CHAR_CREATE_PARENTS" type="string" fixed="MSGTYPE_CHAR_CREATE_PARENTS" />
+			<element name="MSGTYPE_CHAR_CREATE_CHILDHOOD" type="string" fixed="MSGTYPE_CHAR_CREATE_CHILDHOOD" />
+			<element name="MSGTYPE_CHAR_CREATE_LIFEEVENTS" type="string" fixed="MSGTYPE_CHAR_CREATE_LIFEEVENTS" />
+			<element name="MSGTYPE_CHAR_CREATE_UPLOAD" type="string" fixed="MSGTYPE_CHAR_CREATE_UPLOAD" />
+			<element name="MSGTYPE_CHAR_CREATE_VERIFY" type="string" fixed="MSGTYPE_CHAR_CREATE_VERIFY" />
+			<element name="MSGTYPE_CHAR_CREATE_NAME" type="string" fixed="MSGTYPE_CHAR_CREATE_NAME" />
+			<element name="MSGTYPE_PERSIST_WORLD_REQUEST" type="string" fixed="MSGTYPE_PERSIST_WORLD_REQUEST" />
+			<element name="MSGTYPE_PERSIST_WORLD" type="string" fixed="MSGTYPE_PERSIST_WORLD" />
+			<element name="MSGTYPE_PERSIST_ACTOR_REQUEST" type="string" fixed="MSGTYPE_PERSIST_ACTOR_REQUEST" />
+			<element name="MSGTYPE_PERSIST_ACTOR" type="string" fixed="MSGTYPE_PERSIST_ACTOR" />
+			<element name="MSGTYPE_PERSIST_ITEM" type="string" fixed="MSGTYPE_PERSIST_ITEM" />
+			<element name="MSGTYPE_PERSIST_ACTIONLOCATION" type="string" fixed="MSGTYPE_PERSIST_ACTIONLOCATION" />
+			<element name="MSGTYPE_PERSIST_ALL" type="string" fixed="MSGTYPE_PERSIST_ALL" />
+			<element name="MSGTYPE_REMOVE_OBJECT" type="string" fixed="MSGTYPE_REMOVE_OBJECT" />
+			<element name="MSGTYPE_CHANGE_TRAIT" type="string" fixed="MSGTYPE_CHANGE_TRAIT" />
+			<element name="MSGTYPE_DAMAGE_EVENT" type="string" fixed="MSGTYPE_DAMAGE_EVENT" />
+			<element name="MSGTYPE_DEATH_EVENT" type="string" fixed="MSGTYPE_DEATH_EVENT" />
+			<element name="MSGTYPE_TARGET_EVENT" type="string" fixed="MSGTYPE_TARGET_EVENT" />
+			<element name="MSGTYPE_ZPOINT_EVENT" type="string" fixed="MSGTYPE_ZPOINT_EVENT" />
+			<element name="MSGTYPE_BUY_EVENT" type="string" fixed="MSGTYPE_BUY_EVENT" />
+			<element name="MSGTYPE_SELL_EVENT" type="string" fixed="MSGTYPE_SELL_EVENT" />
+			<element name="MSGTYPE_PICKUP_EVENT" type="string" fixed="MSGTYPE_PICKUP_EVENT" />
+			<element name="MSGTYPE_DROP_EVENT" type="string" fixed="MSGTYPE_DROP_EVENT" />
+			<element name="MSGTYPE_LOOT_EVENT" type="string" fixed="MSGTYPE_LOOT_EVENT" />
+			<element name="MSGTYPE_CONNECT_EVENT" type="string" fixed="MSGTYPE_CONNECT_EVENT" />
+			<element name="MSGTYPE_MOVEMENT_EVENT" type="string" fixed="MSGTYPE_MOVEMENT_EVENT" />
+			<element name="MSGTYPE_GENERIC_EVENT" type="string" fixed="MSGTYPE_GENERIC_EVENT" />
+			<element name="MSGTYPE_SOUND_EVENT" type="string" fixed="MSGTYPE_SOUND_EVENT" />
+			<element name="MSGTYPE_CHAR_CREATE_TRAITS" type="string" fixed="MSGTYPE_CHAR_CREATE_TRAITS" />
+			<element name="MSGTYPE_STATS" type="string" fixed="MSGTYPE_STATS" />
+			<element name="MSGTYPE_NPC_SETOWNER" type="string" fixed="MSGTYPE_NPC_SETOWNER" />
+			<element name="MSGTYPE_PET_COMMAND" type="string" fixed="MSGTYPE_PET_COMMAND" />
+			<element name="MSGTYPE_PET_SKILL" type="string" fixed="MSGTYPE_PET_SKILL" />
+			<element name="MSGTYPE_CRAFT_INFO" type="string" fixed="MSGTYPE_CRAFT_INFO" />
+			<element name="MSGTYPE_PETITION_REQUEST" type="string" fixed="MSGTYPE_PETITION_REQUEST" />
+			<element name="MSGTYPE_HEART_BEAT" type="string" fixed="MSGTYPE_HEART_BEAT" />
+			<element name="MSGTYPE_NPC_COMMAND" type="string" fixed="MSGTYPE_NPC_COMMAND" />
+			<element name="MSGTYPE_MINIGAME_STARTSTOP" type="string" fixed="MSGTYPE_MINIGAME_STARTSTOP" />
+			<element name="MSGTYPE_MINIGAME_BOARD" type="string" fixed="MSGTYPE_MINIGAME_BOARD" />
+			<element name="MSGTYPE_MINIGAME_UPDATE" type="string" fixed="MSGTYPE_MINIGAME_UPDATE" />
+			<element name="MSGTYPE_ENTRANCE" type="string" fixed="MSGTYPE_ENTRANCE" />
+			<element name="MSGTYPE_GMEVENT_LIST" type="string" fixed="MSGTYPE_GMEVENT_LIST" />
+			<element name="MSGTYPE_GMEVENT_INFO" type="string" fixed="MSGTYPE_GMEVENT_INFO" />
+			<element name="MSGTYPE_SEQUENCE" type="string" fixed="MSGTYPE_SEQUENCE" />
+			<element name="MSGTYPE_NPCRACELIST" type="string" fixed="MSGTYPE_NPCRACELIST" />
+			<element name="MSGTYPE_INTRODUCTION" type="string" fixed="MSGTYPE_INTRODUCTION" />
+		</choice>
+	</complexType>
+	
+	<!-- Types of chat message -->
+	<complexType name="chattype">
+		<choice minOccurs="1" maxOccurs="1">
+			<element name="CHAT_SYSTEM" type="string" fixed="CHAT_SYSTEM" />
+			<element name="CHAT_SAY" type="string" fixed="CHAT_SAY" />
+			<element name="CHAT_TELL" type="string" fixed="CHAT_TELL" />
+			<element name="CHAT_GROUP" type="string" fixed="CHAT_GROUP" />
+			<element name="CHAT_GUILD" type="string" fixed="CHAT_GUILD" />
+			<element name="CHAT_AUCTION" type="string" fixed="CHAT_AUCTION" />
+			<element name="CHAT_SHOUT" type="string" fixed="CHAT_SHOUT" />
+			<element name="CHAT_ME" type="string" fixed="CHAT_ME" />
+			<element name="CHAT_TELLSELF" type="string" fixed="CHAT_TELLSELF" />
+			<element name="CHAT_REPORT" type="string" fixed="CHAT_REPORT" />
+			<element name="CHAT_ADVISOR" type="string" fixed="CHAT_ADVISOR" />
+			<element name="CHAT_ADVICE" type="string" fixed="CHAT_ADVICE" />
+			<element name="CHAT_ADVICE_LIST" type="string" fixed="CHAT_ADVICE_LIST" />
+			<element name="CHAT_SERVER_TELL" type="string" fixed="CHAT_SERVER_TELL" />
+			<element name="CHAT_GM" type="string" fixed="CHAT_GM" />
+			<element name="CHAT_SERVER_INFO" type="string" fixed="CHAT_SERVER_INFO" />
+			<element name="CHAT_MY" type="string" fixed="CHAT_MY" />
+			<element name="CHAT_NPC" type="string" fixed="CHAT_NPC" />
+			<element name="CHAT_SYSTEM_BASE" type="string" fixed="CHAT_SYSTEM_BASE" />
+			<element name="CHAT_PET_ACTION" type="string" fixed="CHAT_PET_ACTION" />
+			<element name="CHAT_NPC_ME" type="string" fixed="CHAT_NPC_ME" />
+			<element name="CHAT_NPC_MY" type="string" fixed="CHAT_NPC_MY" />
+			<element name="CHAT_NPC_NARRATE" type="string" fixed="CHAT_NPC_NARRATE" />
+		</choice>
+	</complexType>
+	
+	<!-- Combat Event Types -->
+	<complexType name="combateventtype">
+		<choice maxOccurs="1" minOccurs="1">
+			<element name="COMBAT_DODGE" type="string" fixed="COMBAT_DODGE" />
+			<element name="COMBAT_BLOCK" type="string" fixed="COMBAT_BLOCK" />
+			<element name="COMBAT_DAMAGE" type="string" fixed="COMBAT_DAMAGE" />
+			<element name="COMBAT_MISS" type="string" fixed="COMBAT_MISS" />
+			<element name="COMBAT_OUTOFRANGE" type="string" fixed="COMBAT_OUTOFRANGE" />
+			<element name="COMBAT_DEATH" type="string" fixed="COMBAT_DEATH" />
+			<element name="COMBAT_DAMAGE_NEARLY_DEAD" type="string" fixed="COMBAT_DAMAGE_NEARLY_DEAD" />
+		</choice>
+	</complexType>
+	
+	<!-- Flags for persist item messages -->
+	<complexType name="persistitemflags">
+		<choice>
+			<element name="NONE" type="string" fixed="NONE" />
+			<element name="NOPICKUP" type="string" fixed="NOPICKUP" />
+			<element name="COLLIDE" type="string" fixed="COLLIDE" />
+		</choice>
+	</complexType>
+	
+	<!--  Flags for persist actor messages -->
+	<complexType name="persistactorflags">
+		<choice>
+			<element name="NONE" type="string" fixed="NONE" />
+			<element name="NPC" type="string" fixed="NPC" />
+			<element name="NAME_KNOWN" type="string" fixed="NAME_KNOWN" />
+		</choice>
+	</complexType>
+	
+	<!--  Flags for dead reckoning messages -->
+	<complexType name="drdataflags">
+		<choice>
+			<element name="NOT_MOVING" type="string" fixed="NOT_MOVING" />
+			<element name="ACTOR_MODE" type="string" fixed="ACTOR_MODE" />
+			<element name="ANG_VELOCITY" type="string" fixed="ANG_VELOCITY" />
+			<element name="X_VELOCITY" type="string" fixed="X_VELOCITY" />
+			<element name="Y_VELOCITY" type="string" fixed="Y_VELOCITY" />
+			<element name="Z_VELOCITY" type="string" fixed="Z_VELOCITY" />
+			<element name="X_WORLDVELOCITY" type="string" fixed="X_WORLDVELOCITY" />
+			<element name="Y_WORLDVELOCITY" type="string" fixed="Y_WORLDVELOCITY" />
+			<element name="Z_WORLDVELOCITY" type="string" fixed="Z_WORLDVELOCITY" />
+			<element name="ALL_DATA" type="string" fixed="ALL_DATA" />
+		</choice>
+	</complexType>
+	
+	<!-- Type of equipment message command -->
+	<complexType name="equipmentmessagecommand">
+		<choice>
+			<element name="EQUIP" type="string" fixed="EQUIP" />
+			<element name="DEEQUIP" type="string" fixed="DEEQUIP" />
+		</choice>
+	</complexType>
+	
+	<!-- The mode of the player in a psModeMessage -->
+	<complexType name="playermode">
+		<choice>
+			<element name="PEACE" type="string" fixed="PEACE" />
+			<element name="COMBAT" type="string" fixed="COMBAT" />
+			<element name="SPELL_CASTING" type="string" fixed="SPELL_CASTING" />
+			<element name="WORK" type="string" fixed="WORK" />
+			<element name="DEAD" type="string" fixed="DEAD" />
+			<element name="SIT" type="string" fixed="SIT" />
+			<element name="OVERWEIGHT" type="string" fixed="OVERWEIGHT" />
+			<element name="EXHAUSTED" type="string" fixed="EXHAUSTED" />
+			<element name="DEFEATED" type="string" fixed="DEFEATED" />
+		</choice>
+	</complexType>
+	
+	<!-- Types of quest reward message -->
+	<complexType name="questrewardmessagetype">
+		<choice>
+			<element name="OFFER_REWARDS" type="string" fixed="OFFER_REWARDS" />
+			<element name="SELECT_REWARDS" type="string" fixed="SELECT_REWARDS" />
+		</choice>
+	</complexType>
+	
+	<!--  Types of View item message (request - to server?, description - from server?)-->
+	<complexType name="viewitemmessagetype">
+		<choice>
+			<element name="REQUEST" type="string" fixed="REQUEST" />
+			<element name="DESCRIPTION" type="string" fixed="DESCRIPTION" />
+		</choice>
+	</complexType>
+	
+	<!-- Types of system message -->
+	<complexType name="systemmessagetype">
+		<choice>
+			<element name="MSG_ERROR" type="string" fixed="MSG_ERROR" />
+			<element name="MSG_INFO" type="string" fixed="MSG_INFO" />
+			<element name="MSG_INFO_SERVER" type="string" fixed="MSG_INFO_SERVER" />
+			<element name="MSG_RESULT" type="string" fixed="MSG_RESULT" />
+			<element name="MSG_OK" type="string" fixed="MSG_OK" />
+			<element name="MSG_WHO" type="string" fixed="MSG_WHO" />
+			<element name="MSG_ACK" type="string" fixed="MSG_ACK" />
+			<element name="MSG_INFO_BASE" type="string" fixed="MSG_INFO_BASE" />
+			<element name="MSG_COMBAT" type="string" fixed="MSG_COMBAT" />
+			<element name="MSG_COMBAT_DODGE" type="string" fixed="MSG_COMBAT_DODGE" />
+			<element name="MSG_COMBAT_BLOCK" type="string" fixed="MSG_COMBAT_BLOCK" />
+			<element name="MSG_COMBAT_HITYOU" type="string" fixed="MSG_COMBAT_HITYOU" />
+			<element name="MSG_COMBAT_HITOTHER" type="string" fixed="MSG_COMBAT_HITOTHER" />
+			<element name="MSG_COMBAT_YOURHIT" type="string" fixed="MSG_COMBAT_YOURHIT" />
+			<element name="MSG_COMBAT_OTHERHIT" type="string" fixed="MSG_COMBAT_OTHERHIT" />
+			<element name="MSG_COMBAT_MISS" type="string" fixed="MSG_COMBAT_MISS" />
+			<element name="MSG_COMBAT_OWN_DEATH" type="string" fixed="MSG_COMBAT_OWN_DEATH" />
+			<element name="MSG_COMBAT_DEATH" type="string" fixed="MSG_COMBAT_DEATH" />
+			<element name="MSG_COMBAT_VICTORY" type="string" fixed="MSG_COMBAT_VICTORY" />
+			<element name="MSG_COMBAT_STANCE" type="string" fixed="MSG_COMBAT_STANCE" />
+			<element name="MSG_COMBAT_NEARLY_DEAD" type="string" fixed="MSG_COMBAT_NEARLY_DEAD" />
+			<element name="MSG_LOOT" type="string" fixed="MSG_LOOT" />
+			<element name="MSG_SEC" type="string" fixed="MSG_SEC" />
+			<element name="SEC_LEVEL0" type="string" fixed="SEC_LEVEL0" />
+			<element name="SEC_LEVEL1" type="string" fixed="SEC_LEVEL1" />
+			<element name="SEC_LEVEL2" type="string" fixed="SEC_LEVEL2" />
+			<element name="SEC_LEVEL3" type="string" fixed="SEC_LEVEL3" />
+			<element name="SEC_LEVEL4" type="string" fixed="SEC_LEVEL4" />
+			<element name="MSG_PURCHASE" type="string" fixed="MSG_PURCHASE" />
+		</choice>
+	</complexType>
+	
+	<!-- Inventory message command types -->
+	<complexType name="guiinventorymessagetype">
+		<choice>
+			<element name="LIST" type="string" fixed="LIST" />
+			<element name="REQUEST" type="string" fixed="request" />
+			<element name="UPDATE_REQUEST" type="string" fixed="UPDATE_REQUEST" />
+			<element name="UPDATE_LIST" type="string" fixed="UPDATE_LIST" />
+		</choice>
+	</complexType>
+		
+	<!-- Player mode for weather -->
+	<complexType name="playerweathermode">
+		<choice>
+			<element name="DAYNIGHT" type="string" fixed="DAYNIGHT" />
+			<element name="WEATHER" type="string" fixed="WEATHER" />
+		</choice>
+	</complexType>	
+
+	<!-- Weather types -->
+	<complexType name="weathertype">
+		<choice>
+			<element name="RAIN" type="string" fixed="RAIN" />
+			<element name="SNOW" type="string" fixed="SNOW" />
+			<element name="FOG" type="string" fixed="FOG" />
+			<element name="LIGHTNING" type="string" fixed="LIGHTNING" />
+		</choice>
+	</complexType>
+	
+	<!--  GUI Active Magic Command Types -->
+	<complexType name="activemagiccommandtype">
+		<choice>
+			<element name="ADD_CATEGORY" type="string" fixed="ADD_CATEGORY"></element>
+			<element name="REMOVE_CATEGORY" type="string" fixed="REMOVE_CATEGORY" />
+		</choice>
+	</complexType>
+	
+	<!-- Gui Interact Message interaction types -->
+	<complexType name="guiinteractiontype">
+		<choice>
+			<element name="PICKUP" type="string" fixed="PICKUP" />
+			<element name="EXAMINE" type="string" fixed="EXAMINE" />
+			<element name="UNLOCK" type="string" fixed="UNLOCK" />
+			<element name="LOOT" type="string" fixed="LOOT" />
+			<element name="BUYSELL" type="string" fixed="BUYSELL" />
+			<element name="GIVE" type="string" fixed="GIVE" />
+			<element name="CLOSE" type="string" fixed="CLOSE" />
+			<element name="USE" type="string" fixed="USE" />
+			<element name="PLAYERDESC" type="string" fixed="PLAYERDESC" />
+			<element name="ATTACK" type="string" fixed="ATTACK" />
+			<element name="COMBINE" type="string" fixed="COMBINE" />
+			<element name="EXCHANGE" type="string" fixed="EXCHANGE" />
+			<element name="TRAIN" type="string" fixed="TRAIN" />
+			<element name="NPCTALK" type="string" fixed="NPCTALK" />
+			<element name="VIEWSTATS" type="string" fixed="VIEWSTATS" />
+			<element name="DISMISS" type="string" fixed="DISMISS" />
+			<element name="MARRIAGE" type="string" fixed="MARRIAGE" />
+			<element name="DIVORCE" type="string" fixed="DIVORCE" />
+			<element name="PLAYGAME" type="string" fixed="PLAYGAME" />
+			<element name="ENTER" type="string" fixed="ENTER" />
+			<element name="LOCK" type="string" fixed="LOCK" />
+			<element name="ENTERLOCKED" type="string" fixed="ENTERLOCKED" />
+			<element name="BANK" type="string" fixed="BANK" />
+			<element name="INTRODUCE" type="string" fixed="INTRODUCE" />
+		</choice>
+	</complexType>
+	
+	<!-- Gui Merchant Message Commands -->
+	<complexType name="guimerchangmessagecommandtype">
+		<choice>
+			<element name="REQUEST" type="string" fixed="REQUEST" />
+			<element name="MERCHANT" type="string" fixed="MERCHANT" />
+			<element name="CATEGORIES" type="string" fixed="CATEGORIES" />
+			<element name="CATEGORY" type="string" fixed="CATEGORY" />
+			<element name="MONEY" type="string" fixed="MONEY" />
+			<element name="ITEMS" type="string" fixed="ITEMS" />
+			<element name="BUY" type="string" fixed="BUY" />
+			<element name="SELL" type="string" fixed="SELL" />
+			<element name="VIEW" type="string" fixed="VIEW" />
+			<element name="CANCEL" type="string" fixed="CANCEL" />
+		</choice>
+	</complexType>
+	
+	<!-- Gui Skills Message Types -->
+	<complexType name="guiskillmessagetype">
+		<choice>
+			<element name="REQUEST" type="string" fixed="REQUEST" />
+			<element name="BUY_SKILL" type="string" fixed="BUY_SKILL" />
+			<element name="SKILL_LIST" type="string" fixed="SKILL_LIST" />
+			<element name="SKILL_SELECTED" type="string" fixed="SKILL_SELECTED" />
+			<element name="DESCRIPTION" type="string" fixed="DESCRIPTION" />
+			<element name="QUIT" type="string" fixed="QUIT" />
+		</choice>
+	</complexType>
+	
+	<!--  Base Message type. All messages inherit from this -->
+	<complexType name="psmessage">
+		<sequence>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
 		</sequence>
 	</complexType>
     
-    <element name="psChatMessage" type="pschatmessgae" />
+    <!-- The single message that is contained in this message -->
+	<element name="clientmessage">
+		<complexType>
+			<sequence>
+				<element name="message" type="psai:psmessage" maxOccurs="1" minOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
     
-    <complexType name="pschatmessage" type="psMessage">
-    	<complexContent>
-    		<extension base="psMessage">
-    			<sequence>
-			    	<element name="text" type="string"></element>
-			    	<choice>
-				    	<element name="from" type="string"></element>
-				    	<element name="to" type="string"></element>
-			    	</choice>
-		    	</sequence>	
-    		</extension>
-    	</complexContent>
-    </complexType>
+    <!-- psChatMessage -->
+	<complexType name="chatmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="text" type="string" maxOccurs="1" minOccurs="1" />
+					<choice>
+						<element name="from" type="string" maxOccurs="1" minOccurs="1" />
+						<element name="to" type="string" maxOccurs="1" minOccurs="1" />
+					</choice>
+					<element name="chattype" type="psai:chattype" maxOccurs="1" minOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
     
 
-    <complexType name="pscombatmessage">
-    	<complexContent>
-    		<extension base="tns:psmessage">
-    			<sequence>
-    				<element name="attackerId" type="string" />
-    				<element name="targetId" type="string" />
-    				<element name="damage" type="float" />
-    				<element name="targetLocation" type="int" />
-    			</sequence>
-    		</extension>
-    	</complexContent>
-    </complexType>
+	<!-- psCombatEventMessage -->
+	<complexType name="combateventmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="attackerId" type="string" maxOccurs="1" minOccurs="1" />
+					<element name="targetId" type="string" maxOccurs="1" minOccurs="1" />
+					<element name="damage" type="float" maxOccurs="1" minOccurs="1" />
+					<element name="targetLocation" type="int" maxOccurs="1" minOccurs="1" /> <!-- might be worth converting to string -->
+					<element name="combateventtype" type="psai:combateventtype" maxOccurs="1" minOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+    
+	<!-- psPlaySoundMessage -->
+	<complexType name="playsoundmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="sound" type="string" maxOccurs="1" minOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psSoundEventMessage -->
+	<complexType name="soundeventmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="soundeventtype" type="int" maxOccurs="1" minOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psPersistItem -->
+	<complexType name="persistitem">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="factname" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="filename" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="sector" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+					<element name="yrotation" type="float" minOccurs="1" maxOccurs="1" />
+					<element name="id" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="type" type="int" minOccurs=" 1" maxOccurs="1" />
+					<element name="flags" type="psai:persistitemflags" minOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!--	psPersistActor-->
+	<complexType name="persistactormessage">
+		<complexContent>
+			<extension base="psai:drmessage">
+				<sequence>
+					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="guild" type="string" maxOccurs="1" />
+					<element name="factname" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="filename" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="race" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="gender" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="helmgroups" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="top" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+					<element name="bottom" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+					<element name="offset" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+					<element name="type" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="masqueradetype" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="servermode" type="short" minOccurs="1" maxOccurs="1" />
+					<element name="playerid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="groupid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="ownereid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="control" type="boolean" minOccurs="1" maxOccurs="1" />
+					<element name="flags" type="psai:persistactorflags" minOccurs="1" />
+					<element name="instance" type="int" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psPersistActionLocation -->
+	<complexType name="persistactionlocationmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="sector" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="mesh" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="id" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="type" type="int" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!--	psRemoveObject -->
+	<complexType name="removeobjectmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="objecteid" type="int" maxOccurs="1" minOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psDRMessage -->
+	<complexType name="drmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="counter" type="short" minOccurs="1" maxOccurs="1" />
+					<element name="onground" type="boolean" minOccurs="1" maxOccurs="1" />
+					<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+					<element name="velocity" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+					<element name="worldvelocity" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+					<element name="yrotation" type="float" minOccurs="1" maxOccurs="1" />
+					<!-- TODO: iSector sector (sector for mesh) -->
+					<element name="sectorname" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="angularvelocity" type="float" minOccurs="1" maxOccurs="1" />
+					<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psStatDRMessage -->
+	<complexType name="statdrmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="useful" type="boolean" minOccurs="1" maxOccurs="1" />
+					<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="statsdirty" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="counter" type="short" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psModeMessage -->
+	<complexType name="modemessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="actorid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="mode" type="psai:playermode" minOccurs="1" />
+					<element name="stance" type="short" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psMoveLockMessage -->
+	<complexType name="movelockmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="locked" type="boolean" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psNewSectorMessage -->
+	<complexType name="newsectormessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="oldsector" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="newsector" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psEffectMessage -->
+	<complexType name="effectmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="anchorid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="targetid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="castduration" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="uid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="effecttext" type="string" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psStopEffectMessage -->
+	<complexType name="stopeffectmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="uid" type="int" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psSpellCastMessage -->
+	<complexType name="spellcastmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="spell" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="kfactor" type="float" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psSpellCancelMessage -->
+	<complexType name="spellcancelmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<!-- Empty -->
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psStatsMessage -->
+	<complexType name="statsmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="hp" type="float" minOccurs="1" maxOccurs="1" />
+					<element name="mana" type="float" minOccurs="1" maxOccurs="1" />
+					<element name="weight" type="float" minOccurs="1" maxOccurs="1" />
+					<element name="capacity" type="float" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psSystemMessage -->
+	<complexType name="systemmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="text" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="type" type="psai:systemmessagetype" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psWeatherMessage -->
+	<complexType name="weathermessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="minute" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="hour" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="day" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="month" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="year" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="weather" type="psai:netweatherinfo" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psCharacterDetailsMessage -->
+	<complexType name="characterdetailsmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="gender" type="short" minOccurs="1" maxOccurs="1" />
+					<element name="race" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="description" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="requestor" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="skills" type="psai:networkdetailskill" minOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psGUIInventoryMessage -->
+	<complexType name="guiinventorymessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="items" type="psai:itemdescription" minOccurs="1" />
+					<element name="totalitems" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="totalemptoedslots" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="maxweight" type="float" minOccurs="1" maxOccurs="1" />
+					<element name="money" type="psai:psmoney" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psGUIActiveMagicMessage -->
+	<complexType name="guiactivemagicmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="categorylist" type="string" minOccurs="1" />
+					<element name="command" type="psai:activemagiccommandtype" minOccurs="1" maxOccurs="1" />
+					<!-- open window omitted as it is purely for display purpose -->
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psGUIInteractMessage -->
+	<complexType name="guiinteractmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="type" type="psai:guiinteractiontype" minOccurs="1" maxOccurs="1"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psGUIMerchantMessage -->
+	<complexType name="guimerchantmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="commandtype" type="psai:guimerchangmessagecommandtype" minOccurs="1" maxOccurs="1" />
+					<element name="messagecontent" type="string" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psGUISkillMessage -->
+	<complexType name="guiskillmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="command" type="psai:guiskillmessagetype" minOccurs="1" maxOccurs="1" />
+					<element name="commanddata" type="string" minOccurs="1" maxOccurs="1" />
+					<!--
+						not in use currently as not sure if really required <element name="skillcache" type="psai:skillcache" minOccurs="1" maxOccurs="1" />
+					-->
+					<element name="strength" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="endurance" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="agility" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="will" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="charisma" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="hitpoints" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="mana" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="physicalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="mentalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="maxhitpoints" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="maxmana" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="maxphysicalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+					<element name="maxmentalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psGUITargetUpdateMessage -->
+	<complexType name="guitargetupdatemessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="clientid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="targetid" type="int" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psLootMessage -->
+	<complexType name="lootmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="lootxml" type="string" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psQuestListMessage -->
+	<complexType name="questlistmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="questlistxml" type="string" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psQuestRewardMessage -->
+	<complexType name="questrewardmessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="type" type="psai:questrewardmessagetype" minOccurs="1" maxOccurs="1" />
+					<element name="newvalue" type="string" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- psUpdateObjectNameMessage -->
+	<complexType name="updateobjectnamemessage">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="objectid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="newname" type="string" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!--	psViewItemDescription -->
+	<complexType name="viewitemdescription">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="itemname" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="itemdescription" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="stackcount" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="containerid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="slotid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="hascontents" type="boolean" minOccurs="1" maxOccurs="1" />
+					<element name="toclient" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="contents" type="psai:containercontents" minOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!--	psViewItemUpdate -->
+	<complexType name="viewitemupdate">
+		<complexContent>
+			<extension base="psai:psmessage">
+				<sequence>
+					<element name="clearslot" type="boolean" minOccurs="1" maxOccurs="1" />
+					<element name="toclient" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="contanerid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="icon" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="slotid" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="stackcount" type="int" minOccurs="1" maxOccurs="1" />
+					<element name="ownerid" type="int" minOccurs="1" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
 </schema>
