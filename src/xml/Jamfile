@@ -10,4 +10,4 @@ Library psaixml
 ExternalLibs psaixml : CRYSTAL CEL ;
 
 # specify compile group membership
-CompileGroups psaixml : redirector xml ;
+CompileGroups psaixml : xml ;
