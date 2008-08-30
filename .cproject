@@ -27,7 +27,6 @@
 <option id="gnu.cpp.compiler.option.include.paths.66516307" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="/home/tim/development/planeshift/cal3d/include"/>
 <listOptionValue builtIn="false" value="/home/tim/development/planeshift/cs/include"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShiftMessageRedirector/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/client}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/common}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/eedit}&quot;"/>
@@ -37,6 +36,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/setup}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/tools}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/include}&quot;"/>
 </option>
 <option id="gnu.cpp.compiler.option.preprocessor.nostdinc.839974476" name="Do not search system directories (-nostdinc)" superClass="gnu.cpp.compiler.option.preprocessor.nostdinc"/>
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.189049189" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
