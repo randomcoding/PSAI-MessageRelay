@@ -8,7 +8,6 @@
 #include <string.h>
 
 #include <csutil/util.h>
-#include <csutil/csstring.h>
 
 #include <net/messages.h>
 
@@ -18,7 +17,6 @@
 #include "PsaiXmlGenerator.h"
 
 using namespace XERCES_CPP_NAMESPACE;
-using namespace std;
 
 PsaiXmlGenerator::PsaiXmlGenerator()
 {
@@ -50,7 +48,26 @@ void PsaiXmlGenerator::clearXmlUtils()
 	XMLPlatformUtils::Terminate();
 }
 
-string PsaiXmlGenerator::toXml(psChatMessage& msg)
+std::string PsaiXmlGenerator::toXml(psChatMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+		XMLCh tempStr[100];
+
+		XMLString::transcode("Range", tempStr, 99);
+		DOMImplementation* impl = DOMImplementationRegistry::getDOMImplementation(tempStr);
+
+		XMLString::transcode("root", tempStr, 99);
+		DOMDocument* doc = impl->createDocument(0, tempStr, 0);
+		DOMElement* root = doc->getDocumentElement();
+
+		impl.createDOMWriter();
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psPlaySoundMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -59,7 +76,7 @@ string PsaiXmlGenerator::toXml(psChatMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psPlaySoundMessage& msg)
+std::string PsaiXmlGenerator::toXml(psSoundEventMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -68,7 +85,7 @@ string PsaiXmlGenerator::toXml(psPlaySoundMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psSoundEventMessage& msg)
+std::string PsaiXmlGenerator::toXml(psPersistItem& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -77,72 +94,7 @@ string PsaiXmlGenerator::toXml(psSoundEventMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psPersistItem& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psPersistActor& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psPersistActionLocation& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psRemoveObject& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psDRMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psStatDRMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psCombatEventMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psModeMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psMoveLockMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psNewSectorMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psEffectMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psStopEffectMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psSpellCastMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psSpellCancelMessage& msg)
+std::string PsaiXmlGenerator::toXml(psPersistActor& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -151,12 +103,7 @@ string PsaiXmlGenerator::toXml(psSpellCancelMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psStatsMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psSystemMessage& msg)
+std::string PsaiXmlGenerator::toXml(psPersistActionLocation& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -165,7 +112,7 @@ string PsaiXmlGenerator::toXml(psSystemMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psWeatherMessage& msg)
+std::string PsaiXmlGenerator::toXml(psRemoveObject& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -174,7 +121,7 @@ string PsaiXmlGenerator::toXml(psWeatherMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psCharacterDetailsMessage& msg)
+std::string PsaiXmlGenerator::toXml(psDRMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -183,12 +130,7 @@ string PsaiXmlGenerator::toXml(psCharacterDetailsMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psGUIInventoryMessage& msg)
-{
-
-}
-
-string PsaiXmlGenerator::toXml(psGUIActiveMagicMessage& msg)
+std::string PsaiXmlGenerator::toXml(psStatDRMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -197,7 +139,7 @@ string PsaiXmlGenerator::toXml(psGUIActiveMagicMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psGUIInteractMessage& msg)
+std::string PsaiXmlGenerator::toXml(psCombatEventMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -206,7 +148,7 @@ string PsaiXmlGenerator::toXml(psGUIInteractMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psGUIMerchantMessage& msg)
+std::string PsaiXmlGenerator::toXml(psModeMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -215,7 +157,7 @@ string PsaiXmlGenerator::toXml(psGUIMerchantMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psGUISkillMessage& msg)
+std::string PsaiXmlGenerator::toXml(psMoveLockMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -224,7 +166,7 @@ string PsaiXmlGenerator::toXml(psGUISkillMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psGUITargetUpdateMessage& msg)
+std::string PsaiXmlGenerator::toXml(psNewSectorMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -233,7 +175,7 @@ string PsaiXmlGenerator::toXml(psGUITargetUpdateMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psLootMessage& msg)
+std::string PsaiXmlGenerator::toXml(psEffectMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -242,7 +184,7 @@ string PsaiXmlGenerator::toXml(psLootMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psQuestListMessage& msg)
+std::string PsaiXmlGenerator::toXml(psStopEffectMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -251,7 +193,7 @@ string PsaiXmlGenerator::toXml(psQuestListMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psQuestRewardMessage& msg)
+std::string PsaiXmlGenerator::toXml(psSpellCastMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -260,7 +202,7 @@ string PsaiXmlGenerator::toXml(psQuestRewardMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psUpdateObjectNameMessage& msg)
+std::string PsaiXmlGenerator::toXml(psSpellCancelMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -269,7 +211,7 @@ string PsaiXmlGenerator::toXml(psUpdateObjectNameMessage& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psViewItemDescription& msg)
+std::string PsaiXmlGenerator::toXml(psStatsMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -278,7 +220,7 @@ string PsaiXmlGenerator::toXml(psViewItemDescription& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psViewItemUpdate& msg)
+std::string PsaiXmlGenerator::toXml(psSystemMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{
@@ -287,7 +229,129 @@ string PsaiXmlGenerator::toXml(psViewItemUpdate& msg)
 	}
 }
 
-string PsaiXmlGenerator::toXml(psEquipmentMessage& msg)
+std::string PsaiXmlGenerator::toXml(psWeatherMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psCharacterDetailsMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psGUIInventoryMessage& msg)
+{
+
+}
+
+std::string PsaiXmlGenerator::toXml(psGUIActiveMagicMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psGUIInteractMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psGUIMerchantMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psGUISkillMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psGUITargetUpdateMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psLootMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psQuestListMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psQuestRewardMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psUpdateObjectNameMessage& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psViewItemDescription& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psViewItemUpdate& msg)
+{
+	if (initiliaseXmlUtils())
+	{
+
+		clearXmlUtils();
+	}
+}
+
+std::string PsaiXmlGenerator::toXml(psEquipmentMessage& msg)
 {
 	if (initiliaseXmlUtils())
 	{

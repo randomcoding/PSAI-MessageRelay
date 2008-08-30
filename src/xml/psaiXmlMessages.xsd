@@ -417,7 +417,7 @@
 	<!--  GUI Active Magic Command Types -->
 	<complexType name="activemagiccommandtype">
 		<choice>
-			<element name="ADD_CATEGORY" type="string" fixed="ADD_CATEGORY"></element>
+			<element name="ADD_CATEGORY" type="string" fixed="ADD_CATEGORY" />
 			<element name="REMOVE_CATEGORY" type="string" fixed="REMOVE_CATEGORY" />
 		</choice>
 	</complexType>

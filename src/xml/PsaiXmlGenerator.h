@@ -54,8 +54,6 @@ class PsaiXmlGenerator
 		PsaiXmlGenerator();
 		virtual ~PsaiXmlGenerator();
 
-	private:
-
 		std::string toXml(psChatMessage& msg);
 
 		std::string toXml(psPlaySoundMessage& msg);
@@ -123,6 +121,8 @@ class PsaiXmlGenerator
 		std::string toXml(psViewItemUpdate& msg);
 
 		std::string toXml(psEquipmentMessage& msg);
+
+	private:
 
 		void initiliaseXmlUtils();
 
