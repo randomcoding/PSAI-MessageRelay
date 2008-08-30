@@ -10,7 +10,7 @@
 #ifndef PSAIXMLGENERATOR_H_
 #define PSAIXMLGENERATOR_H_
 
-#include <string.h>
+class string;
 
 // message types
 class psChatMessage;
@@ -123,6 +123,10 @@ class PsaiXmlGenerator
 		std::string toXml(psViewItemUpdate& msg);
 
 		std::string toXml(psEquipmentMessage& msg);
+
+		void initiliaseXmlUtils();
+
+		void clearXmlUtils();
 
 		static const char* XML_HEADER;
 		static const char* PSAI_NAMESPACE;

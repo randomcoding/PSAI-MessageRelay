@@ -61,11 +61,11 @@ Help distclean : "Remove built targets and configuration" ;
 
 # Write a description of each compile group for 'jam help'
 Description redirector : "Builds the Message Redirector" ;
-Description comms : "Builds the library for communications between the agent system(s) and the redirectors/client interface" ;
+#Description comms : "Builds the library for communications between the agent system(s) and the redirectors/client interface" ;
  
 # Register the compile groups. To add a project to a compile group, add the line CompileGroups project : compilegroup ; in the projects Jamfile.
 
-RegisterCompileGroups redirector comms xml ;
+RegisterCompileGroups redirector xml ;
 
 # List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensistive.
 # Library targets must be seen by Jam before Application and Plugin targets.

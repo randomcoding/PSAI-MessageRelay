@@ -7,7 +7,7 @@ Library psaixml
 ;
 
 # specify the required libs for the build
-ExternalLibs psaixml : CRYSTAL CEL ;
+ExternalLibs psaixml : CRYSTAL CEL XERCES ;
 
 # specify compile group membership
 CompileGroups psaixml : xml ;
