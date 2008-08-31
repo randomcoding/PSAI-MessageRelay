@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.psaidoesnt-exist.org/psaiXmlMessages" xmlns:tns="http://www.psaidoesnt-exist.org/psaiXmlMessages"
-	xmlns:psai="http://www.psaidoesnt-exist.org/psaiXmlMessages" elementFormDefault="qualified"
+<schema targetNamespace="http://www.psaidoesnt-exist.org/psaiXmlMessages" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:psai="http://www.psaidoesnt-exist.org/psaiXmlMessages"
 >
 	
 	<!-- Global types -->
@@ -16,18 +16,18 @@
 	
 	<!-- Container Contents -->
 	<complexType name="containercontents">
-		<sequence>
+		<all>
 			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
 			<element name="icon" type="string" minOccurs="1" maxOccurs="1" />
 			<element name="slotid" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="stackCount" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="purifystatus" type="int" minOccurs="1" maxOccurs="1" />
-		</sequence>
+		</all>
 	</complexType>
 	
 	<!-- Item Description in GUI Inventory Message-->
 	<complexType name="itemdescription">
-		<sequence>
+		<all>
 			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
 			<element name="slot" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="weight" type="float" minOccurs="1" maxOccurs="1" />
@@ -36,43 +36,43 @@
 			<element name="iconimage" type="string" minOccurs="1" maxOccurs="1" />
 			<element name="container" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="purifystatus" type="int" minOccurs="1" maxOccurs="1" />
-		</sequence>
+		</all>
 	</complexType>
 	
 	<!--Skills details  -->
 	<complexType name="networkdetailskill">
-		<sequence>
+		<all>
 			<element name="category" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="text" type="string" minOccurs="1" maxOccurs="1" />
-		</sequence>
+		</all>
 	</complexType>
 	
 	<!-- Network weather info -->
 	<complexType name="netweatherinfo">
-		<sequence>
-			<element name="hasdownfall" type="boolean" />
-			<element name="downfallissnow" type="boolean" />
-			<element name="hasfog" type="boolean" />
-			<element name="haslightning" type="boolean" />
-			<element name="sector" type="string" />
-			<element name="downfalldrops" type="int" />
-			<element name="downfallfade" type="int" />
-			<element name="fogdensity" type="int" />
-			<element name="fogfade" type="int" />
-			<element name="fogred" type="int" />
-			<element name="foggreen" type="int" />
-			<element name="fogblue" type="int" />
-		</sequence>
+		<all>
+			<element name="hasdownfall" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="downfallissnow" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="hasfog" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="haslightning" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="sector" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="downfalldrops" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="downfallfade" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="fogdensity" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="fogfade" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="fogred" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="foggreen" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="fogblue" type="int" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- Money object -->
 	<complexType name="psmoney">
-		<sequence>
+		<all minOccurs="1" maxOccurs="1">
 			<element name="circles" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="octas" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="hexas" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="trias" type="int" minOccurs="1" maxOccurs="1" />
-		</sequence>
+		</all>
 	</complexType>
 
 	<!-- Enumerated types -->
@@ -390,7 +390,7 @@
 	<complexType name="guiinventorymessagetype">
 		<choice>
 			<element name="LIST" type="string" fixed="LIST" />
-			<element name="REQUEST" type="string" fixed="request" />
+			<element name="REQUEST" type="string" fixed="REQUEST" />
 			<element name="UPDATE_REQUEST" type="string" fixed="UPDATE_REQUEST" />
 			<element name="UPDATE_LIST" type="string" fixed="UPDATE_LIST" />
 		</choice>
@@ -482,497 +482,433 @@
 	
 	<!--  Base Message type. All messages inherit from this -->
 	<complexType name="psmessage">
-		<sequence>
+		<all>
 			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
-		</sequence>
+		</all>
 	</complexType>
-    
-    <!-- The single message that is contained in this message -->
-	<element name="clientmessage">
-		<complexType>
-			<sequence>
-				<element name="message" type="psai:psmessage" maxOccurs="1" minOccurs="1" />
-			</sequence>
-		</complexType>
-	</element>
     
     <!-- psChatMessage -->
 	<complexType name="chatmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="text" type="string" maxOccurs="1" minOccurs="1" />
+		<all minOccurs="1" maxOccurs="1">
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="text" type="string" maxOccurs="1" minOccurs="1" />
+			<element name="speaker" minOccurs="1" maxOccurs="1">
+				<complexType>
 					<choice>
 						<element name="from" type="string" maxOccurs="1" minOccurs="1" />
 						<element name="to" type="string" maxOccurs="1" minOccurs="1" />
 					</choice>
-					<element name="chattype" type="psai:chattype" maxOccurs="1" minOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+				</complexType>
+			</element>
+			<element name="chattype" type="psai:chattype" maxOccurs="1" minOccurs="1" />
+		</all>
 	</complexType>
     
 
 	<!-- psCombatEventMessage -->
 	<complexType name="combateventmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="attackerId" type="string" maxOccurs="1" minOccurs="1" />
-					<element name="targetId" type="string" maxOccurs="1" minOccurs="1" />
-					<element name="damage" type="float" maxOccurs="1" minOccurs="1" />
-					<element name="targetLocation" type="int" maxOccurs="1" minOccurs="1" /> <!-- might be worth converting to string -->
-					<element name="combateventtype" type="psai:combateventtype" maxOccurs="1" minOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="attackerid" type="string" maxOccurs="1" minOccurs="1" />
+			<element name="targetid" type="string" maxOccurs="1" minOccurs="1" />
+			<element name="damage" type="float" maxOccurs="1" minOccurs="1" />
+			<element name="targetlocation" type="int" maxOccurs="1" minOccurs="1" /> <!-- might be worth converting to string -->
+			<element name="combateventtype" type="psai:combateventtype" maxOccurs="1" minOccurs="1" />
+		</all>
 	</complexType>
     
 	<!-- psPlaySoundMessage -->
 	<complexType name="playsoundmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="sound" type="string" maxOccurs="1" minOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="sound" type="string" maxOccurs="1" minOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psSoundEventMessage -->
 	<complexType name="soundeventmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="soundeventtype" type="int" maxOccurs="1" minOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all minOccurs="1" maxOccurs="1">
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="soundeventtype" type="int" maxOccurs="1" minOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psPersistItem -->
-	<complexType name="persistitem">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="factname" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="filename" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="sector" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
-					<element name="yrotation" type="float" minOccurs="1" maxOccurs="1" />
-					<element name="id" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="type" type="int" minOccurs=" 1" maxOccurs="1" />
-					<element name="flags" type="psai:persistitemflags" minOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+	<complexType name="persistitemmessage">
+		<all minOccurs="1" maxOccurs="1">
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="factname" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="filename" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="sector" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+			<element name="yrotation" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="id" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="type" type="int" maxOccurs="1" />
+			<element name="flags" type="psai:persistitemflags" minOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!--	psPersistActor-->
 	<complexType name="persistactormessage">
-		<complexContent>
-			<extension base="psai:drmessage">
-				<sequence>
-					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="guild" type="string" maxOccurs="1" />
-					<element name="factname" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="filename" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="race" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="gender" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="helmgroups" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="top" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
-					<element name="bottom" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
-					<element name="offset" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
-					<element name="type" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="masqueradetype" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="servermode" type="short" minOccurs="1" maxOccurs="1" />
-					<element name="playerid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="groupid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="ownereid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="control" type="boolean" minOccurs="1" maxOccurs="1" />
-					<element name="flags" type="psai:persistactorflags" minOccurs="1" />
-					<element name="instance" type="int" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="drmessage" type="psai:drmessage" minOccurs="1" maxOccurs="1" />
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="guild" type="string" maxOccurs="1" />
+			<element name="factname" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="filename" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="race" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="gender" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="helmgroups" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="top" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+			<element name="bottom" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+			<element name="offset" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+			<element name="type" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="masqueradetype" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="servermode" type="short" minOccurs="1" maxOccurs="1" />
+			<element name="playerid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="groupid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="ownereid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="control" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="flags" type="psai:persistactorflags" minOccurs="1" />
+			<element name="instance" type="int" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psPersistActionLocation -->
 	<complexType name="persistactionlocationmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="sector" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="mesh" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="id" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="type" type="int" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="sector" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="mesh" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="id" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="type" type="int" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!--	psRemoveObject -->
 	<complexType name="removeobjectmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="objecteid" type="int" maxOccurs="1" minOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="objecteid" type="int" maxOccurs="1" minOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psDRMessage -->
 	<complexType name="drmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="counter" type="short" minOccurs="1" maxOccurs="1" />
-					<element name="onground" type="boolean" minOccurs="1" maxOccurs="1" />
-					<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
-					<element name="velocity" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
-					<element name="worldvelocity" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
-					<element name="yrotation" type="float" minOccurs="1" maxOccurs="1" />
+		<all minOccurs="1" maxOccurs="1">
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="counter" type="short" minOccurs="1" maxOccurs="1" />
+			<element name="onground" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+			<element name="velocity" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+			<element name="worldvelocity" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+			<element name="yrotation" type="float" minOccurs="1" maxOccurs="1" />
 					<!-- TODO: iSector sector (sector for mesh) -->
-					<element name="sectorname" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="angularvelocity" type="float" minOccurs="1" maxOccurs="1" />
-					<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+			<element name="sectorname" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="angularvelocity" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psStatDRMessage -->
 	<complexType name="statdrmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="useful" type="boolean" minOccurs="1" maxOccurs="1" />
-					<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="statsdirty" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="counter" type="short" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="useful" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="statsdirty" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="counter" type="short" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psModeMessage -->
 	<complexType name="modemessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="actorid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="mode" type="psai:playermode" minOccurs="1" />
-					<element name="stance" type="short" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="actorid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="mode" type="psai:playermode" minOccurs="1" />
+			<element name="stance" type="short" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psMoveLockMessage -->
 	<complexType name="movelockmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="locked" type="boolean" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="locked" type="boolean" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psNewSectorMessage -->
 	<complexType name="newsectormessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="oldsector" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="newsector" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="oldsector" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="newsector" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="position" type="psai:vector3d" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psEffectMessage -->
 	<complexType name="effectmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="anchorid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="targetid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="castduration" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="uid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="effecttext" type="string" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all minOccurs="1" maxOccurs="1">
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="anchorid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="targetid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="castduration" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="uid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="effecttext" type="string" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psStopEffectMessage -->
 	<complexType name="stopeffectmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="uid" type="int" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="uid" type="int" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psSpellCastMessage -->
 	<complexType name="spellcastmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="spell" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="kfactor" type="float" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="spell" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="kfactor" type="float" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psSpellCancelMessage -->
 	<complexType name="spellcancelmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<!-- Empty -->
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psStatsMessage -->
 	<complexType name="statsmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="hp" type="float" minOccurs="1" maxOccurs="1" />
-					<element name="mana" type="float" minOccurs="1" maxOccurs="1" />
-					<element name="weight" type="float" minOccurs="1" maxOccurs="1" />
-					<element name="capacity" type="float" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="hp" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="mana" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="weight" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="capacity" type="float" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psSystemMessage -->
 	<complexType name="systemmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="text" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="type" type="psai:systemmessagetype" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="text" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="type" type="psai:systemmessagetype" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psWeatherMessage -->
 	<complexType name="weathermessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="minute" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="hour" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="day" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="month" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="year" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="weather" type="psai:netweatherinfo" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="minute" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="hour" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="day" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="month" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="year" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="weather" type="psai:netweatherinfo" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psCharacterDetailsMessage -->
 	<complexType name="characterdetailsmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="gender" type="short" minOccurs="1" maxOccurs="1" />
-					<element name="race" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="description" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="requestor" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="skills" type="psai:networkdetailskill" minOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all minOccurs="1" maxOccurs="1">
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="gender" type="short" minOccurs="1" maxOccurs="1" />
+			<element name="race" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="description" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="requestor" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="skills" type="psai:networkdetailskill" minOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psGUIInventoryMessage -->
 	<complexType name="guiinventorymessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="items" type="psai:itemdescription" minOccurs="1" />
-					<element name="totalitems" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="totalemptoedslots" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="maxweight" type="float" minOccurs="1" maxOccurs="1" />
-					<element name="money" type="psai:psmoney" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all minOccurs="1" maxOccurs="1">
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="items" type="psai:itemdescription" minOccurs="1" />
+			<element name="totalitems" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="totalemptiedslots" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="maxweight" type="float" minOccurs="1" maxOccurs="1" />
+			<element name="money" type="psai:psmoney" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psGUIActiveMagicMessage -->
 	<complexType name="guiactivemagicmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="categorylist" type="string" minOccurs="1" />
-					<element name="command" type="psai:activemagiccommandtype" minOccurs="1" maxOccurs="1" />
+		<all minOccurs="1" maxOccurs="1">
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="categorylist" type="string" minOccurs="1" />
+			<element name="command" type="psai:activemagiccommandtype" minOccurs="1" maxOccurs="1" />
 					<!-- open window omitted as it is purely for display purpose -->
-				</sequence>
-			</extension>
-		</complexContent>
+		</all>
 	</complexType>
 	
 	<!-- psGUIInteractMessage -->
 	<complexType name="guiinteractmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="type" type="psai:guiinteractiontype" minOccurs="1" maxOccurs="1"></element>
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="type" type="psai:guiinteractiontype" minOccurs="1" maxOccurs="1"></element>
+		</all>
 	</complexType>
 	
 	<!-- psGUIMerchantMessage -->
 	<complexType name="guimerchantmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="commandtype" type="psai:guimerchangmessagecommandtype" minOccurs="1" maxOccurs="1" />
-					<element name="messagecontent" type="string" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="commandtype" type="psai:guimerchangmessagecommandtype" minOccurs="1" maxOccurs="1" />
+			<element name="messagecontent" type="string" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psGUISkillMessage -->
 	<complexType name="guiskillmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="command" type="psai:guiskillmessagetype" minOccurs="1" maxOccurs="1" />
-					<element name="commanddata" type="string" minOccurs="1" maxOccurs="1" />
-					<!--
-						not in use currently as not sure if really required <element name="skillcache" type="psai:skillcache" minOccurs="1" maxOccurs="1" />
-					-->
-					<element name="strength" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="endurance" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="agility" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="will" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="charisma" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="hitpoints" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="mana" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="physicalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="mentalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="maxhitpoints" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="maxmana" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="maxphysicalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-					<element name="maxmentalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="command" type="psai:guiskillmessagetype" minOccurs="1" maxOccurs="1" />
+			<element name="commanddata" type="string" minOccurs="1" maxOccurs="1" />
+			<!--
+				not in use currently as not sure if really required <element name="skillcache" type="psai:skillcache" minOccurs="1" maxOccurs="1" />
+			-->
+			<element name="strength" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="endurance" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="agility" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="will" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="charisma" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="hitpoints" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="mana" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="physicalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="mentalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="maxhitpoints" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="maxmana" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="maxphysicalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+			<element name="maxmentalstamina" type="positiveInteger" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psGUITargetUpdateMessage -->
 	<complexType name="guitargetupdatemessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="clientid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="targetid" type="int" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="clientid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="targetid" type="int" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psLootMessage -->
 	<complexType name="lootmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="lootxml" type="string" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="entityid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="lootxml" type="string" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psQuestListMessage -->
 	<complexType name="questlistmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="questlistxml" type="string" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="questlistxml" type="string" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psQuestRewardMessage -->
 	<complexType name="questrewardmessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="type" type="psai:questrewardmessagetype" minOccurs="1" maxOccurs="1" />
-					<element name="newvalue" type="string" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="type" type="psai:questrewardmessagetype" minOccurs="1" maxOccurs="1" />
+			<element name="newvalue" type="string" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!-- psUpdateObjectNameMessage -->
 	<complexType name="updateobjectnamemessage">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="objectid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="newname" type="string" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="objectid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="newname" type="string" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!--	psViewItemDescription -->
-	<complexType name="viewitemdescription">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="itemname" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="itemdescription" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="stackcount" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="containerid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="slotid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="hascontents" type="boolean" minOccurs="1" maxOccurs="1" />
-					<element name="toclient" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="contents" type="psai:containercontents" minOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+	<complexType name="viewitemdescriptionmessage">
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="itemname" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="itemdescription" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="stackcount" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="containerid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="slotid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="hascontents" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="toclient" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="contents" type="psai:containercontents" minOccurs="1" />
+		</all>
 	</complexType>
 	
 	<!--	psViewItemUpdate -->
-	<complexType name="viewitemupdate">
-		<complexContent>
-			<extension base="psai:psmessage">
-				<sequence>
-					<element name="clearslot" type="boolean" minOccurs="1" maxOccurs="1" />
-					<element name="toclient" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="contanerid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="name" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="icon" type="string" minOccurs="1" maxOccurs="1" />
-					<element name="slotid" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="stackcount" type="int" minOccurs="1" maxOccurs="1" />
-					<element name="ownerid" type="int" minOccurs="1" maxOccurs="1" />
-				</sequence>
-			</extension>
-		</complexContent>
+	<complexType name="viewitemupdatemessage">
+		<all>
+			<element name="messagetype" type="psai:messagetype" minOccurs="1" maxOccurs="1" />
+			<element name="clearslot" type="boolean" minOccurs="1" maxOccurs="1" />
+			<element name="toclient" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="contanerid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="icon" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="slotid" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="stackcount" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="ownerid" type="int" minOccurs="1" maxOccurs="1" />
+		</all>
 	</complexType>
+	
+	<!-- Element to define the message in the xml document -->
+	<element name="psaimessage">
+		<complexType>
+			<choice minOccurs="1" maxOccurs="1">
+				<element name="characterdetailsmessage" type="psai:characterdetailsmessage" />
+				<element name="chatmessage" type="psai:chatmessage" />
+				<element name="combateventmessage" type="psai:combateventmessage" />
+				<element name="drmessage" type="psai:drmessage" />
+				<element name="effectmessage" type="psai:effectmessage" />
+				<element name="guiactivemagicmessage" type="psai:guiactivemagicmessage" />
+				<element name="guiinteractmessage" type="psai:guiinteractmessage" />
+				<element name="guiinventorymessage" type="psai:guiinventorymessage" />
+				<element name="guimerchantmessage" type="psai:guimerchantmessage" />
+				<element name="guiskillmessage" type="psai:guiskillmessage" />
+				<element name="guitargetupdatemessage" type="psai:guitargetupdatemessage" />
+				<element name="lootmessage" type="psai:lootmessage" />
+				<element name="modemessage" type="psai:modemessage" />
+				<element name="movelockmessage" type="psai:movelockmessage" />
+				<element name="newsectormessage" type="psai:newsectormessage" />
+				<element name="persistactionlocationmessage" type="psai:persistactionlocationmessage" />
+				<element name="persistactormessage" type="psai:persistactormessage" />
+				<element name="persistitemmessage" type="psai:persistitemmessage" />
+				<element name="playsoundmessage" type="psai:playsoundmessage" />
+				<element name="questlistmessage" type="psai:questlistmessage" />
+				<element name="questrewardmessage" type="psai:questrewardmessage" />
+				<element name="removeobjectmessage" type="psai:removeobjectmessage" />
+				<element name="soundeventmessage" type="psai:soundeventmessage" />
+				<element name="spellcancelmessage" type="psai:spellcancelmessage" />
+				<element name="spellcastmessage" type="psai:spellcastmessage" />
+				<element name="statdrmessage" type="psai:statdrmessage" />
+				<element name="statsmessage" type="psai:statsmessage" />
+				<element name="stopeffectmessage" type="psai:stopeffectmessage" />
+				<element name="systemmessage" type="psai:systemmessage" />
+				<element name="updateobjectnamemessage" type="psai:updateobjectnamemessage" />
+				<element name="weathermessage" type="psai:weathermessage" />
+				<element name="viewitemdescriptionmessage" type="psai:viewitemdescriptionmessage" />
+				<element name="viewitemupdatemessage" type="psai:viewitemupdatemessage" />
+			</choice>
+		</complexType>
+	</element>
 </schema>

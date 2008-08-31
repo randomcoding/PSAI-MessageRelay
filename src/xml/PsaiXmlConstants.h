@@ -17,14 +17,16 @@ class PsaiXmlConstants
 	public:
 
 		// support type names
-		const std::string VECTOR_3D("vector3d");
-		const std::string CONTAINER_CONTENTS("containercontents");
-		const std::string ITEM_DESCRIPTION("itemdescription");
-		const std::string NETWORK_DETAIL_SKILL("networkdetailskill");
-		const std::string NET_WEATHER_INFO("netweatherinfo");
-		const std::string PS_MONEY("psmoney");
+		const std::string TYPE_VECTOR_3D("vector3d");
+		const std::string TYPE_CONTAINER_CONTENTS("containercontents");
+		const std::string TYPE_ITEM_DESCRIPTION("itemdescription");
+		const std::string TYPE_NETWORK_DETAIL_SKILL("networkdetailskill");
+		const std::string TYPE_NET_WEATHER_INFO("netweatherinfo");
+		const std::string TYPE_PS_MONEY("psmoney");
 
 		// enumerated types
+
+		// Message Class Types
 		const std::string MSGTYPE_PING("MSGTYPE_PING");
 		const std::string MSGTYPE_AUTHENTICATE("MSGTYPE_AUTHENTICATE");
 		const std::string MSGTYPE_PREAUTHENTICATE("MSGTYPE_PREAUTHENTICATE");
@@ -179,6 +181,7 @@ class PsaiXmlConstants
 		const std::string MSGTYPE_NPCRACELIST("MSGTYPE_NPCRACELIST");
 		const std::string MSGTYPE_INTRODUCTION("MSGTYPE_INTRODUCTION");
 
+		// Chat Message Types
 		const std::string CHAT_SYSTEM("CHAT_SYSTEM");
 		const std::string CHAT_SAY("CHAT_SAY");
 		const std::string CHAT_TELL("CHAT_TELL");
@@ -203,6 +206,7 @@ class PsaiXmlConstants
 		const std::string CHAT_NPC_MY("CHAT_NPC_MY");
 		const std::string CHAT_NPC_NARRATE("CHAT_NPC_NARRATE");
 
+		// Combat Event Types
 		const std::string COMBAT_DODGE("COMBAT_DODGE");
 		const std::string COMBAT_BLOCK("COMBAT_BLOCK");
 		const std::string COMBAT_DAMAGE("COMBAT_DAMAGE");
@@ -211,134 +215,348 @@ class PsaiXmlConstants
 		const std::string COMBAT_DEATH("COMBAT_DEATH");
 		const std::string COMBAT_DAMAGE_NEARLY_DEAD("COMBAT_DAMAGE_NEARLY_DEAD");
 
-		const std::string NONE("NONE");
-		const std::string NOPICKUP("NOPICKUP");
-		const std::string COLLIDE("COLLIDE");
+		// Persist Item Flags
+		const std::string PERSIST_ITEM_NONE("NONE");
+		const std::string PERSIST_ITEM_NOPICKUP("NOPICKUP");
+		const std::string PERSIST_ITEM_COLLIDE("COLLIDE");
 
-		const std::string NONE("NONE");
-		const std::string NPC("NPC");
-		const std::string NAME_KNOWN("NAME_KNOWN");
+		// Persist Actor flags
+		const std::string PERSIST_ACTOR_NONE("NONE");
+		const std::string PERSIST_ACTOR_NPC("NPC");
+		const std::string PERSIST_ACTOR_NAME_KNOWN("NAME_KNOWN");
 
-		const std::string NOT_MOVING("NOT_MOVING");
-		const std::string ACTOR_MODE("ACTOR_MODE");
-		const std::string ANG_VELOCITY("ANG_VELOCITY");
-		const std::string X_VELOCITY("X_VELOCITY");
-		const std::string Y_VELOCITY("Y_VELOCITY");
-		const std::string Z_VELOCITY("Z_VELOCITY");
-		const std::string X_WORLDVELOCITY("X_WORLDVELOCITY");
-		const std::string Y_WORLDVELOCITY("Y_WORLDVELOCITY");
-		const std::string Z_WORLDVELOCITY("Z_WORLDVELOCITY");
-		const std::string ALL_DATA("ALL_DATA");
+		// Dead Reckoning Data Flags
+		const std::string DR_DATA_NOT_MOVING("NOT_MOVING");
+		const std::string DR_DATA_ACTOR_MODE("ACTOR_MODE");
+		const std::string DR_DATA_ANG_VELOCITY("ANG_VELOCITY");
+		const std::string DR_DATA_X_VELOCITY("X_VELOCITY");
+		const std::string DR_DATA_Y_VELOCITY("Y_VELOCITY");
+		const std::string DR_DATA_Z_VELOCITY("Z_VELOCITY");
+		const std::string DR_DATA_X_WORLDVELOCITY("X_WORLDVELOCITY");
+		const std::string DR_DATA_Y_WORLDVELOCITY("Y_WORLDVELOCITY");
+		const std::string DR_DATA_Z_WORLDVELOCITY("Z_WORLDVELOCITY");
+		const std::string DR_DATA_ALL_DATA("ALL_DATA");
 
+		// Equipment Message Commands
 		const std::string EQUIP("EQUIP");
 		const std::string DEEQUIP("DEEQUIP");
 
-		const std::string PEACE("PEACE");
-		const std::string COMBAT("COMBAT");
-		const std::string SPELL_CASTING("SPELL_CASTING");
-		const std::string WORK("WORK");
-		const std::string DEAD("DEAD");
-		const std::string SIT("SIT");
-		const std::string OVERWEIGHT("OVERWEIGHT");
-		const std::string EXHAUSTED("EXHAUSTED");
-		const std::string DEFEATED("DEFEATED");
+		// PLayer Modes
+		const std::string PLAYER_MODE_PEACE("PEACE");
+		const std::string PLAYER_MODE_COMBAT("COMBAT");
+		const std::string PLAYER_MODE_SPELL_CASTING("SPELL_CASTING");
+		const std::string PLAYER_MODE_WORK("WORK");
+		const std::string PLAYER_MODE_DEAD("DEAD");
+		const std::string PLAYER_MODE_SIT("SIT");
+		const std::string PLAYER_MODE_OVERWEIGHT("OVERWEIGHT");
+		const std::string PLAYER_MODE_EXHAUSTED("EXHAUSTED");
+		const std::string PLAYER_MODE_DEFEATED("DEFEATED");
 
-		const std::string OFFER_REWARDS("OFFER_REWARDS");
-		const std::string SELECT_REWARDS("SELECT_REWARDS");
+		// Quest Reward Message Type
+		const std::string QUEST_REWARD_OFFER_REWARDS("OFFER_REWARDS");
+		const std::string QUEST_REWARD_SELECT_REWARDS("SELECT_REWARDS");
 
-		const std::string REQUEST("REQUEST");
-		const std::string DESCRIPTION("DESCRIPTION");
+		// View Item Message Type
+		const std::string VIEW_ITEM_REQUEST("REQUEST");
+		const std::string VIEW_ITEM_DESCRIPTION("DESCRIPTION");
 
-		const std::string MSG_ERROR("MSG_ERROR");
-		const std::string MSG_INFO("MSG_INFO");
-		const std::string MSG_INFO_SERVER("MSG_INFO_SERVER");
-		const std::string MSG_RESULT("MSG_RESULT");
-		const std::string MSG_OK("MSG_OK");
-		const std::string MSG_WHO("MSG_WHO");
-		const std::string MSG_ACK("MSG_ACK");
-		const std::string MSG_INFO_BASE("MSG_INFO_BASE");
-		const std::string MSG_COMBAT("MSG_COMBAT");
-		const std::string MSG_COMBAT_DODGE("MSG_COMBAT_DODGE");
-		const std::string MSG_COMBAT_BLOCK("MSG_COMBAT_BLOCK");
-		const std::string MSG_COMBAT_HITYOU("MSG_COMBAT_HITYOU");
-		const std::string MSG_COMBAT_HITOTHER("MSG_COMBAT_HITOTHER");
-		const std::string MSG_COMBAT_YOURHIT("MSG_COMBAT_YOURHIT");
-		const std::string MSG_COMBAT_OTHERHIT("MSG_COMBAT_OTHERHIT");
-		const std::string MSG_COMBAT_MISS("MSG_COMBAT_MISS");
-		const std::string MSG_COMBAT_OWN_DEATH("MSG_COMBAT_OWN_DEATH");
-		const std::string MSG_COMBAT_DEATH("MSG_COMBAT_DEATH");
-		const std::string MSG_COMBAT_VICTORY("MSG_COMBAT_VICTORY");
-		const std::string MSG_COMBAT_STANCE("MSG_COMBAT_STANCE");
-		const std::string MSG_COMBAT_NEARLY_DEAD("MSG_COMBAT_NEARLY_DEAD");
-		const std::string MSG_LOOT("MSG_LOOT");
-		const std::string MSG_SEC("MSG_SEC");
-		const std::string SEC_LEVEL0("SEC_LEVEL0");
-		const std::string SEC_LEVEL1("SEC_LEVEL1");
-		const std::string SEC_LEVEL2("SEC_LEVEL2");
-		const std::string SEC_LEVEL3("SEC_LEVEL3");
-		const std::string SEC_LEVEL4("SEC_LEVEL4");
-		const std::string MSG_PURCHASE("MSG_PURCHASE");
+		// System Message Types
+		const std::string SYSTEM_MSG_ERROR("MSG_ERROR");
+		const std::string SYSTEM_MSG_INFO("MSG_INFO");
+		const std::string SYSTEM_MSG_INFO_SERVER("MSG_INFO_SERVER");
+		const std::string SYSTEM_MSG_RESULT("MSG_RESULT");
+		const std::string SYSTEM_MSG_OK("MSG_OK");
+		const std::string SYSTEM_MSG_WHO("MSG_WHO");
+		const std::string SYSTEM_MSG_ACK("MSG_ACK");
+		const std::string SYSTEM_MSG_INFO_BASE("MSG_INFO_BASE");
+		const std::string SYSTEM_MSG_COMBAT("MSG_COMBAT");
+		const std::string SYSTEM_MSG_COMBAT_DODGE("MSG_COMBAT_DODGE");
+		const std::string SYSTEM_MSG_COMBAT_BLOCK("MSG_COMBAT_BLOCK");
+		const std::string SYSTEM_MSG_COMBAT_HITYOU("MSG_COMBAT_HITYOU");
+		const std::string SYSTEM_MSG_COMBAT_HITOTHER("MSG_COMBAT_HITOTHER");
+		const std::string SYSTEM_MSG_COMBAT_YOURHIT("MSG_COMBAT_YOURHIT");
+		const std::string SYSTEM_MSG_COMBAT_OTHERHIT("MSG_COMBAT_OTHERHIT");
+		const std::string SYSTEM_MSG_COMBAT_MISS("MSG_COMBAT_MISS");
+		const std::string SYSTEM_MSG_COMBAT_OWN_DEATH("MSG_COMBAT_OWN_DEATH");
+		const std::string SYSTEM_MSG_COMBAT_DEATH("MSG_COMBAT_DEATH");
+		const std::string SYSTEM_MSG_COMBAT_VICTORY("MSG_COMBAT_VICTORY");
+		const std::string SYSTEM_MSG_COMBAT_STANCE("MSG_COMBAT_STANCE");
+		const std::string SYSTEM_MSG_COMBAT_NEARLY_DEAD("MSG_COMBAT_NEARLY_DEAD");
+		const std::string SYSTEM_MSG_LOOT("MSG_LOOT");
+		const std::string SYSTEM_MSG_SEC("MSG_SEC");
+		const std::string SYSTEM_SEC_LEVEL0("SEC_LEVEL0");
+		const std::string SYSTEM_SEC_LEVEL1("SEC_LEVEL1");
+		const std::string SYSTEM_SEC_LEVEL2("SEC_LEVEL2");
+		const std::string SYSTEM_SEC_LEVEL3("SEC_LEVEL3");
+		const std::string SYSTEM_SEC_LEVEL4("SEC_LEVEL4");
+		const std::string SYSTEM_MSG_PURCHASE("MSG_PURCHASE");
 
-		const std::string LIST("LIST");
-		const std::string REQUEST("request");
-		const std::string UPDATE_REQUEST("UPDATE_REQUEST");
-		const std::string UPDATE_LIST("UPDATE_LIST");
+		// GUI Inventory Message Types
+		const std::string GUI_INVENTORY_LIST("LIST");
+		const std::string GUI_INVENTORY_REQUEST("REQUEST");
+		const std::string GUI_INVENTORY_UPDATE_REQUEST("UPDATE_REQUEST");
+		const std::string GUI_INVENTORY_UPDATE_LIST("UPDATE_LIST");
 
-		const std::string DAYNIGHT("DAYNIGHT");
-		const std::string WEATHER("WEATHER");
+		// Player Weather Mode
+		const std::string WEATHER_MODE_DAYNIGHT("DAYNIGHT");
+		const std::string WEATHER_MODE_WEATHER("WEATHER");
 
-		const std::string RAIN("RAIN");
-		const std::string SNOW("SNOW");
-		const std::string FOG("FOG");
-		const std::string LIGHTNING("LIGHTNING");
+		// Weather Types
+		const std::string WEATHER_TYPE_RAIN("RAIN");
+		const std::string WEATHER_TYPE_SNOW("SNOW");
+		const std::string WEATHER_TYPE_FOG("FOG");
+		const std::string WEATHER_TYPE_LIGHTNING("LIGHTNING");
 
-		const std::string ADD_CATEGORY("ADD_CATEGORY");
-		const std::string REMOVE_CATEGORY("REMOVE_CATEGORY");
+		// Active Magic Command Type
+		const std::string ACTIVE_MAGIC_ADD_CATEGORY("ADD_CATEGORY");
+		const std::string ACTIVE_MAGIC_REMOVE_CATEGORY("REMOVE_CATEGORY");
 
-		const std::string PICKUP("PICKUP");
-		const std::string EXAMINE("EXAMINE");
-		const std::string UNLOCK("UNLOCK");
-		const std::string LOOT("LOOT");
-		const std::string BUYSELL("BUYSELL");
-		const std::string GIVE("GIVE");
-		const std::string CLOSE("CLOSE");
-		const std::string USE("USE");
-		const std::string PLAYERDESC("PLAYERDESC");
-		const std::string ATTACK("ATTACK");
-		const std::string COMBINE("COMBINE");
-		const std::string EXCHANGE("EXCHANGE");
-		const std::string TRAIN("TRAIN");
-		const std::string NPCTALK("NPCTALK");
-		const std::string VIEWSTATS("VIEWSTATS");
-		const std::string DISMISS("DISMISS");
-		const std::string MARRIAGE("MARRIAGE");
-		const std::string DIVORCE("DIVORCE");
-		const std::string PLAYGAME("PLAYGAME");
-		const std::string ENTER("ENTER");
-		const std::string LOCK("LOCK");
-		const std::string ENTERLOCKED("ENTERLOCKED");
-		const std::string BANK("BANK");
-		const std::string INTRODUCE("INTRODUCE");
+		// GUI Interaction TYpes
+		const std::string GUI_INTERACTION_PICKUP("PICKUP");
+		const std::string GUI_INTERACTION_EXAMINE("EXAMINE");
+		const std::string GUI_INTERACTION_UNLOCK("UNLOCK");
+		const std::string GUI_INTERACTION_LOOT("LOOT");
+		const std::string GUI_INTERACTION_BUYSELL("BUYSELL");
+		const std::string GUI_INTERACTION_GIVE("GIVE");
+		const std::string GUI_INTERACTION_CLOSE("CLOSE");
+		const std::string GUI_INTERACTION_USE("USE");
+		const std::string GUI_INTERACTION_PLAYERDESC("PLAYERDESC");
+		const std::string GUI_INTERACTION_ATTACK("ATTACK");
+		const std::string GUI_INTERACTION_COMBINE("COMBINE");
+		const std::string GUI_INTERACTION_EXCHANGE("EXCHANGE");
+		const std::string GUI_INTERACTION_TRAIN("TRAIN");
+		const std::string GUI_INTERACTION_NPCTALK("NPCTALK");
+		const std::string GUI_INTERACTION_VIEWSTATS("VIEWSTATS");
+		const std::string GUI_INTERACTION_DISMISS("DISMISS");
+		const std::string GUI_INTERACTION_MARRIAGE("MARRIAGE");
+		const std::string GUI_INTERACTION_DIVORCE("DIVORCE");
+		const std::string GUI_INTERACTION_PLAYGAME("PLAYGAME");
+		const std::string GUI_INTERACTION_ENTER("ENTER");
+		const std::string GUI_INTERACTION_LOCK("LOCK");
+		const std::string GUI_INTERACTION_ENTERLOCKED("ENTERLOCKED");
+		const std::string GUI_INTERACTION_BANK("BANK");
+		const std::string GUI_INTERACTION_INTRODUCE("INTRODUCE");
 
-		const std::string REQUEST("REQUEST");
-		const std::string MERCHANT("MERCHANT");
-		const std::string CATEGORIES("CATEGORIES");
-		const std::string CATEGORY("CATEGORY");
-		const std::string MONEY("MONEY");
-		const std::string ITEMS("ITEMS");
-		const std::string BUY("BUY");
-		const std::string SELL("SELL");
-		const std::string VIEW("VIEW");
-		const std::string CANCEL("CANCEL");
+		// GUI Merchant Message Types
+		const std::string GUI_MERCHANT_MESSAGE_REQUEST("REQUEST");
+		const std::string GUI_MERCHANT_MESSAGE_MERCHANT("MERCHANT");
+		const std::string GUI_MERCHANT_MESSAGE_CATEGORIES("CATEGORIES");
+		const std::string GUI_MERCHANT_MESSAGE_CATEGORY("CATEGORY");
+		const std::string GUI_MERCHANT_MESSAGE_MONEY("MONEY");
+		const std::string GUI_MERCHANT_MESSAGE_ITEMS("ITEMS");
+		const std::string GUI_MERCHANT_MESSAGE_BUY("BUY");
+		const std::string GUI_MERCHANT_MESSAGE_SELL("SELL");
+		const std::string GUI_MERCHANT_MESSAGE_VIEW("VIEW");
+		const std::string GUI_MERCHANT_MESSAGE_CANCEL("CANCEL");
 
-		const std::string REQUEST("REQUEST");
-		const std::string BUY_SKILL("BUY_SKILL");
-		const std::string SKILL_LIST("SKILL_LIST");
-		const std::string SKILL_SELECTED("SKILL_SELECTED");
-		const std::string DESCRIPTION("DESCRIPTION");
-		const std::string QUIT("QUIT");
+		// GUI Skill Message Types
+		const std::string GUI_SKILL_MESSAGE_REQUEST("REQUEST");
+		const std::string GUI_SKILL_MESSAGE_BUY_SKILL("BUY_SKILL");
+		const std::string GUI_SKILL_MESSAGE_SKILL_LIST("SKILL_LIST");
+		const std::string GUI_SKILL_MESSAGE_SKILL_SELECTED("SKILL_SELECTED");
+		const std::string GUI_SKILL_MESSAGE_DESCRIPTION("DESCRIPTION");
+		const std::string GUI_SKILL_MESSAGE_QUIT("QUIT");
 
 		// Message types and elements
+		const std::string ELEMENT_ALL_MESSAGE_TYPE("messagetype");
+
+		const std::string TYPE_CHAT_MESSAGE("chatmessage");
+		const std::string ELEMENT_CHAT_TEXT("text");
+		const std::string ELEMENT_CHAT_SPEAKER("speaker");
+		const std::string ELEMENT_CHAT_SPEAKER_FROM("from");
+		const std::string ELEMENT_CHAT_SPEAKER_TO("to");
+		const std::string ELEMENT_CHAT_CHAT_TYPE("chattype");
+
+		const std::string TYPE_COMBAT_MESSAGE("combateventmessage");
+		const std::string ELEMENT_COMBAT_ATTACKER_ID("attackerid");
+		const std::string ELEMENT_COMBAT_TARGET_ID("targetid");
+		const std::string ELEMENT_COMBAT_DAMAGE("damage");
+		const std::string ELEMENT_COMBAT_TARGET_LOCATION("targetlocation");
+		const std::string ELEMENT_COMBAT_EVENT_TYPE("combateventtype");
+
+		const std::string TYPE_DR_MESSAGE("drmessage");
+		const std::string ELEMENT_DR_COUNTER("counter");
+		const std::string ELEMENT_DR_ON_GROUND("onground");
+		const std::string ELEMENT_DR_POSITION("position");
+		const std::string ELEMENT_DR_VELOCITY("velocity");
+		const std::string ELEMENT_DR_WORLD_VELOCITY("worldvelocity");
+		const std::string ELEMENT_DR_Y_ROTATION("yrotation");
+		const std::string ELEMENT_DR_SECTOR_NAME("sectorname");
+		const std::string ELEMENT_DR_ANGULAR_VELOCITY("angularvelocity");
+		const std::string ELEMENT_DR_ENTITY_ID("entityid");
+
+		const std::string TYPE_EFFECT_MESSAGE("effectmessage");
+		const std::string ELEMENT_EFFECT_MESSAGE_NAME("name");
+		const std::string ELEMENT_EFFECT_MESSAGE_ANCHOR_ID("anshorid");
+		const std::string ELEMENT_EFFECT_MESSAGE_TARGET_ID("targetid");
+		const std::string ELEMENT_EFFECT_MESSAGE_CAST_DURATION("castduration");
+		const std::string ELEMENT_EFFECT_MESSAGE_UID("uid");
+		const std::string ELEMENT_EFFECT_MESSAGE_EFFECT_TEXT("effecttext");
+
+		const std::string TYPE_GUI_ACTIVE_MAGIC_MESSAGE("guiactivemagicmessage");
+		const std::string ELEMENT_GUI_ACTIVE_MAGIC_CATEGORY_LIST("catrgorylist");
+		const std::string ELEMENT_GUI_ACTIVE_MAGIC_COMMAND("command");
+
+		const std::string TYPE_GUI_INTERACT_MESSAGE("guiinteractmessage");
+		const std::string ELEMENT_GUI_INTERACT_TYPE("type");
+
+		const std::string TYPE_GUI_INVENTORY_MESSAGE("guiinventorymessage");
+		const std::string ELEMENT_GUI_INVENTORY_ITEMS("items");
+		const std::string ELEMENT_GUI_INVENTORY_TOTAL_ITEMS("totalitens");
+		const std::string ELEMENT_GUI_INVENTORY_TOTAL_EMPTIED_SLOTS("totalemptiedslots");
+		const std::string ELEMENT_GUI_INVENTORY_MAX_WEIGHT("maxweight");
+		const std::string ELEMENT_GUI_INVENTORY_MONEY("money");
+
+		const std::string TYPE_GUI_MERCHANT_MESSAGE("guimerchantmessage");
+		const std::string ELEMENT_GUI_MERCHANT_COMMAND_TYPE("commandtype");
+		const std::string ELEMENT_GUI_MERCHANT_MESSAGE_CONTENT("messagecontent");
+
+		const std::string TYPE_GUI_SKILL_MESSAGE("guiskillmessage");
+		const std::string ELEMENT_GUI_SKILL_COMMAND("command");
+		const std::string ELEMENT_GUI_SKILL_COMMAND_DATA("commanddata");
+		const std::string ELEMENT_GUI_SKILL_STRENGTH("strength");
+		const std::string ELEMENT_GUI_SKILL_ENDURANCE("endurance");
+		const std::string ELEMENT_GUI_SKILL_AGILITY("agility");
+		const std::string ELEMENT_GUI_SKILL_WILL("will");
+		const std::string ELEMENT_GUI_SKILL_CHARISMA("charisma");
+		const std::string ELEMENT_GUI_SKILL_HIT_POINTS("hitpoints");
+		const std::string ELEMENT_GUI_SKILL_MANA("mana");
+		const std::string ELEMENT_GUI_SKILL_PHYSICAL_STAMINA("physicalstamina");
+		const std::string ELEMENT_GUI_SKILL_MENTAL_STAMINA("mentalstamina");
+		const std::string ELEMENT_GUI_SKILL_MAX_HIT_POINTS("maxhitpoints");
+		const std::string ELEMENT_GUI_SKILL_MAX_MANA("max_mana");
+		const std::string ELEMENT_GUI_SKILL_MAX_PHYSICAL_STAMINA("maxphysicalstamina");
+		const std::string ELEMENT_GUI_SKILL_MAX_MENTAL_STAMINA("maxmentalstamina");
+
+		const std::string TYPE_GUI_TARGET_UPDATE_MESSAGE("guitargetupdatemessage");
+		const std::string ELEMENT_GUI_TARGET_UPDATE_CLIENT_ID("clientid");
+		const std::string ELEMENT_GUI_TARGET_UPDATE_TARGET_ID("targetid");
+
+		const std::string TYPE_MODE_MESSAGE("modemessage");
+		const std::string ELEMENT_MODE_ACTOR_ID("actorid");
+		const std::string ELEMENT_MODE_MODE("mode");
+		const std::string ELEMENT_MODE_STANCE("stance");
+
+		const std::string TYPE_MOVE_LOCK_MESSAGE("movelockmessage");
+		const std::string ELEMENT_MOVE_LOCK_LOCKED("locked");
+
+		const std::string TYPE_NEW_SECTOR_MESSAGE("newsectormessage");
+		const std::string ELEMENT_NEW_SECTOR_OLD_SECTOR("oldsector");
+		const std::string ELEMENT_NEW_SECTOR_NEW_SECTOR("newsector");
+		const std::string ELEMENT_NEW_SECTOR_POSITION("position");
+
+		const std::string TYPE_PERSIST_ACTION_LOCATION_MESSAGE("persistactionlocationmessage");
+		const std::string ELEMENT_PERSIST_ACTION_LOCATION_SECTOR("sector");
+		const std::string ELEMENT_PERSIST_ACTION_LOCATION_MESH("mesh");
+		const std::string ELEMENT_PERSIST_ACTION_LOCATION_ID("id");
+		const std::string ELEMENT_PERSIST_ACTION_LOCATION_TYPE("type");
+
+		const std::string TYPE_PERSIST_ACTOR_MESSAGE("persistactormessage");
+		const std::string ELEMENT_PERSIST_ACTOR_DR_MESSAGE("drmessage");
+		const std::string ELEMENT_PERSIST_ACTOR_NAME("name");
+		const std::string ELEMENT_PERSIST_ACTOR_GUILD("guild");
+		const std::string ELEMENT_PERSIST_ACTOR_FACT_NAME("factname");
+		const std::string ELEMENT_PERSIST_ACTOR__FILE_NAME("filename");
+		const std::string ELEMENT_PERSIST_ACTOR_RACE("race");
+		const std::string ELEMENT_PERSIST_ACTOR_GENDER("gender");
+		const std::string ELEMENT_PERSIST_ACTOR_HELM_GROUPS("helmgroups");
+		const std::string ELEMENT_PERSIST_ACTOR_TOP("top");
+		const std::string ELEMENT_PERSIST_ACTOR_BOTTOM("bottom");
+		const std::string ELEMENT_PERSIST_ACTOR_OFFSET("offset");
+		const std::string ELEMENT_PERSIST_ACTOR_TYPE("type");
+		const std::string ELEMENT_PERSIST_ACTOR_MASQUERADED_TYPE("masqueradedtype");
+		const std::string ELEMENT_PERSIST_ACTOR_SERVER_MODE("servermode");
+		const std::string ELEMENT_PERSIST_ACTOR_PLAYER_ID("playerid");
+		const std::string ELEMENT_PERSIST_ACTOR_GROUP_ID("groupid");
+		const std::string ELEMENT_PERSIST_ACTOR_OWNER_EID("ownereid");
+		const std::string ELEMENT_PERSIST_ACTOR_CONTROL("control");
+		const std::string ELEMENT_PERSIST_ACTOR_FLAGS("flags");
+		const std::string ELEMENT_PERSIST_ACTOR_INSTANCE("instance");
+
+		const std::string TYPE_PERSIST_ITEM_MESSAGE("persistitemmessage");
+		const std::string ELEMENT_PERSIST_ITEM_NAME("name");
+		const std::string ELEMENT_PERSIST_ITEM_FACT_NAME("factname");
+		const std::string ELEMENT_PERSIST_ITEM_FILE_NAME("filename");
+		const std::string ELEMENT_PERSIST_ITEM_SECTOR("sector");
+		const std::string ELEMENT_PERSIST_ITEM_POSITION("position");
+		const std::string ELEMENT_PERSIST_ITEM_Y_ROTATION("yrotation");
+		const std::string ELEMENT_PERSIST_ITEM_ID("id");
+		const std::string ELEMENT_PERSIST_ITEM_TYPE("type");
+		const std::string ELEMENT_PERSIST_ITEM_FLAGS("flags");
+
+		const std::string TYPE_PLAY_SOUND_MESSAGE("playsoundmessage");
+		const std::string ELEMENT_PLAY_SOUND_SOUND("sound");
+
+		const std::string TYPE_QUEST_LIST_MESSAGE("questlistmessage");
+		const std::string ELEMENT_QUEST_LIST_QUEST_XML("questxml");
+
+		const std::string TYPE_QUEST_REWARD_MESSAGE("questrewardmessage");
+		const std::string ELEMENT_QUEST_REWARD_TYPE("type");
+		const std::string ELEMENT_QUEST_REWARD_NEW_VALUE("newvalue");
+
+		const std::string TYPE_REMOVE_OBJECT_MESSAGE("removeobjectmessage");
+		const std::string ELEMENT_REMOVE_OBJECT_OBJECT_ID("objectid");
+
+		const std::string TYPE_SOUND_EVENT_MESSAGE("soundeventmessage");
+		const std::string ELEMENT_SOUNT_EVENT_TYPE("soundeventtype");
+
+		const std::string TYPE_SPELL_CANCEL_MESSAGE("spellcancelmessage");
+		// empty message
+
+		const std::string TYPE_SPELL_CAST_MESSAGE("spellcastmessage");
+		const std::string ELEMENT_SPELL_CAST_SPELL("spell");
+		const std::string ELEMENT_SPELL_CAST_K_FACTOR("kfactor");
+
+		const std::string TYPE_STAT_DR_MESSAGE("statdrmessage");
+		const std::string ELEMENT_STAT_DR_USEFUL("useful");
+		const std::string ELEMENT_STAT_DR_ENTITY_ID("entityid");
+		const std::string ELEMENT_STAT_DR_STATS_DIRTY("statsdirty");
+		const std::string ELEMENT_STAT_DR_COUNTER("counter");
+
+		const std::string TYPE_STATS_MESSAGE("statsmessage");
+		const std::string ELEMENT_STATS_HIT_POINTS("hp");
+		const std::string ELEMENT_STATS_MANA("mana");
+		const std::string ELEMENT_STATS_WEIGHT("weight");
+		const std::string ELEMENT_STATS_CAPACITY("capacity");
+
+		const std::string TYPE_STOP_EFFECT_MESSAGE("stopeffectmessage");
+		const std::string ELEMENT_STOP_EFFECT_UID("uid");
+
+		const std::string TYPE_SYSTEM_MESSAGE("systemmessage");
+		const std::string ELEMENT_SYSTEM_TEXT("text");
+		const std::string ELEMENT_SYSTEM_TYPE("type");
+
+		const std::string TYPE_UPDATE_OBJECT_NAME_MESSAGE("updateobjectname");
+		const std::string ELEMENT_UPDATE_OBJECT_NAME_OBJECT_ID("objectid");
+		const std::string ELEMENT_UPDATE_OBJECT_NAME_NEW_NAME("newname");
+
+		const std::string TYPE_VIEW_ITEM_DESCRIPTION_MESSAGE("viewitemdescriptionmessage");
+		const std::string ELEMENT_VIEW_ITEM_DESCRIPTION_ITEM_NAME("itemname");
+		const std::string ELEMENT_VIEW_ITEM_DESCRIPTION_ITEM_DESCRIPTION("itemdescription");
+		const std::string ELEMENT_VIEW_ITEM_DESCRIPTION_STACK_COUNT("stackcount");
+		const std::string ELEMENT_VIEW_ITEM_DESCRIPTION_CONTAINER_ID("containerid");
+		const std::string ELEMENT_VIEW_ITEM_DESCRIPTION_SLOT_ID("slotid");
+		const std::string ELEMENT_VIEW_ITEM_DESCRIPTION_HAS_CONTENTS("hascontents");
+		const std::string ELEMENT_VIEW_ITEM_DESCRIPTION_TO_CLIENT("toclient");
+		const std::string ELEMENT_VIEW_ITEM_DESCRIPTION_CONTENTS("contents");
+
+		const std::string TYPE_VIEW_ITEM_UPDATE_MESSAGE("viewitemupdatemessage");
+		const std::string ELEMENT_VIEW_ITEM_UPDATE_CLEAR_SLOT("clearslot");
+		const std::string ELEMENT_VIEW_ITEM_UPDATE_TO_CLIENT("toclient");
+		const std::string ELEMENT_VIEW_ITEM_UPDATE_CONTAINER_ID("containerid");
+		const std::string ELEMENT_VIEW_ITEM_UPDATE_NAME("name");
+		const std::string ELEMENT_VIEW_ITEM_UPDATE_ICON("icon");
+		const std::string ELEMENT_VIEW_ITEM_UPDATE_SLOT_ID("slotid");
+		const std::string ELEMENT_VIEW_ITEM_UPDATE_STACK_COUNT("stackcount");
+		const std::string ELEMENT_VIEW_ITEM_UPDATE_OWNER_ID("ownerid");
+
+		const std::string TYPE_WEATHER_MESSAGE("weathermessage");
+		const std::string ELEMENT_WEATHER_MINUTE("minute");
+		const std::string ELEMENT_WEATHER_HOUR("hour");
+		const std::string ELEMENT_WEATHER_DAY("day");
+		const std::string ELEMENT_WEATHER_MONTH("month");
+		const std::string ELEMENT_WEATHER_YEAR("year");
+		const std::string ELEMENT_WEATHER_WEATHER("weather");
 	};
 
 #endif /* PSAIXMLCONSTANTS_H_ */
