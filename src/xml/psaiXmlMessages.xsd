@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema targetNamespace="http://www.psaidoesnt-exist.org/psaiXmlMessages" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
-	xmlns:psai="http://www.psaidoesnt-exist.org/psaiXmlMessages"
+<schema targetNamespace="http://www.zarniwoops.plus.com/psai/xml" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:psai="http://www.zarniwoops.plus.com/psai/xml"
 >
 	
 	<!-- Global types -->

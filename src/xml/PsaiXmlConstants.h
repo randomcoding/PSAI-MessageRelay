@@ -557,6 +557,10 @@ class PsaiXmlConstants
 		const std::string ELEMENT_WEATHER_MONTH("month");
 		const std::string ELEMENT_WEATHER_YEAR("year");
 		const std::string ELEMENT_WEATHER_WEATHER("weather");
+
+		const std::string XML_HEADER("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		const std::string PSAI_MESSAGE_ELEMENT_START("<psai:psaimessage xmlns:psai=\"http://www.zarniwoops.plus.com/psai/xml\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.zarniwoops.plus.com/psai/xml http://www.zarniwoops.plus.com/psai/xml/psaiXmlMessages.xsd\">");
+		const std::string PSAI_MESSAGE_ELEMENT_END("</psai:psaimessage>");
 	};
 
 #endif /* PSAIXMLCONSTANTS_H_ */
