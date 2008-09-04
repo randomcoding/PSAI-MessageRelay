@@ -121,18 +121,6 @@ class PsaiXmlGenerator
 		std::string toXml(psViewItemUpdate& msg);
 
 		std::string toXml(psEquipmentMessage& msg);
-
-	private:
-
-		void initiliaseXmlUtils();
-
-		void clearXmlUtils();
-
-		static const char* XML_HEADER;
-		static const char* PSAI_NAMESPACE;
 };
-
-static const char* XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-static const char* PSAI_NAMESPACE = "xmlns=\"http://www.psaidoesnt-exist.org/psaiXmlMessages\"";
 
 #endif /* PSAIXMLGENERATOR_H_ */

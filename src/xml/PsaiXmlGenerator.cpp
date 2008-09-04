@@ -14,7 +14,9 @@
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/dom/DOM.hpp>
 
+#include "PsaiXmlConstants.h"
 #include "PsaiXmlGenerator.h"
+#include "PsaiXmlUtils.h"
 
 using namespace XERCES_CPP_NAMESPACE;
 
@@ -28,222 +30,216 @@ PsaiXmlGenerator::~PsaiXmlGenerator()
 	// does nothing yet
 }
 
-bool PsaiXmlGenerator::initiliaseXmlUtils()
-{
-	bool initialiseSuccess = true;
-
-	try
-	{
-		XMLPlatformUtils::Initialize();
-	}
-	catch (const XMLException& toCatch)
-	{
-		initialiseSuccess = false;
-	}
-	return initialiseSuccess;
-}
-
-void PsaiXmlGenerator::clearXmlUtils()
-{
-	XMLPlatformUtils::Terminate();
-}
-
 std::string PsaiXmlGenerator::toXml(psChatMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	std::string xmlString = NULL;
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
-		XMLCh tempStr[100];
+		DOMDocument& doc = PsaiXmlUtils::getDOMDocumentForMessageType(PsaiXmlConstants.TYPE_CHAT_MESSAGE);
+		DOMElement& root = *(doc.getDocumentElement());
 
-		XMLString::transcode("Range", tempStr, 99);
-		DOMImplementation* impl = DOMImplementationRegistry::getDOMImplementation(tempStr);
+		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants.ELEMENT_CHAT_TEXT, msg.sText.GetDataSafe());
 
-		XMLString::transcode("root", tempStr, 99);
-		DOMDocument* doc = impl->createDocument(0, tempStr, 0);
-		DOMElement* root = doc->getDocumentElement();
+		DOMElement& speakerElement = PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants.ELEMENT_CHAT_SPEAKER, NULL);
 
-		impl.createDOMWriter();
+		if (msg.sOther != NULL && msg.sOther.Length() > 0)
+		{
+			PsaiXmlUtils::createDomElement(doc, speakerElement, PsaiXmlConstants.ELEMENT_CHAT_SPEAKER_TO, msg.sOther.GetDataSafe());
+		}
+		else if (msg.sPerson != NULL && msg.sPerson.Length() > 0)
+		{
+			PsaiXmlUtils::createDomElement(doc, speakerElement, PsaiXmlConstants.ELEMENT_CHAT_SPEAKER_FROM, msg.sPerson.GetDataSafe());
+		}
 
-		clearXmlUtils();
+		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants.ELEMENT_CHAT_CHAT_TYPE, PsaiXmlUtils::getChatTypeAsString(msg.iChatType));
+
+		PsaiXmlUtils::clearXmlUtils();
+
+		xmlString = PsaiXmlUtils.convertDomDocumentToXmlString(doc);
 	}
+
+	return xmlString;
 }
+
+
 
 std::string PsaiXmlGenerator::toXml(psPlaySoundMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psSoundEventMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psPersistItem& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psPersistActor& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psPersistActionLocation& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psRemoveObject& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psDRMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psStatDRMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psCombatEventMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psModeMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psMoveLockMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psNewSectorMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psEffectMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psStopEffectMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psSpellCastMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psSpellCancelMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psStatsMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psSystemMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psWeatherMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psCharacterDetailsMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
@@ -254,109 +250,109 @@ std::string PsaiXmlGenerator::toXml(psGUIInventoryMessage& msg)
 
 std::string PsaiXmlGenerator::toXml(psGUIActiveMagicMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psGUIInteractMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psGUIMerchantMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psGUISkillMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psGUITargetUpdateMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psLootMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psQuestListMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psQuestRewardMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psUpdateObjectNameMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psViewItemDescription& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psViewItemUpdate& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
 std::string PsaiXmlGenerator::toXml(psEquipmentMessage& msg)
 {
-	if (initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
-		clearXmlUtils();
+		PsaiXmlUtils::clearXmlUtils();
 	}
 }
 
