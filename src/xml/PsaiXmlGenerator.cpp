@@ -13,10 +13,13 @@
 
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/dom/DOM.hpp>
+#include <xercesc/dom/DOMDocument.hpp>
+#include <xercesc/dom/DOMElement.hpp>
 
 #include "PsaiXmlConstants.h"
 #include "PsaiXmlGenerator.h"
 #include "PsaiXmlUtils.h"
+#include <string>
 
 using namespace XERCES_CPP_NAMESPACE;
 
@@ -33,29 +36,29 @@ PsaiXmlGenerator::~PsaiXmlGenerator()
 std::string PsaiXmlGenerator::toXml(psChatMessage& msg)
 {
 	std::string xmlString = NULL;
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
-		DOMDocument& doc = PsaiXmlUtils::getDOMDocumentForMessageType(PsaiXmlConstants.TYPE_CHAT_MESSAGE);
+		DOMDocument& doc = PsaiXmlUtils::getDOMDocumentForMessageType(PsaiXmlConstants::TYPE_CHAT_MESSAGE);
 		DOMElement& root = *(doc.getDocumentElement());
 
-		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants.ELEMENT_CHAT_TEXT, msg.sText.GetDataSafe());
+		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants::ELEMENT_CHAT_TEXT, msg.sText.GetDataSafe());
 
-		DOMElement& speakerElement = PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants.ELEMENT_CHAT_SPEAKER, NULL);
+		DOMElement& speakerElement = PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER, "");
 
 		if (msg.sOther != NULL && msg.sOther.Length() > 0)
 		{
-			PsaiXmlUtils::createDomElement(doc, speakerElement, PsaiXmlConstants.ELEMENT_CHAT_SPEAKER_TO, msg.sOther.GetDataSafe());
+			PsaiXmlUtils::createDomElement(doc, speakerElement, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_TO, msg.sOther.GetDataSafe());
 		}
 		else if (msg.sPerson != NULL && msg.sPerson.Length() > 0)
 		{
-			PsaiXmlUtils::createDomElement(doc, speakerElement, PsaiXmlConstants.ELEMENT_CHAT_SPEAKER_FROM, msg.sPerson.GetDataSafe());
+			PsaiXmlUtils::createDomElement(doc, speakerElement, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_FROM, msg.sPerson.GetDataSafe());
 		}
 
-		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants.ELEMENT_CHAT_CHAT_TYPE, PsaiXmlUtils::getChatTypeAsString(msg.iChatType));
+		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE, PsaiXmlUtils::getChatTypeAsString(msg.iChatType));
 
 		PsaiXmlUtils::clearXmlUtils();
 
-		xmlString = PsaiXmlUtils.convertDomDocumentToXmlString(doc);
+		xmlString = PsaiXmlUtils::convertDomDocumentToXmlString(doc);
 	}
 
 	return xmlString;
@@ -74,7 +77,7 @@ std::string PsaiXmlGenerator::toXml(psPlaySoundMessage& msg)
 
 std::string PsaiXmlGenerator::toXml(psSoundEventMessage& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -83,7 +86,7 @@ std::string PsaiXmlGenerator::toXml(psSoundEventMessage& msg)
 
 std::string PsaiXmlGenerator::toXml(psPersistItem& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -92,7 +95,7 @@ std::string PsaiXmlGenerator::toXml(psPersistItem& msg)
 
 std::string PsaiXmlGenerator::toXml(psPersistActor& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -101,7 +104,7 @@ std::string PsaiXmlGenerator::toXml(psPersistActor& msg)
 
 std::string PsaiXmlGenerator::toXml(psPersistActionLocation& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -110,7 +113,7 @@ std::string PsaiXmlGenerator::toXml(psPersistActionLocation& msg)
 
 std::string PsaiXmlGenerator::toXml(psRemoveObject& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -119,7 +122,7 @@ std::string PsaiXmlGenerator::toXml(psRemoveObject& msg)
 
 std::string PsaiXmlGenerator::toXml(psDRMessage& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -128,7 +131,7 @@ std::string PsaiXmlGenerator::toXml(psDRMessage& msg)
 
 std::string PsaiXmlGenerator::toXml(psStatDRMessage& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -137,7 +140,7 @@ std::string PsaiXmlGenerator::toXml(psStatDRMessage& msg)
 
 std::string PsaiXmlGenerator::toXml(psCombatEventMessage& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -146,7 +149,7 @@ std::string PsaiXmlGenerator::toXml(psCombatEventMessage& msg)
 
 std::string PsaiXmlGenerator::toXml(psModeMessage& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();
@@ -155,7 +158,7 @@ std::string PsaiXmlGenerator::toXml(psModeMessage& msg)
 
 std::string PsaiXmlGenerator::toXml(psMoveLockMessage& msg)
 {
-	if (PsaiXmlUtils::PsaiXmlUtils::initiliaseXmlUtils())
+	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 
 		PsaiXmlUtils::clearXmlUtils();

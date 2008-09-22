@@ -1,4 +1,4 @@
-SubDir TOP src message ;
+SubDir TOP src xml ;
 
 # specify the library to be built
 Library psaixml
@@ -7,7 +7,7 @@ Library psaixml
 ;
 
 # specify the required libs for the build
-ExternalLibs psaixml : CRYSTAL CEL XERCES ;
+ExternalLibs psaixml : CRYSTAL CEL PSUTIL PSENGINE ;
 
 # specify compile group membership
 CompileGroups psaixml : xml ;

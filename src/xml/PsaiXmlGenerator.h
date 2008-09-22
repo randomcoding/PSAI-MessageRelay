@@ -10,6 +10,8 @@
 #ifndef PSAIXMLGENERATOR_H_
 #define PSAIXMLGENERATOR_H_
 
+#include <globals.h>
+
 class string;
 
 // message types
