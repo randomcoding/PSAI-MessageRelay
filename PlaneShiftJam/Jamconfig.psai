@@ -1,0 +1,7 @@
+PSAI.LIB.VER ?= 0.1 ;
+
+PSAI.AVAILABLE ?= yes ;
+
+PSAI.CFLAGS ?= -I../PsaiMessageRedirector/src ;
+PSAI.LFLAGS ?= -L../PsaiMessageRedirector/out/linuxx86/optimize/libs -lpsaimessageredirect-$(PSAI.LIB.VER) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PSAI.INCLUDE_DIR ?= $(PSAI.WORKSPACE.DIR)/PsaiMessageRedirector/src ;

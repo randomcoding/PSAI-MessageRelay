@@ -11,11 +11,8 @@ IncludeDir "include" ;
 
 # project includes
 IncludeDir src ;
-IncludeDir src intercept ;
 IncludeDir src message ;
 IncludeDir src xml ;
-#IncludeDir src comms ;
-#IncludeDir src util ;
 
 # other library includes
 IncludeDir $(TOP) .. .. cal3d include ;
