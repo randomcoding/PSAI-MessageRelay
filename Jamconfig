@@ -78,7 +78,7 @@ PSGUI.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out
 
 CPPUNIT.AVAILABLE ?= yes ;
 CPPUNIT.CFLAGS ?= $(PS.INCLUDES) ;
-CPPUNIT.LFLAGS ?= -L/usr/lib -lcppunit -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CPPUNIT.LFLAGS ?= -ldl -lcppunit -lz -lpthread -lc -lm -lnsl -L/usr/local/lib ;
 
 LIBMYSQLCLIENT.AVAILABLE ?= yes ;
 LIBMYSQLCLIENT.CFLAGS ?= -I/usr/include/mysql ;

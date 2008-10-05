@@ -44,8 +44,15 @@ class PsaiXmlUtils
 		static DOMElement& createDomElement(DOMDocument& parentDoc, DOMElement& parentElement, const std::string elementTag,
 				const std::string elementText);
 
-		static std::string convertDomDocumentToXmlString(DOMDocument& domDoc);
+		static std::string convertDomDocumentToXmlString(DOMDocument& document);
+
+		static DOMElement& getDocumentRootElement(DOMDocument& document);
 };
+
+DOMElement& getDocumentRootElement(DOMDocument& document)
+{
+	return *(document.getDocumentElement());
+}
 
 bool PsaiXmlUtils::initiliaseXmlUtils()
 {
@@ -59,6 +66,7 @@ bool PsaiXmlUtils::initiliaseXmlUtils()
 	{
 		initialiseSuccess = false;
 	}
+
 	return initialiseSuccess;
 }
 
@@ -74,23 +82,22 @@ const XMLCh* PsaiXmlUtils::transcode(const std::string string)
 
 DOMImplementation& PsaiXmlUtils::getDefaultDomImplementation()
 {
-	DOMImplementation& impl = *(DOMImplementationRegistry::getDOMImplementation(transcode(std::string("Range"))));
-	return impl;
+	return *(DOMImplementationRegistry::getDOMImplementation(transcode(std::string("Range"))));
 }
 
 DOMDocument& PsaiXmlUtils::getDOMDocumentForMessageType(const std::string messageType)
 {
-	DOMDocument& domDoc = *(getDefaultDomImplementation().createDocument(transcode(PsaiXmlConstants::PSAI_NAMESPACE), transcode(PsaiXmlConstants::PSAI_MESSAGE_ELEMENT_START), 0));
+	DOMDocument& document = *(getDefaultDomImplementation().createDocument(transcode(PsaiXmlConstants::PSAI_NAMESPACE), transcode(PsaiXmlConstants::PSAI_MESSAGE_ELEMENT_START), 0));
 
-	domDoc.getDOMConfiguration()->setParameter(transcode(std::string("schema-location")), &(PsaiXmlConstants::PSAI_SCHEMA_LOCATION));
+	document.getDOMConfiguration()->setParameter(transcode(std::string("schema-location")), &(PsaiXmlConstants::PSAI_SCHEMA_LOCATION));
 
-	DOMElement& root = *(domDoc.getDocumentElement());
+	DOMElement& root = *(document.getDocumentElement());
 
-	DOMElement& msgType = *(domDoc.createElement(transcode(PsaiXmlConstants::ELEMENT_ALL_MESSAGE_TYPE)));
+	DOMElement& msgType = *(document.createElement(transcode(PsaiXmlConstants::ELEMENT_ALL_MESSAGE_TYPE)));
 	msgType.setTextContent(transcode(messageType));
 	root.appendChild(&msgType);
 
-	return domDoc;
+	return document;
 }
 
 DOMElement& PsaiXmlUtils::createDomElement(DOMDocument& parentDoc, DOMElement& parentElement, const std::string elementTag, const std::string elementText)
@@ -110,6 +117,7 @@ DOMElement& PsaiXmlUtils::createDomElement(DOMDocument& parentDoc, DOMElement& p
 std::string PsaiXmlUtils::getChatTypeAsString(uint8_t chatType)
 {
 	std::string typeString;
+
 	switch (chatType)
 	{
 		case CHAT_ADVICE:
@@ -138,12 +146,12 @@ std::string PsaiXmlUtils::getChatTypeAsString(uint8_t chatType)
 	return typeString;
 }
 
-std::string PsaiXmlUtils::convertDomDocumentToXmlString(DOMDocument& domDoc)
+std::string PsaiXmlUtils::convertDomDocumentToXmlString(DOMDocument& document)
 {
-	DOMImplementation& impl = *(domDoc.getImplementation());
+	DOMImplementation& impl = *(document.getImplementation());
 	DOMWriter& writer =*(impl.createDOMWriter());
 
-	XMLCh* xmlString = writer.writeToString(domDoc);
+	XMLCh* xmlString = writer.writeToString(document);
 
 	return std::string(XMLString::transcode(xmlString));
 }
