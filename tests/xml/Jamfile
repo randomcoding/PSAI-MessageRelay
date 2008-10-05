@@ -1,0 +1,13 @@
+SubDir TOP tests xml ;
+
+# specify the library to be built
+Library psaixmltests
+	: [ Wildcard *.cpp *.h ]
+	: noinstall
+;
+
+# specify the required libs for the build
+ExternalLibs psaixmltests : CRYSTAL CEL PSUTIL PSENGINE ;
+
+# specify compile group membership
+CompileGroups psaixmltests : tests ;

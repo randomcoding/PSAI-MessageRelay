@@ -1,0 +1,10 @@
+# Jamfile for tests directory call all sub tests directory and then
+SubDir TOP tests ;
+
+SubInclude TOP tests xml ;
+
+Application psaitests : [ Wildcard *.cpp *.h ] ;
+ExternalLibs psaitests : CPPUNIT ;
+CompileGroups psaitests : tests ;
+
+LinkWith psaitests : psaixmltests ;

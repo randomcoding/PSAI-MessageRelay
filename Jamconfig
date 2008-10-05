@@ -76,6 +76,10 @@ PSGUI.AVAILABLE ?= yes ;
 PSGUI.CFLAGS ?= $(PS.INCLUDES) ;
 PSGUI.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out/linuxx86/optimize/libs -lpsgui-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 
+CPPUNIT.AVAILABLE ?= yes ;
+CPPUNIT.CFLAGS ?= $(PS.INCLUDES) ;
+CPPUNIT.LFLAGS ?= -L/usr/lib -lcppunit -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+
 LIBMYSQLCLIENT.AVAILABLE ?= yes ;
 LIBMYSQLCLIENT.CFLAGS ?= -I/usr/include/mysql ;
 LIBMYSQLCLIENT.LFLAGS ?= -L/usr/lib -lmysqlclient ;

@@ -10,8 +10,6 @@
 #ifndef PSAIXMLGENERATOR_H_
 #define PSAIXMLGENERATOR_H_
 
-#include <globals.h>
-
 class string;
 
 // message types
@@ -56,73 +54,73 @@ class PsaiXmlGenerator
 		PsaiXmlGenerator();
 		virtual ~PsaiXmlGenerator();
 
-		std::string toXml(psChatMessage& msg);
+		std::string toXml(const psChatMessage& msg);
 
-		std::string toXml(psPlaySoundMessage& msg);
+		std::string toXml(const psPlaySoundMessage& msg);
 
-		std::string toXml(psSoundEventMessage& msg);
+		std::string toXml(const psSoundEventMessage& msg);
 
-		std::string toXml(psPersistItem& msg);
+		std::string toXml(const psPersistItem& msg);
 
-		std::string toXml(psPersistActor& msg);
+		std::string toXml(const psPersistActor& msg);
 
-		std::string toXml(psPersistActionLocation& msg);
+		std::string toXml(const psPersistActionLocation& msg);
 
-		std::string toXml(psRemoveObject& msg);
+		std::string toXml(const psRemoveObject& msg);
 
-		std::string toXml(psDRMessage& msg);
+		std::string toXml(const psDRMessage& msg);
 
-		std::string toXml(psStatDRMessage& msg);
+		std::string toXml(const psStatDRMessage& msg);
 
-		std::string toXml(psCombatEventMessage& msg);
+		std::string toXml(const psCombatEventMessage& msg);
 
-		std::string toXml(psModeMessage& msg);
+		std::string toXml(const psModeMessage& msg);
 
-		std::string toXml(psMoveLockMessage& msg);
+		std::string toXml(const psMoveLockMessage& msg);
 
-		std::string toXml(psNewSectorMessage& msg);
+		std::string toXml(const psNewSectorMessage& msg);
 
-		std::string toXml(psEffectMessage& msg);
+		std::string toXml(const psEffectMessage& msg);
 
-		std::string toXml(psStopEffectMessage& msg);
+		std::string toXml(const psStopEffectMessage& msg);
 
-		std::string toXml(psSpellCastMessage& msg);
+		std::string toXml(const psSpellCastMessage& msg);
 
-		std::string toXml(psSpellCancelMessage& msg);
+		std::string toXml(const psSpellCancelMessage& msg);
 
-		std::string toXml(psStatsMessage& msg);
+		std::string toXml(const psStatsMessage& msg);
 
-		std::string toXml(psSystemMessage& msg);
+		std::string toXml(const psSystemMessage& msg);
 
-		std::string toXml(psWeatherMessage& msg);
+		std::string toXml(const psWeatherMessage& msg);
 
-		std::string toXml(psCharacterDetailsMessage& msg);
+		std::string toXml(const psCharacterDetailsMessage& msg);
 
-		std::string toXml(psGUIInventoryMessage& msg);
+		std::string toXml(const psGUIInventoryMessage& msg);
 
-		std::string toXml(psGUIActiveMagicMessage& msg);
+		std::string toXml(const psGUIActiveMagicMessage& msg);
 
-		std::string toXml(psGUIInteractMessage& msg);
+		std::string toXml(const psGUIInteractMessage& msg);
 
-		std::string toXml(psGUIMerchantMessage& msg);
+		std::string toXml(const psGUIMerchantMessage& msg);
 
-		std::string toXml(psGUISkillMessage& msg);
+		std::string toXml(const psGUISkillMessage& msg);
 
-		std::string toXml(psGUITargetUpdateMessage& msg);
+		std::string toXml(const psGUITargetUpdateMessage& msg);
 
-		std::string toXml(psLootMessage& msg);
+		std::string toXml(const psLootMessage& msg);
 
-		std::string toXml(psQuestListMessage& msg);
+		std::string toXml(const psQuestListMessage& msg);
 
-		std::string toXml(psQuestRewardMessage& msg);
+		std::string toXml(const psQuestRewardMessage& msg);
 
-		std::string toXml(psUpdateObjectNameMessage& msg);
+		std::string toXml(const psUpdateObjectNameMessage& msg);
 
-		std::string toXml(psViewItemDescription& msg);
+		std::string toXml(const psViewItemDescription& msg);
 
-		std::string toXml(psViewItemUpdate& msg);
+		std::string toXml(const psViewItemUpdate& msg);
 
-		std::string toXml(psEquipmentMessage& msg);
+		std::string toXml(const psEquipmentMessage& msg);
 };
 
 #endif /* PSAIXMLGENERATOR_H_ */

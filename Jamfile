@@ -13,6 +13,8 @@ IncludeDir "include" ;
 IncludeDir src ;
 IncludeDir src message ;
 IncludeDir src xml ;
+IncludeDir tests ;
+IncludeDir tests xml ;
 
 # other library includes
 IncludeDir $(TOP) .. .. cal3d include ;
@@ -62,9 +64,10 @@ Description redirector : "Builds the Message Redirector" ;
  
 # Register the compile groups. To add a project to a compile group, add the line CompileGroups project : compilegroup ; in the projects Jamfile.
 
-RegisterCompileGroups redirector xml ;
+RegisterCompileGroups redirector xml tests ;
 
 # List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensistive.
 # Library targets must be seen by Jam before Application and Plugin targets.
 
 SubInclude TOP src ;
+SubInclude TOP tests ;
