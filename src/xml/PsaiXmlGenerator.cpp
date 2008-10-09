@@ -5,7 +5,8 @@
  *      Author: tim
  */
 
-#include <string.h>
+#include <string>
+#include <sstream>
 
 #include <csutil/util.h>
 
@@ -40,7 +41,7 @@ std::string PsaiXmlGenerator::toXml(const psChatMessage& msg)
 	if (PsaiXmlUtils::initiliaseXmlUtils())
 	{
 		DOMDocument& doc = PsaiXmlUtils::getDOMDocumentForMessageType(PsaiXmlConstants::TYPE_CHAT_MESSAGE);
-		DOMElement& root = PsaiXmlUtils.getDocumentRootElement(doc);
+		DOMElement& root = PsaiXmlUtils::getDocumentRootElement(doc);
 
 		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants::ELEMENT_CHAT_TEXT, msg.sText.GetDataSafe());
 
@@ -97,7 +98,12 @@ std::string PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
 
 		DOMElement& root = PsaiXmlUtils::getDocumentRootElement(doc);
 
-		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants::ELEMENT_SOUNT_EVENT_TYPE, msg.type);
+		std::string typeString;
+		std::stringstream out;
+		out << msg.type;
+		typeString = out.str();
+
+		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants::ELEMENT_SOUNT_EVENT_TYPE, typeString);
 
 		PsaiXmlUtils::clearXmlUtils();
 
