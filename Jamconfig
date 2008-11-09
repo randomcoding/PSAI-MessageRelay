@@ -56,6 +56,7 @@ CRYSTAL.STATICDEPS ?= /home/tim/development/planeshift/cs/./out/linuxx86/optimiz
 
 PS.VERSION ?= 0.4 ;
 PS.INCLUDES ?= -I/home/tim/development/planeshift/workspace-psai/PlaneShift/include -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/client -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/common -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/eedit -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/npcclient -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/pslaunch -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/server -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/setup -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/tools ;
+
 PSENGINE.AVAILABLE ?= yes ;
 PSENGINE.CFLAGS ?= $(PS.INCLUDES) ;
 PSENGINE.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out/linuxx86/optimize/libs -lpsengine-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
@@ -78,7 +79,7 @@ PSGUI.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out
 
 CPPUNIT.AVAILABLE ?= yes ;
 CPPUNIT.CFLAGS ?= $(PS.INCLUDES) ;
-CPPUNIT.LFLAGS ?= -L/usr/local/lib -lcppunit -lz -lpthread -lc -lm -ldl -lnsl ;
+CPPUNIT.LFLAGS ?= -lcppunit -ldl ;
 
 LIBMYSQLCLIENT.AVAILABLE ?= yes ;
 LIBMYSQLCLIENT.CFLAGS ?= -I/usr/include/mysql ;
