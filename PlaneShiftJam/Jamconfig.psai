@@ -1,7 +1,8 @@
 PSAI.LIB.VER ?= 0.1 ;
 
 PSAI.AVAILABLE ?= yes ;
+PSAI.WORKSPACE.DIR ?= /home/tim/development/planeshift/workspace-psai ;
 
-PSAI.CFLAGS ?= -I../PsaiMessageRedirector/src ;
-PSAI.LFLAGS ?= -L../PsaiMessageRedirector/out/linuxx86/optimize/libs -lpsaimessageredirect-$(PSAI.LIB.VER) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PSAI.CFLAGS ?= -I$(PSAI.WORKSPACE.DIR)/PsaiMessageRedirector/src ;
+PSAI.LFLAGS ?= -L$(PSAI.WORKSPACE.DIR)/PsaiMessageRedirector/out/linuxx86/optimize/libs -lpsaibase-$(PSAI.LIB.VER) -lxerces-c -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 PSAI.INCLUDE_DIR ?= $(PSAI.WORKSPACE.DIR)/PsaiMessageRedirector/src ;
