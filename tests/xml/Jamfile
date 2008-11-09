@@ -7,7 +7,8 @@ Library psaixmltests
 ;
 
 # specify the required libs for the build
-ExternalLibs psaixmltests : CRYSTAL CEL PSUTIL PSENGINE ;
+ExternalLibs psaixmltests : CPPUNIT ;
+# CRYSTAL CEL PSUTIL PSENGINE CPPUNIT ;
 
 # specify compile group membership
 CompileGroups psaixmltests : tests ;
