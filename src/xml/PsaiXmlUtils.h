@@ -26,8 +26,8 @@ using namespace XERCES_CPP_NAMESPACE;
 class PsaiXmlUtils
 {
 	public:
-		PsaiXmlUtils();
-		virtual ~PsaiXmlUtils();
+		PsaiXmlUtils(){};
+		virtual ~PsaiXmlUtils(){};
 
 		static bool initiliaseXmlUtils();
 
@@ -82,7 +82,9 @@ const XMLCh* PsaiXmlUtils::transcode(const std::string string)
 
 DOMImplementation& PsaiXmlUtils::getDefaultDomImplementation()
 {
-	return *(DOMImplementationRegistry::getDOMImplementation(transcode(std::string("Range"))));
+	const XMLCh* features = transcode("Range");
+	DOMImplementation* implementation = DOMImplementationRegistry::getDOMImplementation(features);
+	return *(implementation);
 }
 
 DOMDocument& PsaiXmlUtils::getDOMDocumentForMessageType(const std::string messageType)
