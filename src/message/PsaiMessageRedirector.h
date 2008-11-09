@@ -50,6 +50,7 @@ class psUpdateObjectNameMessage;
 class psViewItemDescription;
 class psViewItemUpdate;
 class psEquipmentMessage;
+class PsaiXmlGenerator;
 
 
 class PsaiMessageRedirector: public psClientNetSubscriber
@@ -137,6 +138,8 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 		csStringHashReversible* msgStrings;
 
 		psEngine* engine;
+
+		PsaiXmlGenerator* xmlGenerator;
 };
 
 #endif /* PSAIMESSAGEREDIRECTOR_H_ */
