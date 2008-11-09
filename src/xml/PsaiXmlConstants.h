@@ -564,8 +564,17 @@ class PsaiXmlConstants
 		static const std::string PSAI_SCHEMA_LOCATION;
 		static const std::string PSAI_NAMESPACE;
 
-};
+		static const std::string ELEMENT_VECTOR_X;
+		static const std::string ELEMENT_VECTOR_Y;
+		static const std::string ELEMENT_VECTOR_Z;
 
+		static const std::string ELEMENT_CONTAINER_CONTENTS_NAME;
+		static const std::string ELEMENT_CONTAINER_CONTENTS_ICON;
+		static const std::string ELEMENT_CONTAINER_CONTENTS_SLOT_ID;
+		static const std::string ELEMENT_CONTAINER_CONTENTS_STACK_COUNT;
+		static const std::string ELEMENT_CONTAINER_CONTENTS_PURIFY_STATUS;
+
+};
 
 const std::string PsaiXmlConstants::TYPE_VECTOR_3D("psai:vector3d");
 const std::string PsaiXmlConstants::PsaiXmlConstants::TYPE_CONTAINER_CONTENTS("psai:containercontents");
@@ -1114,5 +1123,15 @@ const std::string PsaiXmlConstants::PSAI_MESSAGE_ELEMENT_END("</psai:psaimessage
 
 const std::string PsaiXmlConstants::PSAI_SCHEMA_LOCATION("xsi:schemaLocation=\"http://www.zarniwoops.plus.com/psai/xml http://www.zarniwoops.plus.com/psai/xml/psaiXmlMessages.xsd\"");
 const std::string PsaiXmlConstants::PSAI_NAMESPACE("xmlns:psai=\"http://www.zarniwoops.plus.com/psai/xml\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+
+const std::string PsaiXmlConstants::ELEMENT_VECTOR_X("x");
+const std::string PsaiXmlConstants::ELEMENT_VECTOR_Y("y");
+const std::string PsaiXmlConstants::ELEMENT_VECTOR_Z("z");
+
+const std::string PsaiXmlConstants::ELEMENT_CONTAINER_CONTENTS_NAME("name");
+const std::string PsaiXmlConstants::ELEMENT_CONTAINER_CONTENTS_ICON("icon");
+const std::string PsaiXmlConstants::ELEMENT_CONTAINER_CONTENTS_SLOT_ID("slotid");
+const std::string PsaiXmlConstants::ELEMENT_CONTAINER_CONTENTS_STACK_COUNT("stackcount");
+const std::string PsaiXmlConstants::ELEMENT_CONTAINER_CONTENTS_PURIFY_STATUS("purifystatus");
 
 #endif /* PSAIXMLCONSTANTS_H_ */
