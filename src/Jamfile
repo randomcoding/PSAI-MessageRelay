@@ -1,5 +1,15 @@
-# Jamfile for src directory just call all next level jam files
 SubDir TOP src ;
 
 SubInclude TOP src message ;
 SubInclude TOP src xml ;
+
+Library psaibase
+	:  [ Wildcard *.cpp *.h ]
+	: noinstall 
+;
+
+#LinkWith psaibase : psaixml psaimessageredirect ;
+
+ExternalLibs psaibase : CRYSTAL CEL PSUTIL PSENGINE ;
+
+CompileGroups psaibase : psailib ;

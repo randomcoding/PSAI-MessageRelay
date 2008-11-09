@@ -1,13 +1,13 @@
 SubDir TOP src xml ;
 
 # specify the library to be built
-Library psaixml
+Library psaibase
 	: [ Wildcard *.cpp *.h ]
 	: noinstall
 ;
 
 # specify the required libs for the build
-ExternalLibs psaixml : CRYSTAL CEL PSUTIL PSENGINE ;
+ExternalLibs psaibase : CRYSTAL CEL PSUTIL PSENGINE ;
 
 # specify compile group membership
-CompileGroups psaixml : xml ;
+CompileGroups psaibase : xml ;
