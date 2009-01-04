@@ -8,8 +8,6 @@ Library psaibase
 	: noinstall 
 ;
 
-#LinkWith psaibase : psaixml psaimessageredirect ;
-
 ExternalLibs psaibase : CRYSTAL CEL PSUTIL PSENGINE ;
 
 CompileGroups psaibase : psailib ;
