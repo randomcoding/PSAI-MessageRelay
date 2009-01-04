@@ -1,13 +1,14 @@
 # Jamfile for tests directory call all sub tests directory and then
 SubDir TOP tests ;
 
-#SubInclude TOP tests xml ;
-
-Application psaitests : [ Wildcard *.cpp *.h ] ;
-
-LinkWith psaitests : psaixmltests ;
-
-ExternalLibs psaitests : CPPUNIT ;
+if $(GTEST.AVAILABLE) = "yes"
+{
+	Application psaitests : [ Wildcard *.cpp *.h ] : console ;
+	
+	ExternalLibs psaitests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;
+	
+	LinkWith psaitests : psaibase ;
+}
 
 CompileGroups psaitests : tests ;
 
