@@ -150,10 +150,10 @@ std::string PsaiXmlUtils::getChatTypeAsString(uint8_t chatType)
 
 std::string PsaiXmlUtils::convertDomDocumentToXmlString(DOMDocument& document)
 {
-	DOMImplementation& impl = *(document.getImplementation());
-	DOMWriter& writer =*(impl.createDOMWriter());
+	DOMImplementation* impl = document.getImplementation();
+	DOMWriter* writer = impl->createDOMWriter();
 
-	XMLCh* xmlString = writer.writeToString(document);
+	XMLCh* xmlString = writer->writeToString(document);
 
 	return std::string(XMLString::transcode(xmlString));
 }
