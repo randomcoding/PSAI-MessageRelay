@@ -190,7 +190,7 @@ std::string PsaiXmlGenerator::toXml(const psPersistItem& msg)
 		std::string flags = convertToString(msg.flags);
 		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FLAGS, flags);
 
-		std::string id = convertToString(msg.id);
+		std::string id = convertToString(msg.eid.Unbox());
 		PsaiXmlUtils::createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_ID, id);
 
 		std::string name(msg.name.GetDataSafe());

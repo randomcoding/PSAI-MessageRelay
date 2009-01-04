@@ -299,7 +299,7 @@ void PsaiMessageRedirector::handleChatMessage(psChatMessage& msg)
 
 void PsaiMessageRedirector::handleCombatEventMessage(psCombatEventMessage& msg)
 {
-	printf("Handle Combat Message of type %s. Attack by %u on %u for %f damage on location %i\n", msg.GetMessageTypeName().GetDataSafe(), msg.attacker_id, msg.target_id, msg.damage,
+	printf("Handle Combat Message of type %s. Attack by %u on %u for %f damage on location %i\n", msg.GetMessageTypeName().GetDataSafe(), msg.attacker_id.Unbox(), msg.target_id.Unbox(), msg.damage,
 			msg.target_location);
 }
 
@@ -315,7 +315,7 @@ void PsaiMessageRedirector::handleEffectMessage(psEffectMessage& msg)
 
 void PsaiMessageRedirector::handleModeMessage(psModeMessage& msg)
 {
-	printf("Handle message of type %s. Actor: %u, mode %u\n", msg.GetMessageTypeName().GetDataSafe(), msg.actorID, msg.mode);
+	printf("Handle message of type %s. Actor: %u, mode %u\n", msg.GetMessageTypeName().GetDataSafe(), msg.actorID.Unbox(), msg.mode);
 }
 
 void PsaiMessageRedirector::handleMoveLockMessage(psMoveLockMessage& msg)
@@ -335,12 +335,12 @@ void PsaiMessageRedirector::handlePersistActionLocationMessage(psPersistActionLo
 
 void PsaiMessageRedirector::handlePersistActorMessage(psPersistActor& msg)
 {
-	printf("Handle message of type %s. Player id %u - name %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.playerID, msg.name.GetDataSafe());
+	printf("Handle message of type %s. Player id %u - name %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.playerID.Unbox(), msg.name.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handlePersistItemMessage(psPersistItem& msg)
 {
-	printf("Handle message of type %s. Persisting item with id %u named %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.id, msg.name.GetDataSafe());
+	printf("Handle message of type %s. Persisting item with id %u named %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.eid.Unbox(), msg.name.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handlePlaySoundMessage(psPlaySoundMessage& msg)
@@ -350,7 +350,7 @@ void PsaiMessageRedirector::handlePlaySoundMessage(psPlaySoundMessage& msg)
 
 void PsaiMessageRedirector::handleRemoveObjectMessage(psRemoveObject& msg)
 {
-	printf("Handle message of type %s. Object id %u\n", msg.GetMessageTypeName().GetDataSafe(), msg.objectEID);
+	printf("Handle message of type %s. Object id %u\n", msg.GetMessageTypeName().GetDataSafe(), msg.objectEID.Unbox());
 }
 
 void PsaiMessageRedirector::handleSoundEventMessage(psSoundEventMessage& msg)
@@ -370,7 +370,7 @@ void PsaiMessageRedirector::handleSpellCastMessage(psSpellCastMessage& msg)
 
 void PsaiMessageRedirector::handleStatDeadReckonMessage(psStatDRMessage& msg)
 {
-	printf("Handle message of type %s. Entity id: %u\n", msg.GetMessageTypeName().GetDataSafe(), msg.entityid);
+	printf("Handle message of type %s. Entity id: %u\n", msg.GetMessageTypeName().GetDataSafe(), msg.entityid.Unbox());
 }
 
 void PsaiMessageRedirector::handleStatsMessage(psStatsMessage& msg)
