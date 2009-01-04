@@ -13,11 +13,11 @@ IncludeDir "include" ;
 IncludeDir src ;
 IncludeDir src message ;
 IncludeDir src xml ;
-#IncludeDir tests ;
-#IncludeDir tests xml ;
+IncludeDir tests ;
+IncludeDir tests xml ;
 
 # other library includes
-IncludeDir $(TOP) .. .. cal3d include ;
+IncludeDir $(TOP) .. .. cal3d src ;
 IncludeDir $(TOP) .. .. cs include ;
 
 # PlaneShift include directories
@@ -59,16 +59,15 @@ Depends distclean : clean ;
 Help distclean : "Remove built targets and configuration" ;
 
 # Write a description of each compile group for 'jam help'
-Description redirector : "Builds the Message Redirector" ;
+#Description redirector : "Builds the Message Redirector" ;
 #Description comms : "Builds the library for communications between the agent system(s) and the redirectors/client interface" ;
  
 # Register the compile groups. To add a project to a compile group, add the line CompileGroups project : compilegroup ; in the projects Jamfile.
 
-RegisterCompileGroups psailib ;
+RegisterCompileGroups psailib tests ;
 
 # List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensistive.
 # Library targets must be seen by Jam before Application and Plugin targets.
 
 SubInclude TOP src ;
-#SubInclude TOP tests xml ;
-#SubInclude TOP tests ;
+SubInclude TOP tests ;
