@@ -10,4 +10,4 @@ Library psaibase
 ExternalLibs psaibase : CRYSTAL CEL ;
 
 # specify compile group membership
-CompileGroups psaibase : redirector ;
+CompileGroups psaibase : psailib ;

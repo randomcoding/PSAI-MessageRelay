@@ -7,7 +7,7 @@ Library psaibase
 ;
 
 # specify the required libs for the build
-ExternalLibs psaibase : CRYSTAL CEL PSUTIL PSENGINE ;
+ExternalLibs psaibase : CRYSTAL CEL PSUTIL PSENGINE XML_LIBS ;
 
 # specify compile group membership
-CompileGroups psaibase : xml ;
+CompileGroups psaibase : psailib ;
