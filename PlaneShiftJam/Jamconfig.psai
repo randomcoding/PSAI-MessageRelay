@@ -4,5 +4,5 @@ PSAI.AVAILABLE ?= yes ;
 PSAI.WORKSPACE.DIR ?= /home/tim/development/planeshift/workspace-psai ;
 
 PSAI.CFLAGS ?= -I$(PSAI.WORKSPACE.DIR)/PsaiMessageRedirector/src ;
-PSAI.LFLAGS ?= -L$(PSAI.WORKSPACE.DIR)/PsaiMessageRedirector/out/linuxx86/optimize/libs -lpsaibase-$(PSAI.LIB.VER) -lxerces-c -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PSAI.LFLAGS ?= -L$(PSAI.WORKSPACE.DIR)/PsaiMessageRedirector/out/linux/optimize/libs -lpsaibase-$(PSAI.LIB.VER) -lxerces-c -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 PSAI.INCLUDE_DIR ?= $(PSAI.WORKSPACE.DIR)/PsaiMessageRedirector/src ;
