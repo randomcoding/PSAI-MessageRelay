@@ -1,18 +1,18 @@
 CMD.CC ?= gcc ;
 COMPILER.C.TYPE ?= GCC ;
 COMPILER.TYPE = GCC ;
-COMPILER.C.VERSION ?= 4.3 ;
-COMPILER.VERSION = 4.3 ;
-COMPILER.C.VERSION_LIST ?= 4 3 ;
-COMPILER.VERSION_LIST = 4 3 ;
+COMPILER.C.VERSION ?= 4.3.2 ;
+COMPILER.VERSION = 4.3.2 ;
+COMPILER.C.VERSION_LIST ?= 4 3 2 ;
+COMPILER.VERSION_LIST = 4 3 2 ;
 COMPILER.CFLAGS += -pipe ;
 CMD.C++ ?= g++ ;
 COMPILER.C++.TYPE ?= GCC ;
 COMPILER.TYPE = GCC ;
-COMPILER.C++.VERSION ?= 4.3 ;
-COMPILER.VERSION = 4.3 ;
-COMPILER.C++.VERSION_LIST ?= 4 3 ;
-COMPILER.VERSION_LIST = 4 3 ;
+COMPILER.C++.VERSION ?= 4.3.2 ;
+COMPILER.VERSION = 4.3.2 ;
+COMPILER.C++.VERSION_LIST ?= 4 3 2 ;
+COMPILER.VERSION_LIST = 4 3 2 ;
 COMPILER.C++FLAGS.PIC ?= -fPIC ;
 CMD.LINK ?= $(CMD.C++) ;
 CMD.LD ?= ld ;
@@ -32,9 +32,9 @@ LN_S ?= ln -s ;
 TARGET.PROCESSOR ?= X86 ;
 TARGET.OS ?= UNIX ;
 TARGET.OS.NORMALIZED ?= Unix ;
-TARGET.PROCESSORSIZE ?= 32 ;
+TARGET.PROCESSORSIZE ?= 64 ;
 COMPILER.CFLAGS.debug += -Wall ;
-COMPILER.CFLAGS += -march=i686 -mtune=generic ;
+COMPILER.CFLAGS += -march=k8 ;
 LINK.DEBUG.INFO.SEPARATE ?= yes ;
 COMPILER.CFLAGS.debug += -g3 ;
 COMPILER.LFLAGS.debug += -g3 ;
@@ -46,15 +46,21 @@ COMPILER.CFLAGS.optimize += -ffast-math ;
 COMPILER.C++FLAGS += -fvisibility-inlines-hidden ;
 COMPILER.CFLAGS += -fvisibility=hidden ;
 COMPILER.CFLAGS.VISIBILITY_DEFAULT ?= -fvisibility=default ;
+
 CRYSTAL.AVAILABLE ?= yes ;
 CRYSTAL.VERSION ?= 1.4 ;
 CRYSTAL.CFLAGS ?= -I/home/tim/development/planeshift/cs/include ;
-CRYSTAL.LFLAGS ?= -L/home/tim/development/planeshift/cs/./out/linuxx86/optimize/libs -lcrystalspace-1.4 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CRYSTAL.LFLAGS ?= -L/home/tim/development/planeshift/cs/./out/linux/optimize/libs -lcrystalspace-1.4 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 CRYSTAL.INCLUDE_DIR ?= /home/tim/development/planeshift/cs/include ;
 CRYSTAL.AVAILABLE_LIBS ?= crystalspace crystalspace_opengl ;
-CRYSTAL.STATICDEPS ?= /home/tim/development/planeshift/cs/./out/linuxx86/optimize/libs/crystalspace_staticplugins.jam ;
+CRYSTAL.STATICDEPS ?= /home/tim/development/planeshift/cs/./out/linux/optimize/libs/crystalspace_staticplugins.jam ;
 
-PS.VERSION ?= 0.4 ;
+CAL3D.AVAILABLE ?= yes ;
+CAL3D.CFLAGS ?= -I/home/tim/development/planeshift/cal3d/src ;
+CAL3D.LFLAGS ?= -L/home/tim/development/planeshift/cal3d/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CAL3D.INCLUDE_DIR ?= -I/home/tim/development/planeshift/cal3d/src ;
+
+PS.VERSION ?= 0.4.03 ;
 PS.INCLUDES ?= -I/home/tim/development/planeshift/workspace-psai/PlaneShift/include -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/client -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/common -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/eedit -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/npcclient -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/pslaunch -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/server -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/setup -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/tools ;
 
 PSENGINE.AVAILABLE ?= yes ;
@@ -77,17 +83,16 @@ PSGUI.AVAILABLE ?= yes ;
 PSGUI.CFLAGS ?= $(PS.INCLUDES) ;
 PSGUI.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out/linuxx86/optimize/libs -lpsgui-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 
-CPPUNIT.AVAILABLE ?= yes ;
-CPPUNIT.CFLAGS ?= $(PS.INCLUDES) ;
-CPPUNIT.LFLAGS ?= -lcppunit -ldl ;
+GTEST.AVAILABLE ?= yes ;
+GTEST.CFLAGS ?= -I/usr/local/include ;
+GTEST.LFLAGS ?= -L/usr/local/gtest/lib -lgtest ;
+GTEST.INCLUDE_DIR ?= -l/usr/local/include ;
 
 LIBMYSQLCLIENT.AVAILABLE ?= yes ;
 LIBMYSQLCLIENT.CFLAGS ?= -I/usr/include/mysql ;
 LIBMYSQLCLIENT.LFLAGS ?= -L/usr/lib -lmysqlclient ;
 TTREE ?= /usr/bin/ttree ;
-CAL3D.AVAILABLE ?= yes ;
-CAL3D.CFLAGS ?= -I/home/tim/development/planeshift/cal3d/include ;
-CAL3D.LFLAGS ?= -L/home/tim/development/planeshift/cal3d/lib -lcal3d ;
+
 EMBED_META ?= yes ;
 OBJCOPY.AVAILABLE ?= yes ;
 CMD.OBJCOPY ?= objcopy ;

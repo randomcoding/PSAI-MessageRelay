@@ -25,7 +25,6 @@
 <option id="gnu.cpp.compiler.exe.debug.option.optimization.level.1195824123" name="Optimization Level" superClass="gnu.cpp.compiler.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.exe.debug.option.debugging.level.700440139" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.include.paths.66516307" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="/home/tim/development/planeshift/cal3d/include"/>
 <listOptionValue builtIn="false" value="/home/tim/development/planeshift/cs/include"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/client}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/common}&quot;"/>
@@ -39,8 +38,8 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/tests}&quot;"/>
-<listOptionValue builtIn="false" value="/usr/include/cppunit"/>
-<listOptionValue builtIn="false" value="/usr/local/include/cppunit"/>
+<listOptionValue builtIn="false" value="/home/tim/development/planeshift/cal3d/src"/>
+<listOptionValue builtIn="false" value="/usr/local/include"/>
 </option>
 <option id="gnu.cpp.compiler.option.preprocessor.nostdinc.839974476" name="Do not search system directories (-nostdinc)" superClass="gnu.cpp.compiler.option.preprocessor.nostdinc"/>
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.189049189" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
@@ -63,6 +62,9 @@
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.184489508" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug">
 <option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.exe.debug.option.optimization.level.1827094343" name="Optimization Level" superClass="gnu.c.compiler.exe.debug.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.exe.debug.option.debugging.level.1152009306" name="Debug Level" superClass="gnu.c.compiler.exe.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+<option id="gnu.c.compiler.option.include.paths.538758071" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+<listOptionValue builtIn="false" value="/usr/local/include"/>
+</option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1724876963" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.1912273902" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
@@ -91,7 +93,9 @@
 </inputType>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.1654678666" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug">
-<option id="gnu.both.asm.option.include.paths.1049148335" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths"/>
+<option id="gnu.both.asm.option.include.paths.1049148335" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+<listOptionValue builtIn="false" value="/usr/local/include"/>
+</option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.987708021" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
 </toolChain>
@@ -399,6 +403,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/tests}&quot;"/>
 <listOptionValue builtIn="false" value="/usr/local/include/cppunit"/>
+<listOptionValue builtIn="false" value="/usr/local/include"/>
 </option>
 <option id="gnu.cpp.compiler.option.preprocessor.nostdinc.424053760" name="Do not search system directories (-nostdinc)" superClass="gnu.cpp.compiler.option.preprocessor.nostdinc"/>
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.1096504863" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
@@ -428,6 +433,7 @@
 </option>
 <option id="gnu.c.compiler.option.include.paths.176628131" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="/usr/include/cppunit"/>
+<listOptionValue builtIn="false" value="/usr/local/include"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.911303035" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
@@ -468,6 +474,7 @@
 <tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.2103011334" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug">
 <option id="gnu.both.asm.option.include.paths.517075090" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="/usr/include/cppunit"/>
+<listOptionValue builtIn="false" value="/usr/local/include"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.931264414" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
