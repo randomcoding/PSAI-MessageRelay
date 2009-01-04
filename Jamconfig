@@ -50,43 +50,53 @@ COMPILER.CFLAGS.VISIBILITY_DEFAULT ?= -fvisibility=default ;
 CRYSTAL.AVAILABLE ?= yes ;
 CRYSTAL.VERSION ?= 1.4 ;
 CRYSTAL.CFLAGS ?= -I/home/tim/development/planeshift/cs/include ;
-CRYSTAL.LFLAGS ?= -L/home/tim/development/planeshift/cs/./out/linux/optimize/libs -lcrystalspace-1.4 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CRYSTAL.LFLAGS ?= -L/home/tim/development/planeshift/cs/out/linux/optimize/libs -lcrystalspace-1.4 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 CRYSTAL.INCLUDE_DIR ?= /home/tim/development/planeshift/cs/include ;
 CRYSTAL.AVAILABLE_LIBS ?= crystalspace crystalspace_opengl ;
-CRYSTAL.STATICDEPS ?= /home/tim/development/planeshift/cs/./out/linux/optimize/libs/crystalspace_staticplugins.jam ;
+CRYSTAL.STATICDEPS ?= /home/tim/development/planeshift/cs/out/linux/optimize/libs/crystalspace_staticplugins.jam ;
 
 CAL3D.AVAILABLE ?= yes ;
 CAL3D.CFLAGS ?= -I/home/tim/development/planeshift/cal3d/src ;
 CAL3D.LFLAGS ?= -L/home/tim/development/planeshift/cal3d/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
-CAL3D.INCLUDE_DIR ?= -I/home/tim/development/planeshift/cal3d/src ;
+CAL3D.INCLUDE_DIR ?= /home/tim/development/planeshift/cal3d/src ;
 
-PS.VERSION ?= 0.4.03 ;
+PS.VERSION ?= 0.4 ;
 PS.INCLUDES ?= -I/home/tim/development/planeshift/workspace-psai/PlaneShift/include -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/client -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/common -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/eedit -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/npcclient -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/pslaunch -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/server -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/setup -I/home/tim/development/planeshift/workspace-psai/PlaneShift/src/tools ;
+PS.LIB_DIR ?= /home/tim/development/planeshift/workspace-psai/PlaneShift/out/linux/optimize/libs ;
 
 PSENGINE.AVAILABLE ?= yes ;
 PSENGINE.CFLAGS ?= $(PS.INCLUDES) ;
-PSENGINE.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out/linuxx86/optimize/libs -lpsengine-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PSENGINE.LFLAGS ?= -L$(PS.LIB_DIR) -lpsengine-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 
 PSNET.AVAILABLE ?= yes ;
 PSNET.CFLAGS ?= $(PS.INCLUDES) ;
-PSNET.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out/linuxx86/optimize/libs -lpsnet-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PSNET.LFLAGS ?= -L$(PS.LIB_DIR) -lpsnet-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 
 PSUTIL.AVAILABLE ?= yes ;
 PSUTIL.CFLAGS ?= $(PS.INCLUDES) ;
-PSUTIL.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out/linuxx86/optimize/libs -lpsutil-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PSUTIL.LFLAGS ?= -L$(PS.LIB_DIR) -lpsutil-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 
 PSPAWS.AVAILABLE ?= yes ;
 PSPAWS.CFLAGS ?= $(PS.INCLUDES) ;
-PSPAWS.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out/linuxx86/optimize/libs -lpspaws-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PSPAWS.LFLAGS ?= -L$(PS.LIB_DIR) -lpaws-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 
 PSGUI.AVAILABLE ?= yes ;
 PSGUI.CFLAGS ?= $(PS.INCLUDES) ;
-PSGUI.LFLAGS ?= -L/home/tim/development/planeshift/workspace-psai/PlaneShift/out/linuxx86/optimize/libs -lpsgui-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PSGUI.LFLAGS ?= -L$(PS.LIB_DIR) -lgui-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+
+PS_ALL.AVAILABLE ?= yes ;
+PS_ALL.CFLAGS ?= $(PS.INCLUDES) ;
+PS_ALL.LFLAGS ?= -L$(PS.LIB_DIR) -lgui-$(PS.VERSION) -lpsengine-$(PS.VERSION) -lpsnet-$(PS.VERSION) -lpsutil-$(PS.VERSION) -lpaws-$(PS.VERSION) -lpsrpgrules-$(PS.VERSION) -lbulkobjects-$(PS.VERSION) -leffects-$(PS.VERSION) -lfparser-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 
 GTEST.AVAILABLE ?= yes ;
 GTEST.CFLAGS ?= -I/usr/local/include ;
 GTEST.LFLAGS ?= -L/usr/local/gtest/lib -lgtest ;
-GTEST.INCLUDE_DIR ?= -l/usr/local/include ;
+GTEST.INCLUDE_DIR ?= /usr/local/include ;
+
+XML_LIBS.AVAILABLE ?= yes ;
+XML_LIBS.CFLAGS ?= -I/usr/include ;
+XML_LIBS.LFLAGS ?= -L/usr/lib -lxerces-c ;
+XML_LIBS.INCLUDE_DIR ?= /usr/include ;
 
 LIBMYSQLCLIENT.AVAILABLE ?= yes ;
 LIBMYSQLCLIENT.CFLAGS ?= -I/usr/include/mysql ;
