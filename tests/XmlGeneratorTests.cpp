@@ -8,9 +8,8 @@
 #include <gtest/gtest.h>
 
 #include <string>
-#include <net/messages.h>
 
-//#include <cssysdef.h>
+#include <net/messages.h>
 
 #include <xml/PsaiXmlGenerator.h>
 
@@ -35,14 +34,6 @@ class XmlGeneratorTest: public testing::Test
 		}
 
 };
-
-/*int main(int argc, char **argv)
-{
-	std::cout << "Running main() from XmlGeneratorTest.cpp\n";
-
-	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
-}*/
 
 /*void testPsaiXmlGeneratorPlaySoundMessageToXml()
  {
