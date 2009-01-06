@@ -10,6 +10,9 @@
 #ifndef PSAIXMLGENERATOR_H_
 #define PSAIXMLGENERATOR_H_
 
+#include<xercesc/dom/DOMDocument.hpp>
+#include <xercesc/dom/DOMElement.hpp>
+
 class string;
 
 // message types
@@ -47,6 +50,7 @@ class psUpdateObjectNameMessage;
 class psViewItemDescription;
 class psViewItemUpdate;
 class psEquipmentMessage;
+class PsaiXmlUtils;
 
 class PsaiXmlGenerator
 {
@@ -121,6 +125,11 @@ class PsaiXmlGenerator
 		std::string toXml(const psViewItemUpdate& msg);
 
 		std::string toXml(const psEquipmentMessage& msg);
+
+	private:
+		PsaiXmlUtils& getXmlUtils();
+
+		XERCES_CPP_NAMESPACE::DOMElement& addVectorElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, float posX, float posY, float posZ);
 };
 
 #endif /* PSAIXMLGENERATOR_H_ */
