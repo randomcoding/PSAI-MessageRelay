@@ -23,6 +23,10 @@
 
 using namespace XERCES_CPP_NAMESPACE;
 
+PsaiXmlUtils::PsaiXmlUtils(){};
+
+PsaiXmlUtils::~PsaiXmlUtils(){};
+
 DOMElement& PsaiXmlUtils::getDocumentRootElement(DOMDocument& document)
 {
 	return *(document.getDocumentElement());
@@ -51,9 +55,12 @@ void PsaiXmlUtils::clearXmlUtils()
 
 XMLCh* PsaiXmlUtils::transcode(const std::string chars)
 {
-	 XMLCh* xmlch = XMLString::transcode(chars.c_str());
+	 return XMLString::transcode(chars.c_str());
+}
 
-	 return xmlch;
+std::string PsaiXmlUtils::transcode(const XMLCh* xmlCh)
+{
+	return XMLString::transcode(xmlCh);
 }
 
 DOMImplementation& PsaiXmlUtils::getDefaultDomImplementation()
@@ -65,31 +72,36 @@ DOMImplementation& PsaiXmlUtils::getDefaultDomImplementation()
 
 DOMDocument& PsaiXmlUtils::getDOMDocumentForMessageType(const std::string messageType)
 {
-	DOMDocument& document = *(getDefaultDomImplementation().createDocument(transcode(PsaiXmlConstants::PSAI_NAMESPACE), transcode(PsaiXmlConstants::PSAI_MESSAGE_ELEMENT_START), 0));
+	const XMLCh* xmlns = transcode(PsaiXmlConstants::PSAI_NAMESPACE);
+	const XMLCh* startMessageElement = transcode(PsaiXmlConstants::PSAI_MESSAGE_ELEMENT_START);
 
-	document.getDOMConfiguration()->setParameter(transcode("schema-location"), &(PsaiXmlConstants::PSAI_SCHEMA_LOCATION));
+	DOMDocument* document = getDefaultDomImplementation().createDocument(xmlns, startMessageElement, 0);
 
-	DOMElement& root = *(document.getDocumentElement());
+	//document->getDOMConfiguration()->setParameter(transcode("schema-location"), &(PsaiXmlConstants::PSAI_SCHEMA_LOCATION));
 
-	DOMElement& msgType = *(document.createElement(transcode(PsaiXmlConstants::ELEMENT_ALL_MESSAGE_TYPE)));
-	msgType.setTextContent(transcode(messageType));
-	root.appendChild(&msgType);
+	DOMElement* root = document->getDocumentElement();
 
-	return document;
+	DOMElement& msgType = createDomElement(*(document), *(root), PsaiXmlConstants::ELEMENT_ALL_MESSAGE_TYPE, messageType);
+
+	//DOMElement* msgType = document.createElement(transcode(PsaiXmlConstants::ELEMENT_ALL_MESSAGE_TYPE));
+	//msgType->setTextContent(transcode(messageType));
+	//root->appendChild(msgType);
+
+	return *(document);
 }
 
 DOMElement& PsaiXmlUtils::createDomElement(DOMDocument& parentDoc, DOMElement& parentElement, const std::string elementTag, const std::string elementText)
 {
-	DOMElement& element = *(parentDoc.createElement(transcode(elementTag)));
+	DOMElement* element = parentDoc.createElement(transcode(elementTag));
 
 	if (elementText != "")
 	{
-		element.setTextContent(transcode(elementText));
+		element->setTextContent(transcode(elementText));
 	}
 
-	parentElement.appendChild(&element);
+	parentElement.appendChild(element);
 
-	return element;
+	return *(element);
 }
 
 std::string PsaiXmlUtils::getChatTypeAsString(uint8_t chatType)

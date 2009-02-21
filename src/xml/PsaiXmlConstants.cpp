@@ -551,11 +551,11 @@ const std::string ELEMENT_WEATHER_YEAR("psai:year");
 const std::string ELEMENT_WEATHER_WEATHER("psai:weather");
 
 const std::string XML_HEADER("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-const std::string PSAI_MESSAGE_ELEMENT_START("<psai:psaimessage>");
-const std::string PSAI_MESSAGE_ELEMENT_END("</psai:psaimessage>");
+const std::string PSAI_MESSAGE_ELEMENT_START("psai:psaimessage");
+const std::string PSAI_MESSAGE_ELEMENT_END("psai:psaimessage");
 
-const std::string PSAI_SCHEMA_LOCATION("xsi:schemaLocation=\"http://www.zarniwoops.plus.com/psai/xml http://www.zarniwoops.plus.com/psai/xml/psaiXmlMessages.xsd\"");
-const std::string PSAI_NAMESPACE("xmlns:psai=\"http://www.zarniwoops.plus.com/psai/xml\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+const std::string PSAI_SCHEMA_LOCATION("http://www.zarniwoops.plus.com/psai/xml http://www.zarniwoops.plus.com/psai/xml/psaiXmlMessages.xsd");
+const std::string PSAI_NAMESPACE("http://www.zarniwoops.plus.com/psai/xml/psaiXmlMessages.xsd");
 
 const std::string ELEMENT_VECTOR_X("x");
 const std::string ELEMENT_VECTOR_Y("y");
