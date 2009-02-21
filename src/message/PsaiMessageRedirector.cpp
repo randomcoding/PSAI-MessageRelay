@@ -292,9 +292,9 @@ void PsaiMessageRedirector::handleChatMessage(psChatMessage& msg)
 	const char* from = msg.sPerson.GetDataSafe();
 	const char* to = msg.sOther.GetDataSafe();
 	const char* text = msg.sText.GetDataSafe();
-	//printf("Handle Chat Message of type %s from %s to %s saying %s\n", messageTypeName, from, to, text);
-	std::string chatXml = xmlGenerator->toXml(msg);
-	printf("Generated xml for chat message: %s", chatXml.c_str());
+	printf("Handle Chat Message of type %s from %s to %s saying %s\n", messageTypeName, from, to, text);
+	//std::string chatXml = xmlGenerator->toXml(msg);
+	//printf("Generated xml for chat message: %s", chatXml.c_str());
 }
 
 void PsaiMessageRedirector::handleCombatEventMessage(psCombatEventMessage& msg)
