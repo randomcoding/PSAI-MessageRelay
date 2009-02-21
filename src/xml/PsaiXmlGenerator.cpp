@@ -110,28 +110,30 @@ std::string PsaiXmlGenerator::toXml(const psChatMessage& msg)
 
 	if (xmlUtils.initiliaseXmlUtils())
 	{
-		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::TYPE_CHAT_MESSAGE);
-		//DOMElement& root = xmlUtils.getDocumentRootElement(doc);
-		DOMElement& root = *(doc.getDocumentElement());
+		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::MSGTYPE_CHAT);
+		DOMElement& root = xmlUtils.getDocumentRootElement(doc);
 
-		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_CHAT_TEXT, msg.sText.GetDataSafe());
+		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_CHAT_MESSAGE, "");
 
-		DOMElement& speakerElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER, "");
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_CHAT_TEXT, msg.sText.GetDataSafe());
 
-		if (msg.sOther != NULL && msg.sOther.Length() > 0)
+		DOMElement& speakerElement = xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER, "");
+
+		if (msg.sOther.GetDataSafe() != NULL && msg.sOther.Length() > 0)
 		{
 			xmlUtils.createDomElement(doc, speakerElement, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_TO, msg.sOther.GetDataSafe());
 		}
-		else if (msg.sPerson != NULL && msg.sPerson.Length() > 0)
+
+		if (msg.sPerson.GetDataSafe() != NULL && msg.sPerson.Length() > 0)
 		{
 			xmlUtils.createDomElement(doc, speakerElement, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_FROM, msg.sPerson.GetDataSafe());
 		}
 
-		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE, xmlUtils.getChatTypeAsString(msg.iChatType));
-
-		xmlUtils.clearXmlUtils();
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE, xmlUtils.getChatTypeAsString(msg.iChatType));
 
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
+
+		xmlUtils.clearXmlUtils();
 	}
 
 	return xmlString;

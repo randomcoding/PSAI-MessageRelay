@@ -7,11 +7,20 @@
 
 #include <gtest/gtest.h>
 
+#include <iostream>
 #include <string>
 
 #include <net/messages.h>
 
 #include <xml/PsaiXmlGenerator.h>
+#include <xml/PsaiXmlUtils.h>
+
+#include <xercesc/util/PlatformUtils.hpp>
+#include <xercesc/dom/DOMDocument.hpp>
+
+#include <xml/PsaiXmlConstants.h>
+
+XERCES_CPP_NAMESPACE_USE
 
 CS_IMPLEMENT_APPLICATION
 
@@ -22,18 +31,57 @@ class XmlGeneratorTest: public testing::Test
 
 		// no tear down yet
 
-		std::string getExpectedXmlStringForChatMessageToXml()
-		{
-			return std::string("");
-		}
-
 		PsaiXmlGenerator& getGenerator()
 		{
 			PsaiXmlGenerator* generator = new PsaiXmlGenerator();
 			return *(generator);
 		}
 
+		std::string getXmlStringStartForMessageType(std::string messageType)
+		{
+			std::string xmlString = "<?xml version=\"1.0\" encoding=\"UTF-16\" standalone=\"no\" ?>";
+			xmlString.append("<psai:psaimessage xmlns:psai=\"");
+			xmlString.append("http://www.zarniwoops.plus.com/psai/xml/psaiXmlMessages.xsd");
+			xmlString.append("\">");
+			xmlString.append("<psai:messagetype>");
+			xmlString.append(messageType.c_str());
+			xmlString.append("</psai:messagetype>");
+
+			return xmlString;
+		}
+
+		std::string getXmlStringMessageEnd()
+		{
+			return "</psai:psaimessage>";
+		}
+
+		std::string getExpectedXmlStringForChatMessageToXml()
+		{
+			std::string chatMessageXml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_CHAT);
+			chatMessageXml.append("<psai:chatmessage>");
+			chatMessageXml.append("<psai:text>Something Said</psai:text>");
+			chatMessageXml.append("<psai:speaker><psai:to>You</psai:to><psai:from>Me</psai:from></psai:speaker>");
+			chatMessageXml.append("<psai:chattype>");
+			chatMessageXml.append(PsaiXmlConstants::CHAT_SAY);
+			chatMessageXml.append("</psai:chattype>");
+			chatMessageXml.append("</psai:chatmessage>");
+			chatMessageXml.append(getXmlStringMessageEnd());
+
+			return chatMessageXml;
+		}
+
 };
+
+TEST_F(XmlGeneratorTest, testChatMessageToXml)
+{
+	uint32_t msgNum = 4321;
+	psChatMessage* msg = new psChatMessage(msgNum, "Me", "You", "Something Said", CHAT_SAY, false);
+	ASSERT_TRUE(msg) << "Chat Message was null";
+
+	std::string chatXml = getGenerator().toXml(*(msg));
+
+	ASSERT_STREQ(getExpectedXmlStringForChatMessageToXml().c_str(), chatXml.c_str()) << "Xml generated from psChatMessage was not the same as expected";
+}
 
 /*void testPsaiXmlGeneratorPlaySoundMessageToXml()
  {
@@ -200,11 +248,3 @@ class XmlGeneratorTest: public testing::Test
  // TODO: Implement testPsaiXmlGenerator_ToXml() function.
  }*/
 
-TEST_F(XmlGeneratorTest, testChatMessageToXml)
-{
-	uint32_t msgNum = 4321;
-	psChatMessage msg(msgNum, "Me\0", "You\0", "Something Said\0", CHAT_SAY, false);
-	std::string chatXml = getGenerator().toXml(msg);
-
-	ASSERT_EQ(getExpectedXmlStringForChatMessageToXml(), chatXml);
-}

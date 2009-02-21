@@ -131,6 +131,9 @@ std::string PsaiXmlUtils::getChatTypeAsString(uint8_t chatType)
 		case CHAT_GUILD:
 			typeString = PsaiXmlConstants::CHAT_GUILD;
 			break;
+		case CHAT_SAY:
+			typeString = PsaiXmlConstants::CHAT_SAY;
+			break;
 	}
 
 	return typeString;
@@ -143,5 +146,5 @@ std::string PsaiXmlUtils::convertDomDocumentToXmlString(DOMDocument& document)
 
 	XMLCh* xmlString = writer->writeToString(document);
 
-	return std::string(XMLString::transcode(xmlString));
+	return transcode(xmlString);
 }
