@@ -515,7 +515,7 @@ const std::string TYPE_STOP_EFFECT_MESSAGE("psai:stopeffectmessage");
 const std::string ELEMENT_STOP_EFFECT_UID("psai:uid");
 
 const std::string TYPE_SYSTEM_MESSAGE("psai:systemmessage");
-const std::string ELEMENT_SYSTEM_TEXT("psai:text");
+const std::string ELEMENT_TEXT("psai:text");
 const std::string ELEMENT_SYSTEM_TYPE("psai:type");
 
 const std::string TYPE_UPDATE_OBJECT_NAME_MESSAGE("psai:updateobjectname");
@@ -566,4 +566,6 @@ const std::string ELEMENT_CONTAINER_CONTENTS_ICON("icon");
 const std::string ELEMENT_CONTAINER_CONTENTS_SLOT_ID("slotid");
 const std::string ELEMENT_CONTAINER_CONTENTS_STACK_COUNT("stackcount");
 const std::string ELEMENT_CONTAINER_CONTENTS_PURIFY_STATUS("purifystatus");
+
+const std::string ELEMENT_CLIENT_NUM("psai:clientnum");
 }

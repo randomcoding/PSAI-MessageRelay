@@ -5,6 +5,7 @@
  *      Author: tim
  */
 
+#include <cstring>
 #include <gtest/gtest.h>
 
 #include <iostream>
@@ -55,38 +56,114 @@ class XmlGeneratorTest: public testing::Test
 			return "</psai:psaimessage>";
 		}
 
+		std::string getOpenTag(std::string tagName)
+		{
+			std::string tag("<");
+			tag.append(tagName);
+			tag.append(">");
+
+			return tag;
+		}
+
+		std::string getCloseTag(std::string tagName)
+		{
+			std::string tag("</");
+			tag.append(tagName);
+			tag.append(">");
+
+			return tag;
+		}
+
+		std::string getEmptyTag(std::string tagName)
+		{
+			std::string tag("<");
+			tag.append(tagName);
+			tag.append(" />");
+
+			return tag;
+		}
+
+		std::string getTextTag(std::string tagName, std::string tagContent)
+		{
+			std::string tag(getOpenTag(tagName));
+			tag.append(tagContent);
+			tag.append(getCloseTag(tagName));
+
+			return tag;
+		}
+
 		std::string getExpectedXmlStringForChatMessageToXml()
 		{
 			std::string chatMessageXml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_CHAT);
-			chatMessageXml.append("<psai:chatmessage>");
-			chatMessageXml.append("<psai:text>Something Said</psai:text>");
-			chatMessageXml.append("<psai:speaker><psai:to>You</psai:to><psai:from>Me</psai:from></psai:speaker>");
-			chatMessageXml.append("<psai:chattype>");
+			chatMessageXml.append(getOpenTag(PsaiXmlConstants::TYPE_CHAT_MESSAGE));
+			chatMessageXml.append(getTextTag(PsaiXmlConstants::ELEMENT_TEXT, "Something Said"));
+			chatMessageXml.append(getOpenTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER));
+			chatMessageXml.append(getTextTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_TO, "You"));
+			chatMessageXml.append(getTextTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_FROM, "Me"));
+			chatMessageXml.append(getCloseTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER));
+			chatMessageXml.append(getOpenTag(PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE));
 			chatMessageXml.append(PsaiXmlConstants::CHAT_SAY);
-			chatMessageXml.append("</psai:chattype>");
-			chatMessageXml.append("</psai:chatmessage>");
+			chatMessageXml.append(getCloseTag(PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE));
+			chatMessageXml.append(getCloseTag(PsaiXmlConstants::TYPE_CHAT_MESSAGE));
 			chatMessageXml.append(getXmlStringMessageEnd());
 
 			return chatMessageXml;
+		}
+
+		std::string getExpectedXmlForPlaySoundMessage()
+		{
+			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PLAYSOUND);
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_PLAY_SOUND_MESSAGE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PLAY_SOUND_SOUND, "aSound"));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_PLAY_SOUND_MESSAGE));
+			xml.append(getXmlStringMessageEnd());
+
+			return xml;
+		}
+
+		std::string getExpectedXmlForSoundEventMessage()
+		{
+			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_SOUND_EVENT);
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_SOUNT_EVENT_TYPE, "10"));
+			xml.append(getXmlStringMessageEnd());
+			return xml;
 		}
 
 };
 
 TEST_F(XmlGeneratorTest, testChatMessageToXml)
 {
-	uint32_t msgNum = 4321;
-	psChatMessage* msg = new psChatMessage(msgNum, "Me", "You", "Something Said", CHAT_SAY, false);
-	ASSERT_TRUE(msg) << "Chat Message was null";
+	psChatMessage* msg = new psChatMessage(4321, "Me", "You", "Something Said", CHAT_SAY, false);
+	ASSERT_TRUE(msg)<< "Chat Message was null";
 
 	std::string chatXml = getGenerator().toXml(*(msg));
 
 	ASSERT_STREQ(getExpectedXmlStringForChatMessageToXml().c_str(), chatXml.c_str()) << "Xml generated from psChatMessage was not the same as expected";
 }
 
-/*void testPsaiXmlGeneratorPlaySoundMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testPlaySoundMessageToXml)
+{
+	csString csstring("aSound");
+	psPlaySoundMessage msg(1, csstring);
+	msg.sound = csstring;
+	std::cout << "sound is " << msg.sound.GetDataSafe() << "\n";
+
+	std::string msgXml = getGenerator().toXml(msg);
+
+	ASSERT_STREQ(getExpectedXmlForPlaySoundMessage().c_str(), msgXml.c_str());
+}
+
+TEST_F(XmlGeneratorTest, testSoundEventMessageToXml)
+{
+	csString csstring("aSound");
+	psSoundEventMessage msg(1, 10);
+
+	std::string msgXml = getGenerator().toXml(msg);
+
+	ASSERT_STREQ(getExpectedXmlForSoundEventMessage().c_str(), msgXml.c_str());
+}
+
+/*
 
  void testPsaiXmlGeneratorSoundEventMessageToXml()
  {

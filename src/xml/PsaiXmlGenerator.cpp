@@ -147,12 +147,11 @@ std::string PsaiXmlGenerator::toXml(const psPlaySoundMessage& msg)
 
 	if (xmlUtils.initiliaseXmlUtils())
 	{
-		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::TYPE_PLAY_SOUND_MESSAGE);
-
-		//DOMElement& root = xmlUtils.getDocumentRootElement(doc);
+		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::MSGTYPE_PLAYSOUND);
 		DOMElement& root = *(doc.getDocumentElement());
 
-		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PLAY_SOUND_SOUND, msg.sound.GetDataSafe());
+		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_PLAY_SOUND_MESSAGE, "");
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PLAY_SOUND_SOUND, msg.sound.GetDataSafe());
 
 		xmlUtils.clearXmlUtils();
 
@@ -170,9 +169,8 @@ std::string PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
 
 	if (xmlUtils.initiliaseXmlUtils())
 	{
-		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::TYPE_SOUND_EVENT_MESSAGE);
+		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::MSGTYPE_SOUND_EVENT);
 
-		//DOMElement& root = xmlUtils.getDocumentRootElement(doc);
 		DOMElement& root = *(doc.getDocumentElement());
 
 		std::string typeString = convertToString(msg.type);
