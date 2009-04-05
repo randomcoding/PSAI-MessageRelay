@@ -51,6 +51,7 @@ class psViewItemDescription;
 class psViewItemUpdate;
 class psEquipmentMessage;
 class PsaiXmlUtils;
+class PsaiStringUtilities;
 
 class PsaiXmlGenerator
 {
@@ -130,6 +131,8 @@ class PsaiXmlGenerator
 		PsaiXmlUtils& getXmlUtils();
 
 		XERCES_CPP_NAMESPACE::DOMElement& addVectorElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, float posX, float posY, float posZ);
+
+		//PsaiStringUtilities& stringUtils = PsaiStringUtilities::getStringUtils();
 };
 
 #endif /* PSAIXMLGENERATOR_H_ */

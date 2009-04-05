@@ -18,12 +18,15 @@
 #include "PsaiXmlConstants.h"
 #include "PsaiXmlGenerator.h"
 #include "PsaiXmlUtils.h"
+#include "util/PsaiStringUtilities.h"
 
 using namespace XERCES_CPP_NAMESPACE;
 
+const PsaiStringUtilities& stringUtils = PsaiStringUtilities::getStringUtils();
+
 PsaiXmlGenerator::PsaiXmlGenerator()
 {
-	// does nothing yet
+	// no construction
 }
 
 PsaiXmlGenerator::~PsaiXmlGenerator()
@@ -38,62 +41,13 @@ PsaiXmlUtils& PsaiXmlGenerator::getXmlUtils()
 	return utils;
 }
 
-// convert values to strings
-
-std::string convertToString(uint value)
-{
-	std::string valueString;
-	std::stringstream out;
-	out << value;
-	valueString = out.str();
-
-	return valueString;
-}
-
-std::string convertToString(int value)
-{
-	std::string valueString;
-	std::stringstream out;
-	out << value;
-	valueString = out.str();
-
-	return valueString;
-}
-
-std::string convertToString(float value)
-{
-	std::string valueString;
-	std::stringstream out;
-	out << value;
-	valueString = out.str();
-
-	return valueString;
-}
-
-std::string convertToString(double value)
-{
-	std::string valueString;
-	std::stringstream out;
-	out << value;
-	valueString = out.str();
-
-	return valueString;
-}
-
-std::string convertToString(bool value)
-{
-	std::string valueString(value ? "true" : "false");
-
-	return valueString;
-}
-
-DOMElement& PsaiXmlGenerator::addVectorElement(DOMDocument& doc, DOMElement& parentElement, float posX, float posY, float posZ)
+DOMElement& PsaiXmlGenerator::addVectorElement(DOMDocument& doc, DOMElement& parentElement, const float posX, const float posY, const float posZ)
 {
 	PsaiXmlUtils& xmlUtils = getXmlUtils();
 
-	std::string posXString = convertToString(posX);
-	std::string posYString = convertToString(posY);
-	std::string posZString = convertToString(posZ);
+	const std::string posXString = stringUtils.convertToString(posX);
+	std::string posYString = stringUtils.convertToString(posY);
+	std::string posZString = stringUtils.convertToString(posZ);
 	DOMElement& vectorElement = xmlUtils.createDomElement(doc, parentElement, PsaiXmlConstants::TYPE_VECTOR_3D, "");
 	xmlUtils.createDomElement(doc, vectorElement, PsaiXmlConstants::ELEMENT_VECTOR_X, posXString);
 	xmlUtils.createDomElement(doc, vectorElement, PsaiXmlConstants::ELEMENT_VECTOR_Y, posYString);
@@ -173,7 +127,7 @@ std::string PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
 
 		DOMElement& root = *(doc.getDocumentElement());
 
-		std::string typeString = convertToString(msg.type);
+		std::string typeString = stringUtils.convertToString(msg.type);
 
 		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_SOUNT_EVENT_TYPE, typeString);
 
@@ -204,10 +158,10 @@ std::string PsaiXmlGenerator::toXml(const psPersistItem& msg)
 		std::string fileName(msg.filename.GetDataSafe());
 		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FILE_NAME, fileName);
 
-		std::string flags = convertToString(msg.flags);
+		std::string flags = stringUtils.convertToString(msg.flags);
 		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FLAGS, flags);
 
-		std::string id = convertToString(msg.eid.Unbox());
+		std::string id = stringUtils.convertToString(msg.eid.Unbox());
 		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_ID, id);
 
 		std::string name(msg.name.GetDataSafe());
@@ -220,10 +174,10 @@ std::string PsaiXmlGenerator::toXml(const psPersistItem& msg)
 		std::string sector(msg.sector.GetDataSafe());
 		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_SECTOR, sector);
 
-		std::string type = convertToString(msg.type);
+		std::string type = stringUtils.convertToString(msg.type);
 		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_TYPE, type);
 
-		std::string yRot = convertToString(msg.yRot);
+		std::string yRot = stringUtils.convertToString(msg.yRot);
 		xmlUtils.createDomElement(doc, root, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_Y_ROTATION, yRot);
 
 		xmlUtils.clearXmlUtils();
