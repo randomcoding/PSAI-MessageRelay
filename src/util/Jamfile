@@ -1,0 +1,13 @@
+SubDir TOP src util ;
+
+# specify the library to be built
+Library psaibase
+	: [ Wildcard *.cpp *.h ]
+	: noinstall
+;
+
+# specify the required libs for the build
+ExternalLibs psaibase : CRYSTAL CEL PSUTIL PSENGINE XML_LIBS ;
+
+# specify compile group membership
+CompileGroups psaibase : psailib ;

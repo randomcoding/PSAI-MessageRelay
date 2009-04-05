@@ -2,6 +2,7 @@ SubDir TOP src ;
 
 SubInclude TOP src message ;
 SubInclude TOP src xml ;
+SubInclude TOP src util ;
 
 Library psaibase
 	:  [ Wildcard *.cpp *.h ]
