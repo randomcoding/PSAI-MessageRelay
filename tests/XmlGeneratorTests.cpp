@@ -6,6 +6,9 @@
  */
 
 #include <cstring>
+
+#include <util/psconst.h>
+
 #include <gtest/gtest.h>
 
 #include <iostream>
@@ -20,6 +23,7 @@
 #include <xercesc/dom/DOMDocument.hpp>
 
 #include <xml/PsaiXmlConstants.h>
+#include <util/PsaiStringUtilities.h>
 
 XERCES_CPP_NAMESPACE_USE
 
@@ -27,15 +31,39 @@ CS_IMPLEMENT_APPLICATION
 
 class XmlGeneratorTest: public testing::Test
 {
+	public:
+		// Declarations of test values
+		static std::string itemName;
+		static std::string factionName;
+		static std::string fileName;
+		static std::string sector;
+		static std::string soundName;
+		static std::string you;
+		static std::string me;
+		static std::string chatMessage;
+		static EID defaultEid;
+		static uint32_t defaultClientNum;
+		static csVector3 defaultPositionVector;
+		static int soundEventType;
+		static int persistItemFlags;
+		static int persistItemType;
+		static float defaultYRotation;
+
 	protected:
 		// no set up yet
 
 		// no tear down yet
 
+
 		PsaiXmlGenerator& getGenerator()
 		{
 			PsaiXmlGenerator* generator = new PsaiXmlGenerator();
 			return *(generator);
+		}
+
+		const PsaiStringUtilities& getStringUtils()
+		{
+			return PsaiStringUtilities::getStringUtils();
 		}
 
 		std::string getXmlStringStartForMessageType(std::string messageType)
@@ -92,29 +120,56 @@ class XmlGeneratorTest: public testing::Test
 			return tag;
 		}
 
+		std::string getTextTag(std::string tagName, int tagContent)
+		{
+			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
+		}
+
+		std::string getTextTag(std::string tagName, unsigned int tagContent)
+		{
+			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
+		}
+
+		std::string getTextTag(std::string tagName, bool tagContent)
+		{
+			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
+		}
+
+		std::string getTextTag(std::string tagName, float tagContent)
+		{
+			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
+		}
+
+		std::string getTextTag(std::string tagName, double tagContent)
+		{
+			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
+		}
+
 		std::string getExpectedXmlStringForChatMessageToXml()
 		{
-			std::string chatMessageXml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_CHAT);
-			chatMessageXml.append(getOpenTag(PsaiXmlConstants::TYPE_CHAT_MESSAGE));
-			chatMessageXml.append(getTextTag(PsaiXmlConstants::ELEMENT_TEXT, "Something Said"));
-			chatMessageXml.append(getOpenTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER));
-			chatMessageXml.append(getTextTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_TO, "You"));
-			chatMessageXml.append(getTextTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_FROM, "Me"));
-			chatMessageXml.append(getCloseTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER));
-			chatMessageXml.append(getOpenTag(PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE));
-			chatMessageXml.append(PsaiXmlConstants::CHAT_SAY);
-			chatMessageXml.append(getCloseTag(PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE));
-			chatMessageXml.append(getCloseTag(PsaiXmlConstants::TYPE_CHAT_MESSAGE));
-			chatMessageXml.append(getXmlStringMessageEnd());
+			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_CHAT);
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_CHAT_MESSAGE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_TEXT, chatMessage));
+			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_TO, you));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER_FROM, me));
+			xml.append(getCloseTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER));
+			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE));
+			xml.append(PsaiXmlConstants::CHAT_SAY);
+			xml.append(getCloseTag(PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_CHAT_MESSAGE));
+			xml.append(getXmlStringMessageEnd());
 
-			return chatMessageXml;
+			return xml;
 		}
 
 		std::string getExpectedXmlForPlaySoundMessage()
 		{
 			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PLAYSOUND);
 			xml.append(getOpenTag(PsaiXmlConstants::TYPE_PLAY_SOUND_MESSAGE));
-			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PLAY_SOUND_SOUND, "aSound"));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PLAY_SOUND_SOUND, soundName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
 			xml.append(getCloseTag(PsaiXmlConstants::TYPE_PLAY_SOUND_MESSAGE));
 			xml.append(getXmlStringMessageEnd());
 
@@ -124,29 +179,75 @@ class XmlGeneratorTest: public testing::Test
 		std::string getExpectedXmlForSoundEventMessage()
 		{
 			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_SOUND_EVENT);
-			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_SOUNT_EVENT_TYPE, "10"));
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_SOUND_EVENT_MESSAGE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_SOUNT_EVENT_TYPE, getStringUtils().convertToString(soundEventType)));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_SOUND_EVENT_MESSAGE));
 			xml.append(getXmlStringMessageEnd());
+			return xml;
+		}
+
+		std::string getExpectedXmlForPersistItemMessage()
+		{
+			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ITEM);
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_PERSIST_ITEM_MESSAGE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_NAME, itemName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FACT_NAME, factionName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FILE_NAME, fileName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FLAGS, getStringUtils().convertToString(persistItemFlags)));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_ID, defaultEid.Unbox()));
+			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_POSITION));
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_VECTOR_3D));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_X, defaultPositionVector.x));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_Y, defaultPositionVector.y));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_Z, defaultPositionVector.z));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_VECTOR_3D));
+			xml.append(getCloseTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_POSITION));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_SECTOR, sector));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_TYPE, getStringUtils().convertToString(persistItemType)));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_Y_ROTATION, getStringUtils().convertToString(defaultYRotation)));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_PERSIST_ITEM_MESSAGE));
+			xml.append(getXmlStringMessageEnd());
+
 			return xml;
 		}
 
 };
 
+// Definitions of test values
+std::string XmlGeneratorTest::itemName("Item Name");
+std::string XmlGeneratorTest::factionName("Faction Name");
+std::string XmlGeneratorTest::fileName("Filename");
+std::string XmlGeneratorTest::sector("Sector1");
+std::string XmlGeneratorTest::you("You");
+std::string XmlGeneratorTest::me("Me");
+std::string XmlGeneratorTest::chatMessage("Something Said");
+EID XmlGeneratorTest::defaultEid(23);
+uint32_t XmlGeneratorTest::defaultClientNum = 4321;
+csVector3 XmlGeneratorTest::defaultPositionVector(1.1, 2.2, 3.3);
+int XmlGeneratorTest::soundEventType = 10;
+std::string XmlGeneratorTest::soundName("aSound");
+
+int XmlGeneratorTest::persistItemFlags = 1;
+int XmlGeneratorTest::persistItemType = 3;
+float XmlGeneratorTest::defaultYRotation = 34.5;
+
 TEST_F(XmlGeneratorTest, testChatMessageToXml)
 {
-	psChatMessage* msg = new psChatMessage(4321, "Me", "You", "Something Said", CHAT_SAY, false);
-	ASSERT_TRUE(msg)<< "Chat Message was null";
+	psChatMessage msg(defaultClientNum, me.c_str(), you.c_str(), chatMessage.c_str(), CHAT_SAY, false);
 
-	std::string chatXml = getGenerator().toXml(*(msg));
+	std::string chatXml = getGenerator().toXml(msg);
 
-	ASSERT_STREQ(getExpectedXmlStringForChatMessageToXml().c_str(), chatXml.c_str()) << "Xml generated from psChatMessage was not the same as expected";
+	ASSERT_STREQ(getExpectedXmlStringForChatMessageToXml().c_str(), chatXml.c_str())<< "Xml generated from psChatMessage was not the same as expected";
 }
 
 TEST_F(XmlGeneratorTest, testPlaySoundMessageToXml)
 {
-	csString csstring("aSound");
-	psPlaySoundMessage msg(1, csstring);
+	csString csstring(soundName.c_str());
+	psPlaySoundMessage msg(defaultClientNum, csstring);
+
 	msg.sound = csstring;
-	std::cout << "sound is " << msg.sound.GetDataSafe() << "\n";
 
 	std::string msgXml = getGenerator().toXml(msg);
 
@@ -155,12 +256,31 @@ TEST_F(XmlGeneratorTest, testPlaySoundMessageToXml)
 
 TEST_F(XmlGeneratorTest, testSoundEventMessageToXml)
 {
-	csString csstring("aSound");
-	psSoundEventMessage msg(1, 10);
+	psSoundEventMessage msg(defaultClientNum, soundEventType);
+	msg.type = soundEventType;
 
 	std::string msgXml = getGenerator().toXml(msg);
 
 	ASSERT_STREQ(getExpectedXmlForSoundEventMessage().c_str(), msgXml.c_str());
+}
+
+TEST_F(XmlGeneratorTest, testPersistItemMessageToXml)
+{
+	psPersistItem msg(defaultClientNum, defaultEid, persistItemType, itemName.c_str(), factionName.c_str(), fileName.c_str(), sector.c_str(), defaultPositionVector, defaultYRotation, persistItemFlags);
+
+	msg.name = itemName.c_str();
+	msg.eid = defaultEid;
+	msg.factname = factionName.c_str();
+	msg.filename = fileName.c_str();
+	msg.flags = persistItemFlags;
+	msg.pos = defaultPositionVector;
+	msg.sector = sector.c_str();
+	msg.type = persistItemType;
+	msg.yRot = defaultYRotation;
+
+	std::string msgXml = getGenerator().toXml(msg);
+
+	ASSERT_STREQ(getExpectedXmlForPersistItemMessage().c_str(), msgXml.c_str());
 }
 
 /*

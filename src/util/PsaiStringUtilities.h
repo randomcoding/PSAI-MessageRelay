@@ -12,8 +12,10 @@ class string;
 
 class PsaiStringUtilities
 {
-	public:
+	private:
 		PsaiStringUtilities();
+
+	public:
 		virtual ~PsaiStringUtilities();
 
 		std::string convertToString(const unsigned int value) const;

@@ -23,11 +23,17 @@
 
 using namespace XERCES_CPP_NAMESPACE;
 
-PsaiXmlUtils::PsaiXmlUtils(){};
+PsaiXmlUtils::PsaiXmlUtils() {};
 
-PsaiXmlUtils::~PsaiXmlUtils(){};
+PsaiXmlUtils::~PsaiXmlUtils() {};
 
-DOMElement& PsaiXmlUtils::getDocumentRootElement(DOMDocument& document)
+PsaiXmlUtils& PsaiXmlUtils::getXmlUtils()
+{
+	PsaiXmlUtils* utils = new PsaiXmlUtils();
+	return *(utils);
+}
+
+DOMElement& PsaiXmlUtils::getDocumentRootElement(const DOMDocument& document)
 {
 	return *(document.getDocumentElement());
 }
@@ -48,17 +54,17 @@ const bool PsaiXmlUtils::initiliaseXmlUtils()
 	return initialiseSuccess;
 }
 
-void PsaiXmlUtils::clearXmlUtils()
+const void PsaiXmlUtils::clearXmlUtils()
 {
 	XMLPlatformUtils::Terminate();
 }
 
-XMLCh* PsaiXmlUtils::transcode(const std::string chars)
+const XMLCh* PsaiXmlUtils::transcode(const std::string chars)
 {
-	 return XMLString::transcode(chars.c_str());
+	return XMLString::transcode(chars.c_str());
 }
 
-std::string PsaiXmlUtils::transcode(const XMLCh* xmlCh)
+const std::string PsaiXmlUtils::transcode(const XMLCh* xmlCh)
 {
 	return XMLString::transcode(xmlCh);
 }
@@ -81,7 +87,7 @@ DOMDocument& PsaiXmlUtils::getDOMDocumentForMessageType(const std::string messag
 
 	DOMElement* root = document->getDocumentElement();
 
-	DOMElement& msgType = createDomElement(*(document), *(root), PsaiXmlConstants::ELEMENT_ALL_MESSAGE_TYPE, messageType);
+	const DOMElement& msgType = createDomElement(*(document), *(root), PsaiXmlConstants::ELEMENT_ALL_MESSAGE_TYPE, messageType);
 
 	//DOMElement* msgType = document.createElement(transcode(PsaiXmlConstants::ELEMENT_ALL_MESSAGE_TYPE));
 	//msgType->setTextContent(transcode(messageType));
@@ -104,7 +110,7 @@ DOMElement& PsaiXmlUtils::createDomElement(DOMDocument& parentDoc, DOMElement& p
 	return *(element);
 }
 
-std::string PsaiXmlUtils::getChatTypeAsString(uint8_t chatType)
+const std::string PsaiXmlUtils::getChatTypeAsString(const uint8_t chatType)
 {
 	std::string typeString;
 
@@ -139,7 +145,7 @@ std::string PsaiXmlUtils::getChatTypeAsString(uint8_t chatType)
 	return typeString;
 }
 
-std::string PsaiXmlUtils::convertDomDocumentToXmlString(DOMDocument& document)
+const std::string PsaiXmlUtils::convertDomDocumentToXmlString(const DOMDocument& document)
 {
 	DOMImplementation* impl = document.getImplementation();
 	DOMWriter* writer = impl->createDOMWriter();

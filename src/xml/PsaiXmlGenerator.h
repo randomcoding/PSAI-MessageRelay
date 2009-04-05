@@ -52,6 +52,7 @@ class psViewItemUpdate;
 class psEquipmentMessage;
 class PsaiXmlUtils;
 class PsaiStringUtilities;
+class psMessageCracker;
 
 class PsaiXmlGenerator
 {
@@ -132,7 +133,9 @@ class PsaiXmlGenerator
 
 		XERCES_CPP_NAMESPACE::DOMElement& addVectorElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, float posX, float posY, float posZ);
 
-		//PsaiStringUtilities& stringUtils = PsaiStringUtilities::getStringUtils();
+		uint32_t getClientNumber(const psMessageCracker& msg);
+
+		XERCES_CPP_NAMESPACE::DOMElement& addClientNumberElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, uint32_t clientNumber);
 };
 
 #endif /* PSAIXMLGENERATOR_H_ */

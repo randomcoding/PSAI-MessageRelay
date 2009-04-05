@@ -74,7 +74,7 @@ TEST_F(XmlUtilsTest, testTranscode)
 {
 	std::string toTranscode("toTranscode");
 	PsaiXmlUtils& xmlUtils = getXmlUtils();
-	XMLCh* xmlch = xmlUtils.transcode(toTranscode);
+	const XMLCh* xmlch = xmlUtils.transcode(toTranscode);
 	ASSERT_EQ(116, *xmlch)<< "actual value of "<< *xmlch << " was not the same as expected: 1";
 
 	std::string transcoded = xmlUtils.transcode(xmlch);
