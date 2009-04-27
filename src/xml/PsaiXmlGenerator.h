@@ -13,6 +13,8 @@
 #include<xercesc/dom/DOMDocument.hpp>
 #include <xercesc/dom/DOMElement.hpp>
 
+typedef std::string String;
+
 class string;
 
 // message types
@@ -60,73 +62,73 @@ class PsaiXmlGenerator
 		PsaiXmlGenerator();
 		virtual ~PsaiXmlGenerator();
 
-		std::string toXml(const psChatMessage& msg);
+		String toXml(const psChatMessage& msg);
 
-		std::string toXml(const psPlaySoundMessage& msg);
+		String toXml(const psPlaySoundMessage& msg);
 
-		std::string toXml(const psSoundEventMessage& msg);
+		String toXml(const psSoundEventMessage& msg);
 
-		std::string toXml(const psPersistItem& msg);
+		String toXml(const psPersistItem& msg);
 
-		std::string toXml(const psPersistActor& msg);
+		String toXml(const psPersistActor& msg);
 
-		std::string toXml(const psPersistActionLocation& msg);
+		String toXml(const psPersistActionLocation& msg);
 
-		std::string toXml(const psRemoveObject& msg);
+		String toXml(const psRemoveObject& msg);
 
-		std::string toXml(const psDRMessage& msg);
+		String toXml(const psDRMessage& msg);
 
-		std::string toXml(const psStatDRMessage& msg);
+		String toXml(const psStatDRMessage& msg);
 
-		std::string toXml(const psCombatEventMessage& msg);
+		String toXml(const psCombatEventMessage& msg);
 
-		std::string toXml(const psModeMessage& msg);
+		String toXml(const psModeMessage& msg);
 
-		std::string toXml(const psMoveLockMessage& msg);
+		String toXml(const psMoveLockMessage& msg);
 
-		std::string toXml(const psNewSectorMessage& msg);
+		String toXml(const psNewSectorMessage& msg);
 
-		std::string toXml(const psEffectMessage& msg);
+		String toXml(const psEffectMessage& msg);
 
-		std::string toXml(const psStopEffectMessage& msg);
+		String toXml(const psStopEffectMessage& msg);
 
-		std::string toXml(const psSpellCastMessage& msg);
+		String toXml(const psSpellCastMessage& msg);
 
-		std::string toXml(const psSpellCancelMessage& msg);
+		String toXml(const psSpellCancelMessage& msg);
 
-		std::string toXml(const psStatsMessage& msg);
+		String toXml(const psStatsMessage& msg);
 
-		std::string toXml(const psSystemMessage& msg);
+		String toXml(const psSystemMessage& msg);
 
-		std::string toXml(const psWeatherMessage& msg);
+		String toXml(const psWeatherMessage& msg);
 
-		std::string toXml(const psCharacterDetailsMessage& msg);
+		String toXml(const psCharacterDetailsMessage& msg);
 
-		std::string toXml(const psGUIInventoryMessage& msg);
+		String toXml(const psGUIInventoryMessage& msg);
 
-		std::string toXml(const psGUIActiveMagicMessage& msg);
+		String toXml(const psGUIActiveMagicMessage& msg);
 
-		std::string toXml(const psGUIInteractMessage& msg);
+		String toXml(const psGUIInteractMessage& msg);
 
-		std::string toXml(const psGUIMerchantMessage& msg);
+		String toXml(const psGUIMerchantMessage& msg);
 
-		std::string toXml(const psGUISkillMessage& msg);
+		String toXml(const psGUISkillMessage& msg);
 
-		std::string toXml(const psGUITargetUpdateMessage& msg);
+		String toXml(const psGUITargetUpdateMessage& msg);
 
-		std::string toXml(const psLootMessage& msg);
+		String toXml(const psLootMessage& msg);
 
-		std::string toXml(const psQuestListMessage& msg);
+		String toXml(const psQuestListMessage& msg);
 
-		std::string toXml(const psQuestRewardMessage& msg);
+		String toXml(const psQuestRewardMessage& msg);
 
-		std::string toXml(const psUpdateObjectNameMessage& msg);
+		String toXml(const psUpdateObjectNameMessage& msg);
 
-		std::string toXml(const psViewItemDescription& msg);
+		String toXml(const psViewItemDescription& msg);
 
-		std::string toXml(const psViewItemUpdate& msg);
+		String toXml(const psViewItemUpdate& msg);
 
-		std::string toXml(const psEquipmentMessage& msg);
+		String toXml(const psEquipmentMessage& msg);
 
 	private:
 		PsaiXmlUtils& getXmlUtils();
@@ -135,7 +137,7 @@ class PsaiXmlGenerator
 
 		uint32_t getClientNumber(const psMessageCracker& msg);
 
-		XERCES_CPP_NAMESPACE::DOMElement& addClientNumberElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, uint32_t clientNumber);
+		XERCES_CPP_NAMESPACE::DOMElement& addClientNumberElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, uint32_t clientNumber, PsaiXmlUtils& xmlUtils);
 };
 
 #endif /* PSAIXMLGENERATOR_H_ */

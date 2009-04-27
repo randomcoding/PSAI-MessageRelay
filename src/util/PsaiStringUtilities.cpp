@@ -20,9 +20,9 @@ PsaiStringUtilities::~PsaiStringUtilities()
 	// do nothing
 }
 
-std::string PsaiStringUtilities::convertToString(const unsigned int value) const
+String PsaiStringUtilities::convertToString(const unsigned int value) const
 {
-	std::string valueString;
+	String valueString;
 	std::stringstream out;
 	out << value;
 	valueString = out.str();
@@ -30,9 +30,9 @@ std::string PsaiStringUtilities::convertToString(const unsigned int value) const
 	return valueString;
 }
 
-std::string PsaiStringUtilities::convertToString(const int value) const
+String PsaiStringUtilities::convertToString(const int value) const
 {
-	std::string valueString;
+	String valueString;
 	std::stringstream out;
 	out << value;
 	valueString = out.str();
@@ -40,9 +40,9 @@ std::string PsaiStringUtilities::convertToString(const int value) const
 	return valueString;
 }
 
-std::string PsaiStringUtilities::convertToString(const float value) const
+String PsaiStringUtilities::convertToString(const float value) const
 {
-	std::string valueString;
+	String valueString;
 	std::stringstream out;
 	out << value;
 	valueString = out.str();
@@ -50,9 +50,9 @@ std::string PsaiStringUtilities::convertToString(const float value) const
 	return valueString;
 }
 
-std::string PsaiStringUtilities::convertToString(const double value) const
+String PsaiStringUtilities::convertToString(const double value) const
 {
-	std::string valueString;
+	String valueString;
 	std::stringstream out;
 	out << value;
 	valueString = out.str();
@@ -60,9 +60,29 @@ std::string PsaiStringUtilities::convertToString(const double value) const
 	return valueString;
 }
 
-std::string PsaiStringUtilities::convertToString(const bool value) const
+String PsaiStringUtilities::convertToString(const unsigned short int value) const
 {
-	std::string valueString(value ? "true" : "false");
+	String valueString;
+	std::stringstream out;
+	out << value;
+	valueString = out.str();
+
+	return valueString;
+}
+
+String PsaiStringUtilities::convertToString(const uint8_t value) const
+{
+	String valueString;
+	std::stringstream out;
+	out << value;
+	valueString = out.str();
+
+	return valueString;
+}
+
+String PsaiStringUtilities::convertToString(const bool value) const
+{
+	String valueString(value ? "true" : "false");
 
 	return valueString;
 }
