@@ -5,9 +5,13 @@
  *      Author: tim
  */
 
+#include <cssysdef.h>
 #include <cstring>
+#include <csutil/strhashr.h>
+#include <iutil/objreg.h>
 
 #include <util/psconst.h>
+#include <cstool/initapp.h>
 
 #include <gtest/gtest.h>
 
@@ -15,6 +19,7 @@
 #include <string>
 
 #include <net/messages.h>
+#include <engine/linmove.h>
 
 #include <xml/PsaiXmlGenerator.h>
 #include <xml/PsaiXmlUtils.h>
@@ -25,6 +30,8 @@
 #include <xml/PsaiXmlConstants.h>
 #include <util/PsaiStringUtilities.h>
 
+typedef std::string String;
+
 XERCES_CPP_NAMESPACE_USE
 
 CS_IMPLEMENT_APPLICATION
@@ -33,14 +40,14 @@ class XmlGeneratorTest: public testing::Test
 {
 	public:
 		// Declarations of test values
-		static std::string itemName;
-		static std::string factionName;
-		static std::string fileName;
-		static std::string sector;
-		static std::string soundName;
-		static std::string you;
-		static std::string me;
-		static std::string chatMessage;
+		static String itemName;
+		static String factionName;
+		static String fileName;
+		static String sector;
+		static String soundName;
+		static String you;
+		static String me;
+		static String chatMessage;
 		static EID defaultEid;
 		static uint32_t defaultClientNum;
 		static csVector3 defaultPositionVector;
@@ -48,6 +55,36 @@ class XmlGeneratorTest: public testing::Test
 		static int persistItemFlags;
 		static int persistItemType;
 		static float defaultYRotation;
+
+		// persist actor message
+		static int actorType;
+		static int masqueradeType;
+		static bool control;
+		static String actorName;
+		static String guildName;
+		static String raceName;
+		static unsigned short int gender;
+		static String helmGroup;
+		static csVector3 collisionTop;
+		static csVector3 collisionBottom;
+		static csVector3 collisionOffset;
+		static String texParts;
+		static String equipmentParts;
+		static uint8_t counter;
+		static EID mappedEid;
+		static csStringHashReversible* msgStrings;
+		static psLinearMovement* linearMovement;
+		static uint8_t movementMode;
+		static uint8_t serverMode;
+		static PID playerId;
+		static uint32_t groupId;
+		static EID ownerEid;
+		static uint32_t persistActorMessageFlags;
+
+		static int actionLocationType;
+		static String actionLocationName;
+		static String meshName;
+		//static iObjectRegistry* objectRegistry;
 
 	protected:
 		// no set up yet
@@ -66,9 +103,19 @@ class XmlGeneratorTest: public testing::Test
 			return PsaiStringUtilities::getStringUtils();
 		}
 
-		std::string getXmlStringStartForMessageType(std::string messageType)
+		psLinearMovement* createLinearMovement()
 		{
-			std::string xmlString = "<?xml version=\"1.0\" encoding=\"UTF-16\" standalone=\"no\" ?>";
+			const char* argv = { "arg" };
+			CS_INITIALIZE_PLATFORM_APPLICATION
+			bool init = csInitializer::InitializeSCF(1, &argv);
+			iObjectRegistry* objectRegistry = csInitializer::CreateObjectRegistry();
+			psLinearMovement* linearMovement = new psLinearMovement(objectRegistry);
+			linearMovement->SetPathSector(XmlGeneratorTest::sector.c_str());
+		}
+
+		String getXmlStringStartForMessageType(String messageType)
+		{
+			String xmlString = "<?xml version=\"1.0\" encoding=\"UTF-16\" standalone=\"no\" ?>";
 			xmlString.append("<psai:psaimessage xmlns:psai=\"");
 			xmlString.append("http://www.zarniwoops.plus.com/psai/xml/psaiXmlMessages.xsd");
 			xmlString.append("\">");
@@ -79,75 +126,96 @@ class XmlGeneratorTest: public testing::Test
 			return xmlString;
 		}
 
-		std::string getXmlStringMessageEnd()
+		String getXmlStringMessageEnd()
 		{
 			return "</psai:psaimessage>";
 		}
 
-		std::string getOpenTag(std::string tagName)
+		String getOpenTag(String tagName)
 		{
-			std::string tag("<");
+			String tag("<");
 			tag.append(tagName);
 			tag.append(">");
 
 			return tag;
 		}
 
-		std::string getCloseTag(std::string tagName)
+		String getCloseTag(String tagName)
 		{
-			std::string tag("</");
+			String tag("</");
 			tag.append(tagName);
 			tag.append(">");
 
 			return tag;
 		}
 
-		std::string getEmptyTag(std::string tagName)
+		String getEmptyTag(String tagName)
 		{
-			std::string tag("<");
+			String tag("<");
 			tag.append(tagName);
 			tag.append(" />");
 
 			return tag;
 		}
 
-		std::string getTextTag(std::string tagName, std::string tagContent)
+		String getTextTag(String tagName, String tagContent)
 		{
-			std::string tag(getOpenTag(tagName));
+			String tag(getOpenTag(tagName));
 			tag.append(tagContent);
 			tag.append(getCloseTag(tagName));
 
 			return tag;
 		}
 
-		std::string getTextTag(std::string tagName, int tagContent)
+		String getTextTag(String tagName, int tagContent)
 		{
 			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
 		}
 
-		std::string getTextTag(std::string tagName, unsigned int tagContent)
+		String getTextTag(String tagName, unsigned int tagContent)
 		{
 			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
 		}
 
-		std::string getTextTag(std::string tagName, bool tagContent)
+		String getTextTag(String tagName, bool tagContent)
 		{
 			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
 		}
 
-		std::string getTextTag(std::string tagName, float tagContent)
+		String getTextTag(String tagName, float tagContent)
 		{
 			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
 		}
 
-		std::string getTextTag(std::string tagName, double tagContent)
+		String getTextTag(String tagName, double tagContent)
 		{
 			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
 		}
 
-		std::string getExpectedXmlStringForChatMessageToXml()
+		String getTextTag(String tagName, unsigned short int tagContent)
 		{
-			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_CHAT);
+			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
+		}
+
+		String getTextTag(String tagName, uint8_t tagContent)
+		{
+			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
+		}
+
+		String getVectorTag(csVector3 vector)
+		{
+			String vectorXml = getOpenTag(PsaiXmlConstants::TYPE_VECTOR_3D);
+			vectorXml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_X, vector.x));
+			vectorXml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_Y, vector.y));
+			vectorXml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_Z, vector.z));
+			vectorXml.append(getCloseTag(PsaiXmlConstants::TYPE_VECTOR_3D));
+
+			return vectorXml;
+		}
+
+		String getExpectedXmlStringForChatMessageToXml()
+		{
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_CHAT);
 			xml.append(getOpenTag(PsaiXmlConstants::TYPE_CHAT_MESSAGE));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_TEXT, chatMessage));
 			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_CHAT_SPEAKER));
@@ -164,9 +232,9 @@ class XmlGeneratorTest: public testing::Test
 			return xml;
 		}
 
-		std::string getExpectedXmlForPlaySoundMessage()
+		String getExpectedXmlForPlaySoundMessage()
 		{
-			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PLAYSOUND);
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PLAYSOUND);
 			xml.append(getOpenTag(PsaiXmlConstants::TYPE_PLAY_SOUND_MESSAGE));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PLAY_SOUND_SOUND, soundName));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
@@ -176,9 +244,9 @@ class XmlGeneratorTest: public testing::Test
 			return xml;
 		}
 
-		std::string getExpectedXmlForSoundEventMessage()
+		String getExpectedXmlForSoundEventMessage()
 		{
-			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_SOUND_EVENT);
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_SOUND_EVENT);
 			xml.append(getOpenTag(PsaiXmlConstants::TYPE_SOUND_EVENT_MESSAGE));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_SOUNT_EVENT_TYPE, getStringUtils().convertToString(soundEventType)));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
@@ -187,9 +255,9 @@ class XmlGeneratorTest: public testing::Test
 			return xml;
 		}
 
-		std::string getExpectedXmlForPersistItemMessage()
+		String getExpectedXmlForPersistItemMessage()
 		{
-			std::string xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ITEM);
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ITEM);
 			xml.append(getOpenTag(PsaiXmlConstants::TYPE_PERSIST_ITEM_MESSAGE));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_NAME, itemName));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FACT_NAME, factionName));
@@ -197,11 +265,7 @@ class XmlGeneratorTest: public testing::Test
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FLAGS, getStringUtils().convertToString(persistItemFlags)));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_ID, defaultEid.Unbox()));
 			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_POSITION));
-			xml.append(getOpenTag(PsaiXmlConstants::TYPE_VECTOR_3D));
-			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_X, defaultPositionVector.x));
-			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_Y, defaultPositionVector.y));
-			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_VECTOR_Z, defaultPositionVector.z));
-			xml.append(getCloseTag(PsaiXmlConstants::TYPE_VECTOR_3D));
+			xml.append(getVectorTag(defaultPositionVector));
 			xml.append(getCloseTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_POSITION));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_SECTOR, sector));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_TYPE, getStringUtils().convertToString(persistItemType)));
@@ -213,31 +277,105 @@ class XmlGeneratorTest: public testing::Test
 			return xml;
 		}
 
+		String getExpectedXmlForPersistActorMessage()
+		{
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ACTOR);
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_PERSIST_ACTOR_MESSAGE));
+			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_BOTTOM));
+			xml.append(getVectorTag(collisionBottom));
+			xml.append(getCloseTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_BOTTOM));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_CONTROL, control));
+			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_DR_MESSAGE));
+			xml.append(getCloseTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_DR_MESSAGE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_FACT_NAME, factionName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_FLAGS, persistActorMessageFlags));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_GENDER, gender));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_GROUP_ID, groupId));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_GUILD, guildName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_HELM_GROUPS, helmGroup));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_INSTANCE, "Unknown Value"));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_MASQUERADED_TYPE, masqueradeType));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_NAME, actorName));
+			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_OFFSET));
+			xml.append(getVectorTag(collisionOffset));
+			xml.append(getCloseTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_OFFSET));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_OWNER_EID, ownerEid.Unbox()));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_PLAYER_ID, playerId.Unbox()));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_RACE, raceName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_SERVER_MODE, serverMode));
+			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_TOP));
+			xml.append(getVectorTag(collisionTop));
+			xml.append(getCloseTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_TOP));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR_TYPE, actorType));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTOR__FILE_NAME, fileName));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_PERSIST_ACTOR_MESSAGE));
+			xml.append(getXmlStringMessageEnd());
+
+			return xml;
+		}
+
+		String getExpectedXmlForPersistActionLocationMessage()
+		{
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ACTIONLOCATION);
+
+			xml.append(getXmlStringMessageEnd());
+
+			return xml;
+		}
 };
 
 // Definitions of test values
-std::string XmlGeneratorTest::itemName("Item Name");
-std::string XmlGeneratorTest::factionName("Faction Name");
-std::string XmlGeneratorTest::fileName("Filename");
-std::string XmlGeneratorTest::sector("Sector1");
-std::string XmlGeneratorTest::you("You");
-std::string XmlGeneratorTest::me("Me");
-std::string XmlGeneratorTest::chatMessage("Something Said");
+String XmlGeneratorTest::itemName("Item Name");
+String XmlGeneratorTest::factionName("Faction Name");
+String XmlGeneratorTest::fileName("Filename");
+String XmlGeneratorTest::sector("Sector1");
+String XmlGeneratorTest::you("You");
+String XmlGeneratorTest::me("Me");
+String XmlGeneratorTest::chatMessage("Something Said");
 EID XmlGeneratorTest::defaultEid(23);
 uint32_t XmlGeneratorTest::defaultClientNum = 4321;
 csVector3 XmlGeneratorTest::defaultPositionVector(1.1, 2.2, 3.3);
 int XmlGeneratorTest::soundEventType = 10;
-std::string XmlGeneratorTest::soundName("aSound");
-
+String XmlGeneratorTest::soundName("aSound");
 int XmlGeneratorTest::persistItemFlags = 1;
 int XmlGeneratorTest::persistItemType = 3;
 float XmlGeneratorTest::defaultYRotation = 34.5;
 
+// persist actor message
+int XmlGeneratorTest::actorType = 98;
+int XmlGeneratorTest::masqueradeType = 45;
+bool XmlGeneratorTest::control = true;
+String XmlGeneratorTest::actorName("Actor Name");
+String XmlGeneratorTest::guildName("Guild Name");
+String XmlGeneratorTest::raceName("Race Name");
+unsigned short int XmlGeneratorTest::gender = 1;
+String XmlGeneratorTest::helmGroup("Helm Group");
+csVector3 XmlGeneratorTest::collisionTop(23.4, 32.1, 2.3);
+csVector3 XmlGeneratorTest::collisionBottom(23.4, 32.1, 0.3);
+csVector3 XmlGeneratorTest::collisionOffset(1.0, 1.0, 2.0);
+String XmlGeneratorTest::texParts("Tex Parts");
+String XmlGeneratorTest::equipmentParts("Equipment Parts");
+uint8_t XmlGeneratorTest::counter = 2;
+EID XmlGeneratorTest::mappedEid(43);
+csStringHashReversible* XmlGeneratorTest::msgStrings = new csStringHashReversible(10);
+uint8_t XmlGeneratorTest::movementMode = 5;
+uint8_t XmlGeneratorTest::serverMode = 3;
+PID XmlGeneratorTest::playerId(123);
+uint32_t XmlGeneratorTest::groupId = 9876;
+EID XmlGeneratorTest::ownerEid(789);
+uint32_t XmlGeneratorTest::persistActorMessageFlags = 45;
+
+// persist action location
+int XmlGeneratorTest::actionLocationType = 10;
+String XmlGeneratorTest::actionLocationName("actionLocation");
+String XmlGeneratorTest::meshName("mesh");
+
+// Test Fixtures
 TEST_F(XmlGeneratorTest, testChatMessageToXml)
 {
 	psChatMessage msg(defaultClientNum, me.c_str(), you.c_str(), chatMessage.c_str(), CHAT_SAY, false);
 
-	std::string chatXml = getGenerator().toXml(msg);
+	String chatXml = getGenerator().toXml(msg);
 
 	ASSERT_STREQ(getExpectedXmlStringForChatMessageToXml().c_str(), chatXml.c_str())<< "Xml generated from psChatMessage was not the same as expected";
 }
@@ -246,10 +384,9 @@ TEST_F(XmlGeneratorTest, testPlaySoundMessageToXml)
 {
 	csString csstring(soundName.c_str());
 	psPlaySoundMessage msg(defaultClientNum, csstring);
-
 	msg.sound = csstring;
 
-	std::string msgXml = getGenerator().toXml(msg);
+	String msgXml = getGenerator().toXml(msg);
 
 	ASSERT_STREQ(getExpectedXmlForPlaySoundMessage().c_str(), msgXml.c_str());
 }
@@ -259,14 +396,15 @@ TEST_F(XmlGeneratorTest, testSoundEventMessageToXml)
 	psSoundEventMessage msg(defaultClientNum, soundEventType);
 	msg.type = soundEventType;
 
-	std::string msgXml = getGenerator().toXml(msg);
+	String msgXml = getGenerator().toXml(msg);
 
 	ASSERT_STREQ(getExpectedXmlForSoundEventMessage().c_str(), msgXml.c_str());
 }
 
 TEST_F(XmlGeneratorTest, testPersistItemMessageToXml)
 {
-	psPersistItem msg(defaultClientNum, defaultEid, persistItemType, itemName.c_str(), factionName.c_str(), fileName.c_str(), sector.c_str(), defaultPositionVector, defaultYRotation, persistItemFlags);
+	psPersistItem
+			msg(defaultClientNum, defaultEid, persistItemType, itemName.c_str(), factionName.c_str(), fileName.c_str(), sector.c_str(), defaultPositionVector, defaultYRotation, persistItemFlags);
 
 	msg.name = itemName.c_str();
 	msg.eid = defaultEid;
@@ -278,170 +416,165 @@ TEST_F(XmlGeneratorTest, testPersistItemMessageToXml)
 	msg.type = persistItemType;
 	msg.yRot = defaultYRotation;
 
-	std::string msgXml = getGenerator().toXml(msg);
+	String msgXml = getGenerator().toXml(msg);
 
 	ASSERT_STREQ(getExpectedXmlForPersistItemMessage().c_str(), msgXml.c_str());
 }
 
-/*
+// Disabled as the creation og the DRMessage fails as the required iSector is null
+TEST_F(XmlGeneratorTest, DISABLED_testPersistActorMessageToXml)
+{
+	psPersistActor msg(defaultClientNum, actorType, masqueradeType, control, actorName.c_str(), guildName.c_str(), factionName.c_str(), fileName.c_str(), raceName.c_str(), gender, helmGroup.c_str(),
+			collisionTop, collisionBottom, collisionOffset, texParts.c_str(), equipmentParts.c_str(), counter, mappedEid, msgStrings, createLinearMovement(), movementMode, serverMode, playerId, groupId,
+			ownerEid, persistActorMessageFlags);
+	String msgXml = getGenerator().toXml(msg);
+	ASSERT_STREQ(getExpectedXmlForPersistActorMessage().c_str(), msgXml.c_str());
+}
 
- void testPsaiXmlGeneratorSoundEventMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testPersistActionLocationMessageToXml)
+{
+	psPersistActionLocation* msg = new psPersistActionLocation(defaultClientNum, ownerEid, actionLocationType, actionLocationName.c_str(), sector.c_str(), meshName.c_str());
+	String msgXml = getGenerator().toXml(&msg);
+	ASSERT_STREQ(getExpectedXmlForPersistActionLocationMessage().c_str(), msgXml.c_str());
+}
 
- void testPsaiXmlGeneratorPersistItemMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testRemoveObjectMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorPersistActorMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testDeadReckoningMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorPersistActionLocationMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testStatDeadReckoningMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorRemoveObjectMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testCombatEventMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorDRMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testModeMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorStatDRMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testMoveLockMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorCombatEventMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testNewSectorMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorModeMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testEffectMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorMoveLockMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testStopEffectMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorNewSectorMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testSpellCastMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorEffectMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testSpellCancelMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorStopEffectMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testStatsMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorSpellCastMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testSystemMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorSpellCancelMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testWeatherMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorStatsMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testCharacterDetailMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorSystemMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testGuiInventoryMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorWeatherMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testGuiActiveMagicMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorCharacterDetailsMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testGuiInteractMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorGUIInventoryMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testGuiMerchantMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorGUIActiveMagicMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testGuiSkillMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorGUIInteractMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testGuiTargetUpdateMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorGUIMerchantMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testLootMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorGUISkillMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testQuestListMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorGUITargetUpdateMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testQuestRewardMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorLootMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testUpdateObjectNameMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorQuestListMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testViewItemDescriptionMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorQuestRewardMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
+TEST_F(XmlGeneratorTest, testViewItemUpdateMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
- void testPsaiXmlGeneratorUpdateObjectNameMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
-
- void testPsaiXmlGeneratorViewItemDescriptionMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
-
- void testPsaiXmlGeneratorViewItemUpdateMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }
-
- void testPsaiXmlGeneratorEquipmentMessageToXml()
- {
- // TODO: Implement testPsaiXmlGenerator_ToXml() function.
- }*/
+TEST_F(XmlGeneratorTest, testEquipmentMessageToXml)
+{
+	FAIL() << "Not Implemented Yet";
+}
 
