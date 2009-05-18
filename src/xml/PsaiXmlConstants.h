@@ -450,6 +450,7 @@ namespace PsaiXmlConstants
 		extern const String ELEMENT_PERSIST_ACTION_LOCATION_MESH;
 		extern const String ELEMENT_PERSIST_ACTION_LOCATION_ID;
 		extern const String ELEMENT_PERSIST_ACTION_LOCATION_TYPE;
+		extern const String ELEMENT_PERSIST_ACTION_LOCATION_NAME;
 
 		extern const String TYPE_PERSIST_ACTOR_MESSAGE;
 		extern const String ELEMENT_PERSIST_ACTOR_DR_MESSAGE;
