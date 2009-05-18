@@ -131,8 +131,6 @@ class PsaiXmlGenerator
 		String toXml(const psEquipmentMessage& msg);
 
 	private:
-		PsaiXmlUtils& getXmlUtils();
-
 		XERCES_CPP_NAMESPACE::DOMElement& addVectorElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, float posX, float posY, float posZ);
 
 		uint32_t getClientNumber(const psMessageCracker& msg);
