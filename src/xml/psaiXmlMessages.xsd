@@ -583,6 +583,7 @@
 			<element name="mesh" type="string" minOccurs="1" maxOccurs="1" />
 			<element name="id" type="int" minOccurs="1" maxOccurs="1" />
 			<element name="type" type="int" minOccurs="1" maxOccurs="1" />
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
 		</all>
 	</complexType>
 	

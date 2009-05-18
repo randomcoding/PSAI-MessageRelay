@@ -442,6 +442,7 @@ const String ELEMENT_PERSIST_ACTION_LOCATION_SECTOR("psai:sector");
 const String ELEMENT_PERSIST_ACTION_LOCATION_MESH("psai:mesh");
 const String ELEMENT_PERSIST_ACTION_LOCATION_ID("psai:id");
 const String ELEMENT_PERSIST_ACTION_LOCATION_TYPE("psai:type");
+const String ELEMENT_PERSIST_ACTION_LOCATION_NAME("psai:name");
 
 const String TYPE_PERSIST_ACTOR_MESSAGE("psai:persistactormessage");
 const String ELEMENT_PERSIST_ACTOR_DR_MESSAGE("psai:drmessage");
