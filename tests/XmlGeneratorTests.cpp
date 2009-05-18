@@ -9,6 +9,7 @@
 #include <cstring>
 #include <csutil/strhashr.h>
 #include <iutil/objreg.h>
+#include <iengine/sector.h>
 
 #include <util/psconst.h>
 #include <cstool/initapp.h>
@@ -84,7 +85,15 @@ class XmlGeneratorTest: public testing::Test
 		static int actionLocationType;
 		static String actionLocationName;
 		static String meshName;
-		//static iObjectRegistry* objectRegistry;
+
+		static EID objectEid;
+
+		static csVector3 position;
+		static float yRot;
+		static iSector* iSec;
+		static csVector3 velocity;
+		static csVector3 worldVelocity;
+		static float ang_velocity;
 
 	protected:
 		// no set up yet
@@ -317,10 +326,38 @@ class XmlGeneratorTest: public testing::Test
 		String getExpectedXmlForPersistActionLocationMessage()
 		{
 			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ACTIONLOCATION);
-
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_PERSIST_ACTION_LOCATION_MESSAGE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_SECTOR, sector));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_MESH, meshName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_TYPE, actionLocationType));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_ID, ownerEid.Unbox()));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_NAME, actionLocationName));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_PERSIST_ACTION_LOCATION_MESSAGE));
 			xml.append(getXmlStringMessageEnd());
 
 			return xml;
+		}
+
+		String getExpectedXmlForRemoveObjectMessage()
+		{
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_REMOVE_OBJECT);
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_REMOVE_OBJECT_MESSAGE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_REMOVE_OBJECT_OBJECT_ID, objectEid.Unbox()));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_REMOVE_OBJECT_MESSAGE));
+			xml.append(getXmlStringMessageEnd());
+
+			return xml;
+		}
+
+		String getExpectedXmlForDeadReckoningMessage()
+		{
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_DEAD_RECKONING);
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_DR_MESSAGE));
+
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_DR_MESSAGE));
+			xml.append(getXmlStringMessageEnd());
 		}
 };
 
@@ -340,6 +377,7 @@ String XmlGeneratorTest::soundName("aSound");
 int XmlGeneratorTest::persistItemFlags = 1;
 int XmlGeneratorTest::persistItemType = 3;
 float XmlGeneratorTest::defaultYRotation = 34.5;
+EID XmlGeneratorTest::objectEid(44);
 
 // persist actor message
 int XmlGeneratorTest::actorType = 98;
@@ -369,6 +407,14 @@ uint32_t XmlGeneratorTest::persistActorMessageFlags = 45;
 int XmlGeneratorTest::actionLocationType = 10;
 String XmlGeneratorTest::actionLocationName("actionLocation");
 String XmlGeneratorTest::meshName("mesh");
+
+// DR message
+csVector3 XmlGeneratorTest::position(23.0, 45.0, 67.0);
+float XmlGeneratorTest::yRot = 65.7;
+iSector* XmlGeneratorTest::iSec;
+csVector3 XmlGeneratorTest::velocity(45.0, 92.0, 0.0);
+csVector3 XmlGeneratorTest::worldVelocity(1.0, 1.0, 1.0);
+float XmlGeneratorTest::ang_velocity = 78.3;
 
 // Test Fixtures
 TEST_F(XmlGeneratorTest, testChatMessageToXml)
@@ -421,31 +467,81 @@ TEST_F(XmlGeneratorTest, testPersistItemMessageToXml)
 	ASSERT_STREQ(getExpectedXmlForPersistItemMessage().c_str(), msgXml.c_str());
 }
 
-// Disabled as the creation og the DRMessage fails as the required iSector is null
+// Disabled as the creation of the DRMessage fails as the required iSector is null
 TEST_F(XmlGeneratorTest, DISABLED_testPersistActorMessageToXml)
 {
+	psLinearMovement* linearMove = createLinearMovement();
 	psPersistActor msg(defaultClientNum, actorType, masqueradeType, control, actorName.c_str(), guildName.c_str(), factionName.c_str(), fileName.c_str(), raceName.c_str(), gender, helmGroup.c_str(),
-			collisionTop, collisionBottom, collisionOffset, texParts.c_str(), equipmentParts.c_str(), counter, mappedEid, msgStrings, createLinearMovement(), movementMode, serverMode, playerId, groupId,
+			collisionTop, collisionBottom, collisionOffset, texParts.c_str(), equipmentParts.c_str(), counter, mappedEid, msgStrings, linearMove, movementMode, serverMode, playerId, groupId,
 			ownerEid, persistActorMessageFlags);
+
+	msg.bottom = collisionBottom;
+	msg.masqueradeType = masqueradeType;
+	msg.guild = guildName.c_str();
+	msg.factname = factionName.c_str();
+	msg.filename = fileName.c_str();
+	msg.race = raceName.c_str();
+	msg.helmGroup = helmGroup.c_str();
+	msg.top = collisionTop;
+	msg.offset = collisionOffset;
+	msg.texParts = texParts.c_str();
+	msg.counter = counter;
+	msg.equipment = equipmentParts.c_str();
+	msg.entityid = mappedEid;
+	msg.mode = movementMode;
+	msg.serverMode = serverMode;
+	msg.playerID = playerId;
+	msg.groupID = groupId;
+	msg.ownerEID = ownerEid;
+	msg.flags = persistActorMessageFlags;
+
 	String msgXml = getGenerator().toXml(msg);
 	ASSERT_STREQ(getExpectedXmlForPersistActorMessage().c_str(), msgXml.c_str());
 }
 
 TEST_F(XmlGeneratorTest, testPersistActionLocationMessageToXml)
 {
-	psPersistActionLocation* msg = new psPersistActionLocation(defaultClientNum, ownerEid, actionLocationType, actionLocationName.c_str(), sector.c_str(), meshName.c_str());
-	String msgXml = getGenerator().toXml(&msg);
+	psPersistActionLocation msg(defaultClientNum, ownerEid, actionLocationType, actionLocationName.c_str(), sector.c_str(), meshName.c_str());
+
+	msg.eid = ownerEid;
+	msg.mesh = meshName.c_str();
+	msg.name = actionLocationName.c_str();
+	msg.sector = sector.c_str();
+	msg.type = actionLocationType;
+
+	String msgXml = getGenerator().toXml(msg);
 	ASSERT_STREQ(getExpectedXmlForPersistActionLocationMessage().c_str(), msgXml.c_str());
 }
 
 TEST_F(XmlGeneratorTest, testRemoveObjectMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	psRemoveObject msg(defaultClientNum, objectEid);
+
+	msg.objectEID = objectEid;
+
+	String msgXml = getGenerator().toXml(msg);
+	ASSERT_STREQ(getExpectedXmlForRemoveObjectMessage().c_str(), msgXml.c_str());
 }
 
-TEST_F(XmlGeneratorTest, testDeadReckoningMessageToXml)
+// Disabled for the same reason as testPersistActorMessageToXml
+TEST_F(XmlGeneratorTest, DISABLED_testDeadReckoningMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	psDRMessage msg(defaultClientNum, mappedEid, true, movementMode, counter, position, yRot, iSec, velocity, worldVelocity, ang_velocity, msgStrings);
+
+	msg.entityid = mappedEid;
+	msg.on_ground = true;
+	msg.mode = movementMode;
+	msg.counter = counter;
+	msg.pos = position;
+	msg.yrot = yRot;
+	msg.sector = iSec;
+	msg.vel = velocity;
+	msg.worldVel = worldVelocity;
+	msg.ang_vel = ang_velocity;
+
+	String msgXml = getGenerator().toXml(msg);
+
+	ASSERT_STREQ(getExpectedXmlForDeadReckoningMessage().c_str(), msgXml.c_str());
 }
 
 TEST_F(XmlGeneratorTest, testStatDeadReckoningMessageToXml)

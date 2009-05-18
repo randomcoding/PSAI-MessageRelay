@@ -26,6 +26,7 @@ using namespace XERCES_CPP_NAMESPACE;
 
 
 const PsaiStringUtilities& stringUtils = PsaiStringUtilities::getStringUtils();
+PsaiXmlUtils& xmlUtils = *(new PsaiXmlUtils());
 
 PsaiXmlGenerator::PsaiXmlGenerator()
 {
@@ -37,13 +38,6 @@ PsaiXmlGenerator::~PsaiXmlGenerator()
 	// does nothing yet
 }
 
-PsaiXmlUtils& PsaiXmlGenerator::getXmlUtils()
-{
-	PsaiXmlUtils& utils = *(new PsaiXmlUtils());
-
-	return utils;
-}
-
 uint32_t PsaiXmlGenerator::getClientNumber(const psMessageCracker& msg)
 {
 	return msg.msg->clientnum;
@@ -51,12 +45,10 @@ uint32_t PsaiXmlGenerator::getClientNumber(const psMessageCracker& msg)
 
 DOMElement& PsaiXmlGenerator::addVectorElement(DOMDocument& doc, DOMElement& parentElement, const float posX, const float posY, const float posZ)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	const String posXString = stringUtils.convertToString(posX);
 	const String posYString = stringUtils.convertToString(posY);
 	const String posZString = stringUtils.convertToString(posZ);
-	DOMElement& vectorElement = xmlUtils.createDomElement(doc, parentElement, PsaiXmlConstants::TYPE_VECTOR_3D, "");
+	DOMElement& vectorElement = xmlUtils.createDomElement(doc, parentElement, PsaiXmlConstants::TYPE_VECTOR_3D);
 	xmlUtils.createDomElement(doc, vectorElement, PsaiXmlConstants::ELEMENT_VECTOR_X, posXString);
 	xmlUtils.createDomElement(doc, vectorElement, PsaiXmlConstants::ELEMENT_VECTOR_Y, posYString);
 	xmlUtils.createDomElement(doc, vectorElement, PsaiXmlConstants::ELEMENT_VECTOR_Z, posZString);
@@ -71,8 +63,6 @@ DOMElement& PsaiXmlGenerator::addClientNumberElement(DOMDocument& doc, DOMElemen
 
 String PsaiXmlGenerator::toXml(const psChatMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -84,7 +74,7 @@ String PsaiXmlGenerator::toXml(const psChatMessage& msg)
 
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_CHAT_TEXT, msg.sText.GetDataSafe());
 
-		DOMElement& speakerElement = xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER, "");
+		DOMElement& speakerElement = xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_CHAT_SPEAKER);
 
 		if (msg.sOther.GetDataSafe() != NULL && msg.sOther.Length() > 0)
 		{
@@ -110,8 +100,6 @@ String PsaiXmlGenerator::toXml(const psChatMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psPlaySoundMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -133,8 +121,6 @@ String PsaiXmlGenerator::toXml(const psPlaySoundMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -158,8 +144,6 @@ String PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psPersistItem& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -185,7 +169,7 @@ String PsaiXmlGenerator::toXml(const psPersistItem& msg)
 		String id = stringUtils.convertToString(msg.eid.Unbox());
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_ID, id);
 
-		DOMElement& positionElement = xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_POSITION, "");
+		DOMElement& positionElement = xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_POSITION);
 
 		addVectorElement(doc, positionElement, msg.pos.x, msg.pos.y, msg.pos.z);
 
@@ -210,15 +194,13 @@ String PsaiXmlGenerator::toXml(const psPersistItem& msg)
 
 String PsaiXmlGenerator::toXml(const psPersistActor& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
 	{
 		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ACTOR);
 		DOMElement& root = *(doc.getDocumentElement());
-		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_PERSIST_ACTOR_MESSAGE, "");
+		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_PERSIST_ACTOR_MESSAGE);
 		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 		xmlUtils.clearXmlUtils();
@@ -229,14 +211,21 @@ String PsaiXmlGenerator::toXml(const psPersistActor& msg)
 
 String PsaiXmlGenerator::toXml(const psPersistActionLocation& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
 	{
 		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ACTIONLOCATION);
+		DOMElement& root = *(doc.getDocumentElement());
+		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_PERSIST_ACTION_LOCATION_MESSAGE);
 
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_SECTOR, msg.sector.GetDataSafe());
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_MESH, msg.mesh.GetDataSafe());
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_TYPE, stringUtils.convertToString(msg.type));
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_ID, stringUtils.convertToString(msg.eid.Unbox()));
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_NAME, msg.name.GetDataSafe());
+
+		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 		xmlUtils.clearXmlUtils();
 	}
@@ -246,14 +235,15 @@ String PsaiXmlGenerator::toXml(const psPersistActionLocation& msg)
 
 String PsaiXmlGenerator::toXml(const psRemoveObject& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
 	{
 		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::MSGTYPE_REMOVE_OBJECT);
-
+		DOMElement& root = *(doc.getDocumentElement());
+		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_REMOVE_OBJECT_MESSAGE);
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_REMOVE_OBJECT_OBJECT_ID, stringUtils.convertToString(msg.objectEID.Unbox()));
+		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 		xmlUtils.clearXmlUtils();
 	}
@@ -263,8 +253,6 @@ String PsaiXmlGenerator::toXml(const psRemoveObject& msg)
 
 String PsaiXmlGenerator::toXml(const psDRMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -280,8 +268,6 @@ String PsaiXmlGenerator::toXml(const psDRMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psStatDRMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -297,8 +283,6 @@ String PsaiXmlGenerator::toXml(const psStatDRMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psCombatEventMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -314,8 +298,6 @@ String PsaiXmlGenerator::toXml(const psCombatEventMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psModeMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -331,8 +313,6 @@ String PsaiXmlGenerator::toXml(const psModeMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psMoveLockMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -348,8 +328,6 @@ String PsaiXmlGenerator::toXml(const psMoveLockMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psNewSectorMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -365,8 +343,6 @@ String PsaiXmlGenerator::toXml(const psNewSectorMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psEffectMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -382,8 +358,6 @@ String PsaiXmlGenerator::toXml(const psEffectMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psStopEffectMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -399,8 +373,6 @@ String PsaiXmlGenerator::toXml(const psStopEffectMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psSpellCastMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -416,8 +388,6 @@ String PsaiXmlGenerator::toXml(const psSpellCastMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psSpellCancelMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -433,8 +403,6 @@ String PsaiXmlGenerator::toXml(const psSpellCancelMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psStatsMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -450,8 +418,6 @@ String PsaiXmlGenerator::toXml(const psStatsMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psSystemMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -467,8 +433,6 @@ String PsaiXmlGenerator::toXml(const psSystemMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psWeatherMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -484,8 +448,6 @@ String PsaiXmlGenerator::toXml(const psWeatherMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psCharacterDetailsMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -501,8 +463,6 @@ String PsaiXmlGenerator::toXml(const psCharacterDetailsMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psGUIInventoryMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -518,8 +478,6 @@ String PsaiXmlGenerator::toXml(const psGUIInventoryMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psGUIActiveMagicMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -535,8 +493,6 @@ String PsaiXmlGenerator::toXml(const psGUIActiveMagicMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psGUIInteractMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -552,8 +508,6 @@ String PsaiXmlGenerator::toXml(const psGUIInteractMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psGUIMerchantMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -569,8 +523,6 @@ String PsaiXmlGenerator::toXml(const psGUIMerchantMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psGUISkillMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -586,8 +538,6 @@ String PsaiXmlGenerator::toXml(const psGUISkillMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psGUITargetUpdateMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -603,8 +553,6 @@ String PsaiXmlGenerator::toXml(const psGUITargetUpdateMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psLootMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -620,8 +568,6 @@ String PsaiXmlGenerator::toXml(const psLootMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psQuestListMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -637,8 +583,6 @@ String PsaiXmlGenerator::toXml(const psQuestListMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psQuestRewardMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -654,8 +598,6 @@ String PsaiXmlGenerator::toXml(const psQuestRewardMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psUpdateObjectNameMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -671,8 +613,6 @@ String PsaiXmlGenerator::toXml(const psUpdateObjectNameMessage& msg)
 
 String PsaiXmlGenerator::toXml(const psViewItemDescription& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -688,8 +628,6 @@ String PsaiXmlGenerator::toXml(const psViewItemDescription& msg)
 
 String PsaiXmlGenerator::toXml(const psViewItemUpdate& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
@@ -705,8 +643,6 @@ String PsaiXmlGenerator::toXml(const psViewItemUpdate& msg)
 
 String PsaiXmlGenerator::toXml(const psEquipmentMessage& msg)
 {
-	PsaiXmlUtils& xmlUtils = getXmlUtils();
-
 	String xmlString;
 
 	if (xmlUtils.initiliaseXmlUtils())
