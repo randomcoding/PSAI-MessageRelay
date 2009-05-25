@@ -443,7 +443,7 @@ csVector3 XmlGeneratorTest::worldVelocity(1.0, 1.0, 1.0);
 float XmlGeneratorTest::ang_velocity = 78.3;
 
 // Combat message
-int XmlGeneratorTest::combatEventType = 10;
+int XmlGeneratorTest::combatEventType = COMBAT_DAMAGE;
 EID XmlGeneratorTest::attacker(15);
 EID XmlGeneratorTest::target(20);
 int XmlGeneratorTest::targetLocation = 5;

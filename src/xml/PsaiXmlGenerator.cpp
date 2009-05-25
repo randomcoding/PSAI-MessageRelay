@@ -23,10 +23,8 @@
 
 using namespace XERCES_CPP_NAMESPACE;
 
-
-
-const PsaiStringUtilities& stringUtils = PsaiStringUtilities::getStringUtils();
-PsaiXmlUtils& xmlUtils = *(new PsaiXmlUtils());
+static const PsaiStringUtilities& stringUtils = PsaiStringUtilities::getStringUtils();
+static PsaiXmlUtils& xmlUtils = *(new PsaiXmlUtils());
 
 PsaiXmlGenerator::PsaiXmlGenerator()
 {
@@ -56,7 +54,7 @@ DOMElement& PsaiXmlGenerator::addVectorElement(DOMDocument& doc, DOMElement& par
 	return vectorElement;
 }
 
-DOMElement& PsaiXmlGenerator::addClientNumberElement(DOMDocument& doc, DOMElement& parentElement, uint32_t clientNumber, PsaiXmlUtils& xmlUtils)
+DOMElement& PsaiXmlGenerator::addClientNumberElement(DOMDocument& doc, DOMElement& parentElement, uint32_t clientNumber)
 {
 	return xmlUtils.createDomElement(doc, parentElement, PsaiXmlConstants::ELEMENT_CLIENT_NUM, stringUtils.convertToString(clientNumber));
 }
@@ -88,7 +86,7 @@ String PsaiXmlGenerator::toXml(const psChatMessage& msg)
 
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_CHAT_CHAT_TYPE, xmlUtils.getChatTypeAsString(msg.iChatType));
 
-		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
+		addClientNumberElement(doc, messageElement, getClientNumber(msg));
 
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 
@@ -109,7 +107,7 @@ String PsaiXmlGenerator::toXml(const psPlaySoundMessage& msg)
 
 		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_PLAY_SOUND_MESSAGE);
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PLAY_SOUND_SOUND, msg.sound.GetDataSafe());
-		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
+		addClientNumberElement(doc, messageElement, getClientNumber(msg));
 
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 
@@ -134,7 +132,7 @@ String PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
 		String typeString = stringUtils.convertToString(msg.type);
 
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_SOUNT_EVENT_TYPE, typeString);
-		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
+		addClientNumberElement(doc, messageElement, getClientNumber(msg));
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 		xmlUtils.clearXmlUtils();
 	}
@@ -182,7 +180,7 @@ String PsaiXmlGenerator::toXml(const psPersistItem& msg)
 		String yRot = stringUtils.convertToString(msg.yRot);
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_Y_ROTATION, yRot);
 
-		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
+		addClientNumberElement(doc, messageElement, getClientNumber(msg));
 
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 
@@ -201,7 +199,7 @@ String PsaiXmlGenerator::toXml(const psPersistActor& msg)
 		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::MSGTYPE_PERSIST_ACTOR);
 		DOMElement& root = *(doc.getDocumentElement());
 		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_PERSIST_ACTOR_MESSAGE);
-		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
+		addClientNumberElement(doc, messageElement, getClientNumber(msg));
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 		xmlUtils.clearXmlUtils();
 	}
@@ -225,7 +223,7 @@ String PsaiXmlGenerator::toXml(const psPersistActionLocation& msg)
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_ID, stringUtils.convertToString(msg.eid.Unbox()));
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ACTION_LOCATION_NAME, msg.name.GetDataSafe());
 
-		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
+		addClientNumberElement(doc, messageElement, getClientNumber(msg));
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 		xmlUtils.clearXmlUtils();
 	}
@@ -243,7 +241,7 @@ String PsaiXmlGenerator::toXml(const psRemoveObject& msg)
 		DOMElement& root = *(doc.getDocumentElement());
 		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_REMOVE_OBJECT_MESSAGE);
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_REMOVE_OBJECT_OBJECT_ID, stringUtils.convertToString(msg.objectEID.Unbox()));
-		addClientNumberElement(doc, messageElement, getClientNumber(msg), xmlUtils);
+		addClientNumberElement(doc, messageElement, getClientNumber(msg));
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 		xmlUtils.clearXmlUtils();
 	}
@@ -288,6 +286,15 @@ String PsaiXmlGenerator::toXml(const psCombatEventMessage& msg)
 	if (xmlUtils.initiliaseXmlUtils())
 	{
 		DOMDocument& doc = xmlUtils.getDOMDocumentForMessageType(PsaiXmlConstants::MSGTYPE_COMBATEVENT);
+		DOMElement& root = xmlUtils.getDocumentRootElement(doc);
+		DOMElement& messageElement = xmlUtils.createDomElement(doc, root, PsaiXmlConstants::TYPE_COMBAT_MESSAGE);
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_COMBAT_ATTACKER_ID, stringUtils.convertToString(msg.attacker_id.Unbox()));
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_COMBAT_DAMAGE, stringUtils.convertToString(msg.damage));
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_COMBAT_TARGET_ID, stringUtils.convertToString(msg.target_id.Unbox()));
+		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_COMBAT_TARGET_LOCATION, stringUtils.convertToString(msg.target_location));
+
+		int clientNum = getClientNumber(msg);
+		addClientNumberElement(doc, messageElement, clientNum);
 
 		xmlString = xmlUtils.convertDomDocumentToXmlString(doc);
 		xmlUtils.clearXmlUtils();
