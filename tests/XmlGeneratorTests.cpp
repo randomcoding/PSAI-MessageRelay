@@ -95,6 +95,15 @@ class XmlGeneratorTest: public testing::Test
 		static csVector3 worldVelocity;
 		static float ang_velocity;
 
+		// combat message
+		static int combatEventType;
+		static EID attacker;
+		static EID target;
+		static int targetLocation;
+		static float damage;
+		static int attackAnimation;
+		static int defenseAnimation;
+
 	protected:
 		// no set up yet
 
@@ -358,6 +367,23 @@ class XmlGeneratorTest: public testing::Test
 
 			xml.append(getCloseTag(PsaiXmlConstants::TYPE_DR_MESSAGE));
 			xml.append(getXmlStringMessageEnd());
+
+			return xml;
+		}
+
+		String getExpectedXmlForCombatEventMessage()
+		{
+			String xml = getXmlStringStartForMessageType(PsaiXmlConstants::MSGTYPE_COMBATEVENT);
+			xml.append(getOpenTag(PsaiXmlConstants::TYPE_COMBAT_MESSAGE));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_COMBAT_ATTACKER_ID, attacker.Unbox()));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_COMBAT_DAMAGE, damage));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_COMBAT_TARGET_ID, target.Unbox()));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_COMBAT_TARGET_LOCATION, targetLocation));
+			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_CLIENT_NUM, getStringUtils().convertToString(defaultClientNum)));
+			xml.append(getCloseTag(PsaiXmlConstants::TYPE_COMBAT_MESSAGE));
+			xml.append(getXmlStringMessageEnd());
+
+			return xml;
 		}
 };
 
@@ -415,6 +441,15 @@ iSector* XmlGeneratorTest::iSec;
 csVector3 XmlGeneratorTest::velocity(45.0, 92.0, 0.0);
 csVector3 XmlGeneratorTest::worldVelocity(1.0, 1.0, 1.0);
 float XmlGeneratorTest::ang_velocity = 78.3;
+
+// Combat message
+int XmlGeneratorTest::combatEventType = 10;
+EID XmlGeneratorTest::attacker(15);
+EID XmlGeneratorTest::target(20);
+int XmlGeneratorTest::targetLocation = 5;
+float XmlGeneratorTest::damage = 34.5;
+int XmlGeneratorTest::attackAnimation = 6;
+int XmlGeneratorTest::defenseAnimation = 7;
 
 // Test Fixtures
 TEST_F(XmlGeneratorTest, testChatMessageToXml)
@@ -544,133 +579,145 @@ TEST_F(XmlGeneratorTest, DISABLED_testDeadReckoningMessageToXml)
 	ASSERT_STREQ(getExpectedXmlForDeadReckoningMessage().c_str(), msgXml.c_str());
 }
 
-TEST_F(XmlGeneratorTest, testStatDeadReckoningMessageToXml)
+// DR messages all seem to have problems being created without the required setup. Is there a C++ mock library?
+TEST_F(XmlGeneratorTest, DISABLED_testStatDeadReckoningMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testCombatEventMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+
+	psCombatEventMessage msg(defaultClientNum, combatEventType, attacker, target, targetLocation, damage, attackAnimation, defenseAnimation);
+	msg.attack_anim = attackAnimation;
+	msg.attacker_id = attacker;
+	msg.damage = damage;
+	msg.defense_anim = defenseAnimation;
+	msg.target_id = target;
+	msg.target_location = targetLocation;
+
+	String xmlString = getGenerator().toXml(msg);
+	ASSERT_STREQ(getExpectedXmlForCombatEventMessage().c_str(), xmlString.c_str());
+
 }
 
 TEST_F(XmlGeneratorTest, testModeMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testMoveLockMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testNewSectorMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testEffectMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testStopEffectMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testSpellCastMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testSpellCancelMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testStatsMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testSystemMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testWeatherMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testCharacterDetailMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testGuiInventoryMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testGuiActiveMagicMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testGuiInteractMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testGuiMerchantMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testGuiSkillMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testGuiTargetUpdateMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testLootMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testQuestListMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testQuestRewardMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testUpdateObjectNameMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testViewItemDescriptionMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testViewItemUpdateMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
 TEST_F(XmlGeneratorTest, testEquipmentMessageToXml)
 {
-	FAIL() << "Not Implemented Yet";
+	FAIL() << "Not Implemented Yet" ;
 }
 
