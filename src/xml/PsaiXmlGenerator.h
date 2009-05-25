@@ -135,7 +135,7 @@ class PsaiXmlGenerator
 
 		uint32_t getClientNumber(const psMessageCracker& msg);
 
-		XERCES_CPP_NAMESPACE::DOMElement& addClientNumberElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, uint32_t clientNumber, PsaiXmlUtils& xmlUtils);
+		XERCES_CPP_NAMESPACE::DOMElement& addClientNumberElement(XERCES_CPP_NAMESPACE::DOMDocument& doc, XERCES_CPP_NAMESPACE::DOMElement& parentElement, uint32_t clientNumber);
 };
 
 #endif /* PSAIXMLGENERATOR_H_ */
