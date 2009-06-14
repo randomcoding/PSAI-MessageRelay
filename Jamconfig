@@ -47,24 +47,22 @@ COMPILER.C++FLAGS += -fvisibility-inlines-hidden ;
 COMPILER.CFLAGS += -fvisibility=hidden ;
 COMPILER.CFLAGS.VISIBILITY_DEFAULT ?= -fvisibility=default ;
 
-PS.DEV.DIR ?= /media/devdisk/phd/development/planeshift ;
-
 CRYSTAL.AVAILABLE ?= yes ;
 CRYSTAL.VERSION ?= 1.4 ;
-CRYSTAL.CFLAGS ?= -I$(PS.DEV.DIR)/cs/include ;
-CRYSTAL.LFLAGS ?= -L$(PS.DEV.DIR)/cs/out/linux/optimize/libs -lcrystalspace-1.4 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
-CRYSTAL.INCLUDE_DIR ?= $(PS.DEV.DIR)/cs/include ;
+CRYSTAL.CFLAGS ?= -I$(PS.DEV.DIR)/CrystalSpace/include ;
+CRYSTAL.LFLAGS ?= -L$(PS.DEV.DIR)/CrystalSpace/out/linuxx86/optimize/libs -lcrystalspace-1.4 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CRYSTAL.INCLUDE_DIR ?= $(PS.DEV.DIR)/CrystalSpace/include ;
 CRYSTAL.AVAILABLE_LIBS ?= crystalspace crystalspace_opengl ;
-CRYSTAL.STATICDEPS ?= $(PS.DEV.DIR)/cs/out/linux/optimize/libs/crystalspace_staticplugins.jam ;
+CRYSTAL.STATICDEPS ?= $(PS.DEV.DIR)/CrystalSpace/out/linuxx86/optimize/libs/crystalspace_staticplugins.jam ;
 
 CAL3D.AVAILABLE ?= yes ;
-CAL3D.CFLAGS ?= -I$(PS.DEV.DIR)/cal3d/src ;
-CAL3D.LFLAGS ?= -L$(PS.DEV.DIR)/cal3d/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
-CAL3D.INCLUDE_DIR ?= $(PS.DEV.DIR)/cal3d/src ;
+CAL3D.CFLAGS ?= -I$(PS.DEV.DIR)/Cal3d/src ;
+CAL3D.LFLAGS ?= -L$(PS.DEV.DIR)/Cal3d/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CAL3D.INCLUDE_DIR ?= $(PS.DEV.DIR)/Cal3d/src ;
 
 PS.VERSION ?= 0.4 ;
-PS.INCLUDES ?= -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/include -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/src/client -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/src/common -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/src/eedit -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/src/npcclient -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/src/pslaunch -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/src/server -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/src/setup -I$(PS.DEV.DIR)/workspace-psai/PlaneShift/src/tools ;
-PS.LIB_DIR ?= $(PS.DEV.DIR)/workspace-psai/PlaneShift/out/linux/optimize/libs ;
+PS.INCLUDES ?= -I$(PS.DEV.DIR)/PlaneShift/include -I$(PS.DEV.DIR)/PlaneShift/src/client -I$(PS.DEV.DIR)/PlaneShift/src/common -I$(PS.DEV.DIR)/PlaneShift/src/eedit -I$(PS.DEV.DIR)/PlaneShift/src/npcclient -I$(PS.DEV.DIR)/PlaneShift/src/pslaunch -I$(PS.DEV.DIR)/PlaneShift/src/server -I$(PS.DEV.DIR)/PlaneShift/src/setup -I$(PS.DEV.DIR)/PlaneShift/src/tools ;
+PS.LIB_DIR ?= $(PS.DEV.DIR)/PlaneShift/out/linuxx86/optimize/libs ;
 
 PSENGINE.AVAILABLE ?= yes ;
 PSENGINE.CFLAGS ?= $(PS.INCLUDES) ;

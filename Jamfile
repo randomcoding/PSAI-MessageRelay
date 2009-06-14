@@ -17,8 +17,9 @@ IncludeDir tests ;
 IncludeDir tests xml ;
 
 # other library includes
-IncludeDir $(TOP) .. .. cal3d src ;
-IncludeDir $(TOP) .. .. cs include ;
+IncludeDir $(TOP) .. Cal3d src ;
+IncludeDir $(TOP) .. Cal3d include ;
+IncludeDir $(TOP) .. CrystalSpace include ;
 
 # PlaneShift include directories
 IncludeDir $(TOP) .. PlaneShift include ;
@@ -66,7 +67,7 @@ Help distclean : "Remove built targets and configuration" ;
 
 RegisterCompileGroups psailib tests ;
 
-# List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensistive.
+# List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensitive.
 # Library targets must be seen by Jam before Application and Plugin targets.
 
 SubInclude TOP src ;
