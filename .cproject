@@ -39,8 +39,8 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/server}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/tools}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CrystalSpace/include}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Cal3d/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cal3d/include}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.830716654" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
@@ -60,8 +60,8 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/server}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/tools}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CrystalSpace/include}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Cal3d/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cal3d/include}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1363997412" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
@@ -92,8 +92,8 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/server}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/src/tools}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CrystalSpace/include}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Cal3d/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PlaneShift/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cal3d/include}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.173137458" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
