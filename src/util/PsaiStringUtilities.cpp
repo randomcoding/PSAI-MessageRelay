@@ -70,7 +70,7 @@ String PsaiStringUtilities::convertToString(const unsigned short int value) cons
 	return valueString;
 }
 
-String PsaiStringUtilities::convertToString(const uint8_t value) const
+/*String PsaiStringUtilities::convertToString(const uint8_t value) const
 {
 	String valueString;
 	std::stringstream out;
@@ -78,7 +78,7 @@ String PsaiStringUtilities::convertToString(const uint8_t value) const
 	valueString = out.str();
 
 	return valueString;
-}
+}*/
 
 String PsaiStringUtilities::convertToString(const bool value) const
 {

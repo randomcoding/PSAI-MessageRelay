@@ -136,7 +136,7 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 		void handleEquipmentMessage(psEquipmentMessage& msg);
 
 
-		csStringHashReversible* msgStrings;
+		csStringHashReversible* msgStringsHashReversable;
 
 		psEngine* engine;
 

@@ -28,7 +28,7 @@ class PsaiStringUtilities
 		String convertToString(const double value) const;
 		String convertToString(const bool value) const;
 		String convertToString(const unsigned short int value) const;
-		String convertToString(const uint8_t value) const;
+		//String convertToString(const uint8_t value) const;
 
 		/**
 		 * @return A single @class PsaiStringUtilities instance

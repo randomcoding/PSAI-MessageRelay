@@ -55,7 +55,9 @@ class XmlGeneratorTest: public testing::Test
 		static int soundEventType;
 		static int persistItemFlags;
 		static int persistItemType;
+		static float defaultXRotation;
 		static float defaultYRotation;
+		static float defaultZRotation;
 
 		// persist actor message
 		static int actorType;
@@ -64,8 +66,15 @@ class XmlGeneratorTest: public testing::Test
 		static String actorName;
 		static String guildName;
 		static String raceName;
+		static String mounterAnim;
+		static String mountGroup;
+		static String mountFactionName;
 		static unsigned short int gender;
 		static String helmGroup;
+		static String beltGroup;
+		static String cloakGroup;
+		static String bracerGroup;
+		static String matName;
 		static csVector3 collisionTop;
 		static csVector3 collisionBottom;
 		static csVector3 collisionOffset;
@@ -73,7 +82,7 @@ class XmlGeneratorTest: public testing::Test
 		static String equipmentParts;
 		static uint8_t counter;
 		static EID mappedEid;
-		static csStringHashReversible* msgStrings;
+		static csStringHashReversible* msgStringsHashReversable;
 		static psLinearMovement* linearMovement;
 		static uint8_t movementMode;
 		static uint8_t serverMode;
@@ -81,6 +90,7 @@ class XmlGeneratorTest: public testing::Test
 		static uint32_t groupId;
 		static EID ownerEid;
 		static uint32_t persistActorMessageFlags;
+		static csStringSet* msgStrings;
 
 		static int actionLocationType;
 		static String actionLocationName;
@@ -217,7 +227,7 @@ class XmlGeneratorTest: public testing::Test
 
 		String getTextTag(String tagName, uint8_t tagContent)
 		{
-			return getTextTag(tagName, getStringUtils().convertToString(tagContent));
+			return getTextTag(tagName, getStringUtils().convertToString((int)tagContent));
 		}
 
 		String getVectorTag(csVector3 vector)
@@ -402,7 +412,9 @@ int XmlGeneratorTest::soundEventType = 10;
 String XmlGeneratorTest::soundName("aSound");
 int XmlGeneratorTest::persistItemFlags = 1;
 int XmlGeneratorTest::persistItemType = 3;
+float XmlGeneratorTest::defaultXRotation = 43.5;
 float XmlGeneratorTest::defaultYRotation = 34.5;
+float XmlGeneratorTest::defaultZRotation = 54.3;
 EID XmlGeneratorTest::objectEid(44);
 
 // persist actor message
@@ -412,8 +424,13 @@ bool XmlGeneratorTest::control = true;
 String XmlGeneratorTest::actorName("Actor Name");
 String XmlGeneratorTest::guildName("Guild Name");
 String XmlGeneratorTest::raceName("Race Name");
+String XmlGeneratorTest::matName("Mat Name");
+String XmlGeneratorTest::mountFactionName("Mount Faction");
 unsigned short int XmlGeneratorTest::gender = 1;
 String XmlGeneratorTest::helmGroup("Helm Group");
+String XmlGeneratorTest::beltGroup("Belt Group");
+String XmlGeneratorTest::cloakGroup("Cloak Group");
+String XmlGeneratorTest::bracerGroup("Bracer Group");
 csVector3 XmlGeneratorTest::collisionTop(23.4, 32.1, 2.3);
 csVector3 XmlGeneratorTest::collisionBottom(23.4, 32.1, 0.3);
 csVector3 XmlGeneratorTest::collisionOffset(1.0, 1.0, 2.0);
@@ -421,13 +438,15 @@ String XmlGeneratorTest::texParts("Tex Parts");
 String XmlGeneratorTest::equipmentParts("Equipment Parts");
 uint8_t XmlGeneratorTest::counter = 2;
 EID XmlGeneratorTest::mappedEid(43);
-csStringHashReversible* XmlGeneratorTest::msgStrings = new csStringHashReversible(10);
+csStringHashReversible* XmlGeneratorTest::msgStringsHashReversable = new csStringHashReversible(10);
 uint8_t XmlGeneratorTest::movementMode = 5;
 uint8_t XmlGeneratorTest::serverMode = 3;
 PID XmlGeneratorTest::playerId(123);
 uint32_t XmlGeneratorTest::groupId = 9876;
 EID XmlGeneratorTest::ownerEid(789);
 uint32_t XmlGeneratorTest::persistActorMessageFlags = 45;
+csStringSet* XmlGeneratorTest::msgStrings = new csStringSet();
+String XmlGeneratorTest::mounterAnim("Mounter Anim");
 
 // persist action location
 int XmlGeneratorTest::actionLocationType = 10;
@@ -454,7 +473,7 @@ int XmlGeneratorTest::defenseAnimation = 7;
 // Test Fixtures
 TEST_F(XmlGeneratorTest, testChatMessageToXml)
 {
-	psChatMessage msg(defaultClientNum, me.c_str(), you.c_str(), chatMessage.c_str(), CHAT_SAY, false);
+	psChatMessage msg(defaultClientNum, defaultEid, me.c_str(), you.c_str(), chatMessage.c_str(), CHAT_SAY, false);
 
 	String chatXml = getGenerator().toXml(msg);
 
@@ -484,18 +503,20 @@ TEST_F(XmlGeneratorTest, testSoundEventMessageToXml)
 
 TEST_F(XmlGeneratorTest, testPersistItemMessageToXml)
 {
-	psPersistItem
-			msg(defaultClientNum, defaultEid, persistItemType, itemName.c_str(), factionName.c_str(), fileName.c_str(), sector.c_str(), defaultPositionVector, defaultYRotation, persistItemFlags);
+	psPersistItem msg(defaultClientNum, defaultEid, persistItemType, itemName.c_str(), factionName.c_str(), matName.c_str(), sector.c_str(),
+			defaultPositionVector, defaultXRotation, defaultYRotation, defaultZRotation, persistItemFlags, msgStrings);
 
 	msg.name = itemName.c_str();
 	msg.eid = defaultEid;
 	msg.factname = factionName.c_str();
-	msg.filename = fileName.c_str();
+	msg.matname = matName.c_str();
 	msg.flags = persistItemFlags;
 	msg.pos = defaultPositionVector;
 	msg.sector = sector.c_str();
 	msg.type = persistItemType;
 	msg.yRot = defaultYRotation;
+	msg.xRot = defaultXRotation;
+	msg.zRot = defaultZRotation;
 
 	String msgXml = getGenerator().toXml(msg);
 
@@ -506,17 +527,22 @@ TEST_F(XmlGeneratorTest, testPersistItemMessageToXml)
 TEST_F(XmlGeneratorTest, DISABLED_testPersistActorMessageToXml)
 {
 	psLinearMovement* linearMove = createLinearMovement();
-	psPersistActor msg(defaultClientNum, actorType, masqueradeType, control, actorName.c_str(), guildName.c_str(), factionName.c_str(), fileName.c_str(), raceName.c_str(), gender, helmGroup.c_str(),
-			collisionTop, collisionBottom, collisionOffset, texParts.c_str(), equipmentParts.c_str(), counter, mappedEid, msgStrings, linearMove, movementMode, serverMode, playerId, groupId,
-			ownerEid, persistActorMessageFlags);
+	psPersistActor msg(defaultClientNum, actorType, masqueradeType, control, actorName.c_str(), guildName.c_str(), factionName.c_str(),
+			matName.c_str(), raceName.c_str(), mountFactionName.c_str(), mounterAnim.c_str(), gender, helmGroup.c_str(), bracerGroup.c_str(),
+			beltGroup.c_str(), cloakGroup.c_str(), collisionTop, collisionBottom, collisionOffset, texParts.c_str(), equipmentParts.c_str(), counter,
+			mappedEid, msgStrings, linearMove, movementMode, serverMode, playerId, groupId, ownerEid, persistActorMessageFlags);
 
 	msg.bottom = collisionBottom;
 	msg.masqueradeType = masqueradeType;
 	msg.guild = guildName.c_str();
 	msg.factname = factionName.c_str();
-	msg.filename = fileName.c_str();
+	msg.mountFactname = mountFactionName.c_str();
+	msg.matname = matName.c_str();
+	msg.MounterAnim = mounterAnim.c_str();
 	msg.race = raceName.c_str();
 	msg.helmGroup = helmGroup.c_str();
+	msg.BeltGroup = beltGroup.c_str();
+	msg.CloakGroup = cloakGroup.c_str();
 	msg.top = collisionTop;
 	msg.offset = collisionOffset;
 	msg.texParts = texParts.c_str();
@@ -561,7 +587,8 @@ TEST_F(XmlGeneratorTest, testRemoveObjectMessageToXml)
 // Disabled for the same reason as testPersistActorMessageToXml
 TEST_F(XmlGeneratorTest, DISABLED_testDeadReckoningMessageToXml)
 {
-	psDRMessage msg(defaultClientNum, mappedEid, true, movementMode, counter, position, yRot, iSec, velocity, worldVelocity, ang_velocity, msgStrings);
+	psDRMessage msg(defaultClientNum, mappedEid, true, movementMode, counter, position, yRot, iSec, sector.c_str(), velocity, worldVelocity,
+			ang_velocity, msgStrings, msgStringsHashReversable);
 
 	msg.entityid = mappedEid;
 	msg.on_ground = true;
@@ -573,6 +600,7 @@ TEST_F(XmlGeneratorTest, DISABLED_testDeadReckoningMessageToXml)
 	msg.vel = velocity;
 	msg.worldVel = worldVelocity;
 	msg.ang_vel = ang_velocity;
+	msg.sectorName = sector.c_str();
 
 	String msgXml = getGenerator().toXml(msg);
 

@@ -22,15 +22,15 @@ PsaiMessageRedirector::PsaiMessageRedirector(MsgHandler* messageHandler, psEngin
 {
 	setupSubscriptions(messageHandler);
 	this->engine = engine;
-	msgStrings = NULL;
+	msgStringsHashReversable = NULL;
 	xmlGenerator = new PsaiXmlGenerator();
 }
 
 PsaiMessageRedirector::~PsaiMessageRedirector()
 {
-	if (msgStrings)
+	if (msgStringsHashReversable)
 	{
-		delete msgStrings;
+		delete msgStringsHashReversable;
 	}
 }
 
@@ -58,9 +58,10 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		}
 		case MSGTYPE_DEAD_RECKONING:
 		{
-			if (msgStrings)
+			if (msgStringsHashReversable)
 			{
-				psDRMessage drMsg(msg, msgStrings, engine->GetEngine());
+				//new psDRMessage()
+				psDRMessage drMsg(msg, 0, msgStringsHashReversable, engine->GetEngine());
 				handleDeadReckonMessage(drMsg);
 			}
 			break;
@@ -103,17 +104,20 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		}
 		case MSGTYPE_PERSIST_ACTOR:
 		{
-			if (msgStrings)
+			if (msgStringsHashReversable)
 			{
-				psPersistActor persistActorMsg(msg, msgStrings, engine->GetEngine());
+				psPersistActor persistActorMsg(msg, 0, msgStringsHashReversable, engine->GetEngine());
 				handlePersistActorMessage(persistActorMsg);
 			}
 			break;
 		}
 		case MSGTYPE_PERSIST_ITEM:
 		{
-			psPersistItem persistItemMsg(msg);
-			handlePersistItemMessage(persistItemMsg);
+			if (msgStringsHashReversable)
+			{
+				psPersistItem persistItemMsg(msg, msgStringsHashReversable);
+				handlePersistItemMessage(persistItemMsg);
+			}
 			break;
 		}
 		case MSGTYPE_REMOVE_OBJECT:
@@ -179,8 +183,11 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		}
 		case MSGTYPE_GUIINVENTORY:
 		{
-			psGUIInventoryMessage guiInvMessage(msg);
-			handleGuiInventoryMessage(guiInvMessage);
+			if (msgStringsHashReversable)
+			{
+				psGUIInventoryMessage guiInvMessage(msg, msgStringsHashReversable);
+				handleGuiInventoryMessage(guiInvMessage);
+			}
 			break;
 		}
 		case MSGTYPE_ACTIVEMAGIC:
@@ -299,8 +306,8 @@ void PsaiMessageRedirector::handleChatMessage(psChatMessage& msg)
 
 void PsaiMessageRedirector::handleCombatEventMessage(psCombatEventMessage& msg)
 {
-	printf("Handle Combat Message of type %s. Attack by %u on %u for %f damage on location %i\n", msg.GetMessageTypeName().GetDataSafe(), msg.attacker_id.Unbox(), msg.target_id.Unbox(), msg.damage,
-			msg.target_location);
+	printf("Handle Combat Message of type %s. Attack by %u on %u for %f damage on location %i\n", msg.GetMessageTypeName().GetDataSafe(),
+			msg.attacker_id.Unbox(), msg.target_id.Unbox(), msg.damage, msg.target_location);
 }
 
 void PsaiMessageRedirector::handleDeadReckonMessage(psDRMessage& msg)
@@ -325,22 +332,26 @@ void PsaiMessageRedirector::handleMoveLockMessage(psMoveLockMessage& msg)
 
 void PsaiMessageRedirector::handleNewSectorMessage(psNewSectorMessage& msg)
 {
-	printf("Handle message of type %s. Changed sector to %s from %s.\n", msg.GetMessageTypeName().GetDataSafe(), msg.newSector.GetDataSafe(), msg.oldSector.GetDataSafe());
+	printf("Handle message of type %s. Changed sector to %s from %s.\n", msg.GetMessageTypeName().GetDataSafe(), msg.newSector.GetDataSafe(),
+			msg.oldSector.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handlePersistActionLocationMessage(psPersistActionLocation& msg)
 {
-	printf("Handle message of type %s. Persisted Action Location %s in sector %s.\n", msg.GetMessageTypeName().GetDataSafe(), msg.name.GetDataSafe(), msg.sector.GetDataSafe());
+	printf("Handle message of type %s. Persisted Action Location %s in sector %s.\n", msg.GetMessageTypeName().GetDataSafe(), msg.name.GetDataSafe(),
+			msg.sector.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handlePersistActorMessage(psPersistActor& msg)
 {
-	printf("Handle message of type %s. Player id %u - name %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.playerID.Unbox(), msg.name.GetDataSafe());
+	printf("Handle message of type %s. Player id %u - name %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.playerID.Unbox(),
+			msg.name.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handlePersistItemMessage(psPersistItem& msg)
 {
-	printf("Handle message of type %s. Persisting item with id %u named %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.eid.Unbox(), msg.name.GetDataSafe());
+	printf("Handle message of type %s. Persisting item with id %u named %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.eid.Unbox(),
+			msg.name.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handlePlaySoundMessage(psPlaySoundMessage& msg)
@@ -355,7 +366,8 @@ void PsaiMessageRedirector::handleRemoveObjectMessage(psRemoveObject& msg)
 
 void PsaiMessageRedirector::handleSoundEventMessage(psSoundEventMessage& msg)
 {
-	printf("Handle message of type %s. Sound type is %u and it %s valid.\n", msg.GetMessageTypeName().GetDataSafe(), msg.type, (msg.valid ? "is" : "is not"));
+	printf("Handle message of type %s. Sound type is %u and it %s valid.\n", msg.GetMessageTypeName().GetDataSafe(), msg.type, (msg.valid ? "is"
+			: "is not"));
 }
 
 void PsaiMessageRedirector::handleSpellCancelMessage(psSpellCancelMessage& msg)
@@ -385,7 +397,8 @@ void PsaiMessageRedirector::handleStopEffectMessage(psStopEffectMessage& msg)
 
 void PsaiMessageRedirector::handleWeatherMessage(psWeatherMessage& msg)
 {
-	printf("Handle message of type %s. Weather for sector %s is unknown (TDB) \n", msg.GetMessageTypeName().GetDataSafe(), msg.weather.sector.GetDataSafe());
+	printf("Handle message of type %s. Weather for sector %s is unknown (TDB) \n", msg.GetMessageTypeName().GetDataSafe(),
+			msg.weather.sector.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleSystemMessage(psSystemMessage& msg)
@@ -396,7 +409,7 @@ void PsaiMessageRedirector::handleSystemMessage(psSystemMessage& msg)
 void PsaiMessageRedirector::handleMessageStringsMessage(psMsgStringsMessage& msg)
 {
 	printf("Updating msgstrings\n");
-	msgStrings = msg.msgstrings;
+	msgStringsHashReversable = msg.msgstrings;
 }
 
 void PsaiMessageRedirector::handleCharacterDetailsMessage(psCharacterDetailsMessage& msg)
