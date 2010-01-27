@@ -47,22 +47,25 @@ COMPILER.C++FLAGS += -fvisibility-inlines-hidden ;
 COMPILER.CFLAGS += -fvisibility=hidden ;
 COMPILER.CFLAGS.VISIBILITY_DEFAULT ?= -fvisibility=default ;
 
+# set this to debug or optimize depending on whether or not you configured PlaneShift with debug or not
+PS.BUILD.TYPE ?= debug ;
+
 CRYSTAL.AVAILABLE ?= yes ;
 CRYSTAL.VERSION ?= 1.4 ;
 CRYSTAL.CFLAGS ?= -I$(PS.DEV.DIR)/CrystalSpace/include ;
-CRYSTAL.LFLAGS ?= -L$(PS.DEV.DIR)/CrystalSpace/out/linuxx86/optimize/libs -lcrystalspace-1.4 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CRYSTAL.LFLAGS ?= -L$(PS.DEV.DIR)/CrystalSpace/out/linux/optimize/libs -lcrystalspace-1.9 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 CRYSTAL.INCLUDE_DIR ?= $(PS.DEV.DIR)/CrystalSpace/include ;
 CRYSTAL.AVAILABLE_LIBS ?= crystalspace crystalspace_opengl ;
-CRYSTAL.STATICDEPS ?= $(PS.DEV.DIR)/CrystalSpace/out/linuxx86/optimize/libs/crystalspace_staticplugins.jam ;
+CRYSTAL.STATICDEPS ?= $(PS.DEV.DIR)/CrystalSpace/out/linux/optimize/libs/crystalspace_staticplugins.jam ;
 
 CAL3D.AVAILABLE ?= yes ;
-CAL3D.CFLAGS ?= -I$(PS.DEV.DIR)/Cal3d/src ;
-CAL3D.LFLAGS ?= -L$(PS.DEV.DIR)/Cal3d/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
-CAL3D.INCLUDE_DIR ?= $(PS.DEV.DIR)/Cal3d/src ;
+CAL3D.CFLAGS ?= -I$(PS.DEV.DIR)/cal3d/src ;
+CAL3D.LFLAGS ?= -L$(PS.DEV.DIR)/cal3d/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CAL3D.INCLUDE_DIR ?= $(PS.DEV.DIR)/cal3d/src ;
 
-PS.VERSION ?= 0.4 ;
+PS.VERSION ?= 0.5 ;
 PS.INCLUDES ?= -I$(PS.DEV.DIR)/PlaneShift/include -I$(PS.DEV.DIR)/PlaneShift/src/client -I$(PS.DEV.DIR)/PlaneShift/src/common -I$(PS.DEV.DIR)/PlaneShift/src/eedit -I$(PS.DEV.DIR)/PlaneShift/src/npcclient -I$(PS.DEV.DIR)/PlaneShift/src/pslaunch -I$(PS.DEV.DIR)/PlaneShift/src/server -I$(PS.DEV.DIR)/PlaneShift/src/setup -I$(PS.DEV.DIR)/PlaneShift/src/tools ;
-PS.LIB_DIR ?= $(PS.DEV.DIR)/PlaneShift/out/linuxx86/optimize/libs ;
+PS.LIB_DIR ?= $(PS.DEV.DIR)/PlaneShift/out/linux/$(PS.BUILD.TYPE)/libs ;
 
 PSENGINE.AVAILABLE ?= yes ;
 PSENGINE.CFLAGS ?= $(PS.INCLUDES) ;
@@ -86,7 +89,9 @@ PSGUI.LFLAGS ?= -L$(PS.LIB_DIR) -lgui-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -
 
 PS_ALL.AVAILABLE ?= yes ;
 PS_ALL.CFLAGS ?= $(PS.INCLUDES) ;
-PS_ALL.LFLAGS ?= -L$(PS.LIB_DIR) -lgui-$(PS.VERSION) -lpsengine-$(PS.VERSION) -lpsnet-$(PS.VERSION) -lpsutil-$(PS.VERSION) -lpaws-$(PS.VERSION) -lpsrpgrules-$(PS.VERSION) -lbulkobjects-$(PS.VERSION) -leffects-$(PS.VERSION) -lfparser-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+PS_ALL.LFLAGS ?= -L$(PS.LIB_DIR) -lgui-$(PS.VERSION) -lpsengine-$(PS.VERSION) -lpsnet-$(PS.VERSION) -lpsutil-$(PS.VERSION) -lpaws-$(PS.VERSION) -lpsrpgrules-$(PS.VERSION)  -leffects-$(PS.VERSION) -lfparser-$(PS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+
+# removed libs -lbulkobjects-$(PS.VERSION)
 
 GTEST.AVAILABLE ?= yes ;
 GTEST.CFLAGS ?= -I/usr/local/include ;
