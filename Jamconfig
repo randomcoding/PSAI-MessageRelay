@@ -48,7 +48,7 @@ COMPILER.CFLAGS += -fvisibility=hidden ;
 COMPILER.CFLAGS.VISIBILITY_DEFAULT ?= -fvisibility=default ;
 
 # set this to debug or optimize depending on whether or not you configured PlaneShift with debug or not
-PS.BUILD.TYPE ?= debug ;
+PS.BUILD.TYPE ?= optimize ;
 
 CRYSTAL.AVAILABLE ?= yes ;
 CRYSTAL.VERSION ?= 1.4 ;
