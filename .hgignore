@@ -3,3 +3,5 @@ syntax: regexp
 ^psaitests$
 syntax: regexp
 \.dbg$
+syntax: glob
+hg svn pull*
