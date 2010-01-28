@@ -4,4 +4,4 @@ syntax: regexp
 syntax: regexp
 \.dbg$
 syntax: glob
-hg svn pull*
+hg svn pull*.launch
