@@ -1,3 +1,11 @@
-#Sun Jun 14 14:37:00 BST 2009
+#Tue Sep 06 18:48:55 BST 2011
 eclipse.preferences.version=1
-environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<environment append\="true" appendContributed\="true">\n<variable delimiter\=";" name\="CRYSTAL" operation\="append" value\="${workspace_loc\:/CrystalSpace}"/>\n<variable delimiter\=";" name\="LD_LIBRARY_PATH" operation\="append" value\="${workspace_loc\:/CrystalSpace/}\:${workspace_loc\:/Cal3d/}/src/cal3d/.libs/\:${env_var\:LD_LIBRARY_PATH}"/>\n</environment>\n
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057=
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057/CRYSTAL/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057/CRYSTAL/operation=append
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057/CRYSTAL/value=${workspace_loc\:/CrystalSpace}
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057/LD_LIBRARY_PATH/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057/LD_LIBRARY_PATH/operation=append
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057/LD_LIBRARY_PATH/value=${workspace_loc\:/CrystalSpace/}\:${workspace_loc\:/Cal3d/}/src/cal3d/.libs/\:${env_var\:LD_LIBRARY_PATH}
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057/append=true
+environment/project/cdt.managedbuild.config.gnu.exe.release.1342493057/appendContributed=true

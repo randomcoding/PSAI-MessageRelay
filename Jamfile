@@ -16,52 +16,59 @@ IncludeDir src xml ;
 IncludeDir tests ;
 IncludeDir tests xml ;
 
+# These library includes need to be setup for your own system
+# I use a 'all projects are siblings' layout so this works.
+
+# Sadly I haven't been able to work out how to convert the
+# variables used in the build config to the paths...
+
 # other library includes
-IncludeDir $(TOP) .. Cal3d src ;
-IncludeDir $(TOP) .. Cal3d include ;
-IncludeDir $(TOP) .. CrystalSpace include ;
+IncludeDir $(TOP) .. cal3d src ;
+IncludeDir $(TOP) .. cal3d include ;
+IncludeDir $(TOP) .. crystalspace include ;
 
 # PlaneShift include directories
-IncludeDir $(TOP) .. PlaneShift include ;
-IncludeDir $(TOP) .. PlaneShift src client ;
-IncludeDir $(TOP) .. PlaneShift src common ;
-IncludeDir $(TOP) .. PlaneShift src eedit ;
-IncludeDir $(TOP) .. PlaneShift src npcclient ;
-IncludeDir $(TOP) .. PlaneShift src pslaunch ;
-IncludeDir $(TOP) .. PlaneShift src server ;
-IncludeDir $(TOP) .. PlaneShift src setup ;
-IncludeDir $(TOP) .. PlaneShift src tools ;
-
-
+IncludeDir $(TOP) .. planeshift include ;
+IncludeDir $(TOP) .. planeshift src client ;
+IncludeDir $(TOP) .. planeshift src common ;
+IncludeDir $(TOP) .. planeshift src eedit ;
+IncludeDir $(TOP) .. planeshift src npcclient ;
+IncludeDir $(TOP) .. planeshift src pslaunch ;
+IncludeDir $(TOP) .. planeshift src server ;
+IncludeDir $(TOP) .. planeshift src tools ;
+IncludeDir $(TOP) .. planeshift src worldeditor ;
+IncludeDir $(TOP) .. planeshift src plugins ;
 
 #IncludeDir $(BUILDTOP) : : literal transient ;
 
-
+# Define the 'clean' and 'distclean' targets
 # Delete the following dir and subdirs on running 'jam clean'.
-
 CleanDir clean :
     out ;
 	
 # Delete the following files on running 'jam distclean'.
-
 Clean distclean :
 	
 # Delete the following dir and subdirs on running 'jam distclean'.
-
 CleanDir distclean :
     autom4te.cache ;
 	
 # Invokes 'jam clean' on running 'jam distclean'.
-
 Depends distclean : clean ;
 
-# Description for 'jam help'.
+# Descriptions for 'jam help'.
 
+#Help text for distclean
 Help distclean : "Remove built targets and configuration" ;
 
+# Help text for psailib
+Help psailib : "Builds the PSAI library. This can then be used to compile the PlaneShift client with the PSAI additions"
+
+# Help text for tests
+Help tests : "Builds the PSAI tests, I mean what else did you expect?"
+
 # Write a description of each compile group for 'jam help'
-#Description redirector : "Builds the Message Redirector" ;
-#Description comms : "Builds the library for communications between the agent system(s) and the redirectors/client interface" ;
+Description psailib : "Builds the PSAI libraries" ;
  
 # Register the compile groups. To add a project to a compile group, add the line CompileGroups project : compilegroup ; in the projects Jamfile.
 

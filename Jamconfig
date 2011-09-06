@@ -52,20 +52,20 @@ PS.BUILD.TYPE ?= optimize ;
 
 CRYSTAL.AVAILABLE ?= yes ;
 CRYSTAL.VERSION ?= 1.4 ;
-CRYSTAL.CFLAGS ?= -I$(PS.DEV.DIR)/CrystalSpace/include ;
-CRYSTAL.LFLAGS ?= -L$(PS.DEV.DIR)/CrystalSpace/out/linux/optimize/libs -lcrystalspace-1.9 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
-CRYSTAL.INCLUDE_DIR ?= $(PS.DEV.DIR)/CrystalSpace/include ;
+CRYSTAL.CFLAGS ?= -I$(CRYSTAL.DIR)/include ;
+CRYSTAL.LFLAGS ?= -L$(CRYSTAL.DIR)/out/linux/optimize/libs -lcrystalspace-1.9 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CRYSTAL.INCLUDE_DIR ?= $(CRYSTAL.DIR)/include ;
 CRYSTAL.AVAILABLE_LIBS ?= crystalspace crystalspace_opengl ;
-CRYSTAL.STATICDEPS ?= $(PS.DEV.DIR)/CrystalSpace/out/linux/optimize/libs/crystalspace_staticplugins.jam ;
+CRYSTAL.STATICDEPS ?= $(CRYSTAL.DIR)/pace/out/linux/optimize/libs/crystalspace_staticplugins.jam ;
 
 CAL3D.AVAILABLE ?= yes ;
-CAL3D.CFLAGS ?= -I$(PS.DEV.DIR)/cal3d/src ;
-CAL3D.LFLAGS ?= -L$(PS.DEV.DIR)/cal3d/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
-CAL3D.INCLUDE_DIR ?= $(PS.DEV.DIR)/cal3d/src ;
+CAL3D.CFLAGS ?= -I$(CAL3D.DIR)/src ;
+CAL3D.LFLAGS ?= -L$(CAL3D.DIR)/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CAL3D.INCLUDE_DIR ?= $(CAL3D.DIR)/src ;
 
 PS.VERSION ?= 0.5 ;
-PS.INCLUDES ?= -I$(PS.DEV.DIR)/PlaneShift/include -I$(PS.DEV.DIR)/PlaneShift/src/client -I$(PS.DEV.DIR)/PlaneShift/src/common -I$(PS.DEV.DIR)/PlaneShift/src/eedit -I$(PS.DEV.DIR)/PlaneShift/src/npcclient -I$(PS.DEV.DIR)/PlaneShift/src/pslaunch -I$(PS.DEV.DIR)/PlaneShift/src/server -I$(PS.DEV.DIR)/PlaneShift/src/setup -I$(PS.DEV.DIR)/PlaneShift/src/tools ;
-PS.LIB_DIR ?= $(PS.DEV.DIR)/PlaneShift/out/linux/$(PS.BUILD.TYPE)/libs ;
+PS.INCLUDES ?= -I$(PS.DIR)/include -I$(PS.DEV.DIR)/PlaneShift/src/client -I$(PS.DEV.DIR)/PlaneShift/src/common -I$(PS.DEV.DIR)/PlaneShift/src/eedit -I$(PS.DEV.DIR)/PlaneShift/src/npcclient -I$(PS.DEV.DIR)/PlaneShift/src/pslaunch -I$(PS.DEV.DIR)/PlaneShift/src/server -I$(PS.DEV.DIR)/PlaneShift/src/setup -I$(PS.DEV.DIR)/PlaneShift/src/tools ;
+PS.LIB_DIR ?= $(PS.DIR)/out/linux/$(PS.BUILD.TYPE)/libs ;
 
 PSENGINE.AVAILABLE ?= yes ;
 PSENGINE.CFLAGS ?= $(PS.INCLUDES) ;
@@ -94,9 +94,9 @@ PS_ALL.LFLAGS ?= -L$(PS.LIB_DIR) -lgui-$(PS.VERSION) -lpsengine-$(PS.VERSION) -l
 # removed libs -lbulkobjects-$(PS.VERSION)
 
 GTEST.AVAILABLE ?= yes ;
-GTEST.CFLAGS ?= -I/usr/local/include ;
-GTEST.LFLAGS ?= -L/usr/local/gtest/lib -lgtest ;
-GTEST.INCLUDE_DIR ?= /usr/local/include ;
+GTEST.CFLAGS ?= -I$(GTEST.DIR)/include ;
+GTEST.LFLAGS ?= -L$(GTEST.DIR)/lib -lgtest ;
+GTEST.INCLUDE_DIR ?= $(GTEST.DIR)/include ;
 
 XML_LIBS.AVAILABLE ?= yes ;
 XML_LIBS.CFLAGS ?= -I/usr/include ;
@@ -135,10 +135,10 @@ mandir ?= $(datarootdir)/man ;
 PACKAGE_NAME ?= "PSAI" ;
 PACKAGE_VERSION ?= "0.1.0" ;
 PACKAGE_STRING ?= "PSAI 0.1.0" ;
-PACKAGE_BUGREPORT ?= "tymtheenchanter@googlemail.com" ;
+PACKAGE_BUGREPORT ?= "randomcoder@randomcoding.co.uk" ;
 PACKAGE_LONGNAME ?= "PSAI: An advanced AI player character for PlaneShift" ;
 PACKAGE_HOMEPAGE ?= "http://www.planeshift.it" ;
-PACKAGE_COPYRIGHT ?= "Copyright (C)2008 by T. Sheppard" ;
+PACKAGE_COPYRIGHT ?= "Copyright (C)2008 by RandomCoder" ;
 PACKAGE_VERSION_LIST += "0" ;
 PACKAGE_VERSION_LIST += "1" ;
 PACKAGE_VERSION_LIST += "0" ;
