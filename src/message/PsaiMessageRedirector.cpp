@@ -6,7 +6,7 @@
  */
 
 #include <stdio.h>
-#include <string>
+#include <string.h>
 
 #include <psconfig.h>
 #include <psengine.h>
@@ -22,12 +22,17 @@ PsaiMessageRedirector::PsaiMessageRedirector(MsgHandler* messageHandler, psEngin
 {
 	setupSubscriptions(messageHandler);
 	this->engine = engine;
-	msgStringsHashReversable = NULL;
+	//msgStringsHashReversable = NULL;
 	xmlGenerator = new PsaiXmlGenerator();
+	accessPointers = new NetBase::AccessPointers();
 }
 
 PsaiMessageRedirector::~PsaiMessageRedirector()
 {
+	if(accessPointers)
+	{
+		delete accessPointers;
+	}
 	if (msgStringsHashReversable)
 	{
 		delete msgStringsHashReversable;
@@ -58,10 +63,9 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		}
 		case MSGTYPE_DEAD_RECKONING:
 		{
-			if (msgStringsHashReversable)
+			if (accessPointers)
 			{
-				//new psDRMessage()
-				psDRMessage drMsg(msg, 0, msgStringsHashReversable, engine->GetEngine());
+				psDRMessage drMsg(msg, 0, accessPointers);
 				handleDeadReckonMessage(drMsg);
 			}
 			break;
@@ -104,18 +108,18 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		}
 		case MSGTYPE_PERSIST_ACTOR:
 		{
-			if (msgStringsHashReversable)
+			if (accessPointers)
 			{
-				psPersistActor persistActorMsg(msg, 0, msgStringsHashReversable, engine->GetEngine());
+				psPersistActor persistActorMsg(msg, 0, accessPointers);
 				handlePersistActorMessage(persistActorMsg);
 			}
 			break;
 		}
 		case MSGTYPE_PERSIST_ITEM:
 		{
-			if (msgStringsHashReversable)
+			if (accessPointers)
 			{
-				psPersistItem persistItemMsg(msg, msgStringsHashReversable);
+				psPersistItem persistItemMsg(msg, accessPointers);
 				handlePersistItemMessage(persistItemMsg);
 			}
 			break;
@@ -183,9 +187,9 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		}
 		case MSGTYPE_GUIINVENTORY:
 		{
-			if (msgStringsHashReversable)
+			if (accessPointers)
 			{
-				psGUIInventoryMessage guiInvMessage(msg, msgStringsHashReversable);
+				psGUIInventoryMessage guiInvMessage(msg, accessPointers);
 				handleGuiInventoryMessage(guiInvMessage);
 			}
 			break;
@@ -252,6 +256,7 @@ void PsaiMessageRedirector::HandleMessage(MsgEntry* msg)
 		{
 			psEquipmentMessage equipmentMessage(msg);
 			handleEquipmentMessage(equipmentMessage);
+			break;
 		}
 	}
 }
@@ -317,7 +322,7 @@ void PsaiMessageRedirector::handleDeadReckonMessage(psDRMessage& msg)
 
 void PsaiMessageRedirector::handleEffectMessage(psEffectMessage& msg)
 {
-	printf("Handle message of type %s.Effect text: %s\n", msg.GetMessageTypeName().GetDataSafe(), msg.effectText.GetDataSafe());
+	printf("Handle message of type %s.", msg.GetMessageTypeName().GetDataSafe());//, msg.effectText.GetDataSafe());
 }
 
 void PsaiMessageRedirector::handleModeMessage(psModeMessage& msg)

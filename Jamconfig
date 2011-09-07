@@ -64,7 +64,7 @@ CAL3D.LFLAGS ?= -L$(CAL3D.DIR)/src/cal3d/.libs -lcal3d -lz -lpthread -lc -lm -ld
 CAL3D.INCLUDE_DIR ?= $(CAL3D.DIR)/src ;
 
 PS.VERSION ?= 0.5 ;
-PS.INCLUDES ?= -I$(PS.DIR)/include -I$(PS.DEV.DIR)/PlaneShift/src/client -I$(PS.DEV.DIR)/PlaneShift/src/common -I$(PS.DEV.DIR)/PlaneShift/src/eedit -I$(PS.DEV.DIR)/PlaneShift/src/npcclient -I$(PS.DEV.DIR)/PlaneShift/src/pslaunch -I$(PS.DEV.DIR)/PlaneShift/src/server -I$(PS.DEV.DIR)/PlaneShift/src/setup -I$(PS.DEV.DIR)/PlaneShift/src/tools ;
+PS.INCLUDES ?= -I$(PS.DIR)/include -I$(PS.DIR)/src/client -I$(PS.DIR)/src/common -I$(PS.DIR)/src/eedit -I$(PS.DIR)/src/npcclient -I$(PS.DIR)/src/pslaunch -I$(PS.DIR)/src/server -I$(PS.DIR)/src/setup -I$(PS.DIR)/src/tools ;
 PS.LIB_DIR ?= $(PS.DIR)/out/linux/$(PS.BUILD.TYPE)/libs ;
 
 PSENGINE.AVAILABLE ?= yes ;

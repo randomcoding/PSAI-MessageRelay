@@ -52,6 +52,7 @@ class psViewItemDescription;
 class psViewItemUpdate;
 class psEquipmentMessage;
 class PsaiXmlGenerator;
+class NetBase::AccessPointers;
 
 
 class PsaiMessageRedirector: public psClientNetSubscriber
@@ -137,6 +138,8 @@ class PsaiMessageRedirector: public psClientNetSubscriber
 
 
 		csStringHashReversible* msgStringsHashReversable;
+
+		NetBase::AccessPointers* accessPointers;
 
 		psEngine* engine;
 

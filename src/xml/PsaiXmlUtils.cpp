@@ -6,9 +6,11 @@
  */
 
 #include <cssysdef.h>
+#include <psconfig.h>
 
 #include <globals.h>
 #include <string>
+#include <string.h>
 
 #include <net/messages.h>
 
@@ -148,9 +150,8 @@ const std::string PsaiXmlUtils::getChatTypeAsString(const uint8_t chatType)
 const std::string PsaiXmlUtils::convertDomDocumentToXmlString(const DOMDocument& document)
 {
 	DOMImplementation* impl = document.getImplementation();
-	DOMWriter* writer = impl->createDOMWriter();
 
-	XMLCh* xmlString = writer->writeToString(document);
+	XMLCh* xmlString = impl->createLSSerializer()->writeToString(&document);
 
 	return transcode(xmlString);
 }

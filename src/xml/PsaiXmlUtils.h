@@ -8,6 +8,8 @@
 #ifndef PSAIXMLUTILS_H_
 #define PSAIXMLUTILS_H_
 
+#include <string>
+
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/dom/DOM.hpp>
 #include <xercesc/dom/DOMImplementation.hpp>
@@ -15,8 +17,6 @@
 #include <xercesc/dom/DOMElement.hpp>
 
 using namespace XERCES_CPP_NAMESPACE;
-
-typedef std::string String;
 
 class PsaiXmlUtils
 {
@@ -33,21 +33,21 @@ class PsaiXmlUtils
 		 * @param chars The string to transcode
 		 * @return An XMLCh* which is the transcoded string
 		 */
-		const XMLCh* transcode(const String chars);
+		const XMLCh* transcode(const std::string chars);
 
 		/**
 		 * Convert an XMLCh* into a string
 		 * @param xmlCh The XMLCh* to convert
 		 * @return The string version of the XMLCh* value
 		 */
-		const String transcode(const XMLCh* xmlCh);
+		const std::string transcode(const XMLCh* xmlCh);
 
 		/**
 		 * Gets a string representation of a chat type constant. Uses PsaiXmlConstants::CHAT_... values
 		 * @param chatType The type of chat message
 		 * @return A string for the message type
 		 */
-		const String getChatTypeAsString(const uint8_t chatType);
+		const std::string getChatTypeAsString(const uint8_t chatType);
 
 		/**
 		 * Creates a default DOMImplementation reference
@@ -60,7 +60,7 @@ class PsaiXmlUtils
 		 * @param messageType The type of message to use
 		 * @return a DOMDocument that has the base values filled in
 		 */
-		DOMDocument& getDOMDocumentForMessageType(const String messageType);
+		DOMDocument& getDOMDocumentForMessageType(const std::string messageType);
 
 		/**
 		 * Creates a DOMElement as a child of parentElement within parentDoc.
@@ -70,14 +70,14 @@ class PsaiXmlUtils
 		 * @param elementText The text content of the element to create. Defaults to an empty string
 		 * @return
 		 */
-		DOMElement& createDomElement(DOMDocument& parentDoc, DOMElement& parentElement, const String elementTag, const String elementText="");
+		DOMElement& createDomElement(DOMDocument& parentDoc, DOMElement& parentElement, const std::string elementTag, const std::string elementText="");
 
 		/**
 		 * Converts a DOMDocument into a string
 		 * @param document The document to convert
 		 * @return A string that is the document's xml
 		 */
-		const String convertDomDocumentToXmlString(const DOMDocument& document);
+		const std::string convertDomDocumentToXmlString(const DOMDocument& document);
 
 		/**
 		 * Gets the root element of the given document

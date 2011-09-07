@@ -5,7 +5,11 @@
  *      Author: tim
  */
 
+#include <cssysdef.h>
+#include <psconfig.h>
+
 #include <string>
+#include <string.h>
 #include <sstream>
 #include <iostream>
 
@@ -43,9 +47,9 @@ uint32_t PsaiXmlGenerator::getClientNumber(const psMessageCracker& msg)
 
 DOMElement& PsaiXmlGenerator::addVectorElement(DOMDocument& doc, DOMElement& parentElement, const float posX, const float posY, const float posZ)
 {
-	const String posXString = stringUtils.convertToString(posX);
-	const String posYString = stringUtils.convertToString(posY);
-	const String posZString = stringUtils.convertToString(posZ);
+	const std::string posXString = stringUtils.convertToString(posX);
+	const std::string posYString = stringUtils.convertToString(posY);
+	const std::string posZString = stringUtils.convertToString(posZ);
 	DOMElement& vectorElement = xmlUtils.createDomElement(doc, parentElement, PsaiXmlConstants::TYPE_VECTOR_3D);
 	xmlUtils.createDomElement(doc, vectorElement, PsaiXmlConstants::ELEMENT_VECTOR_X, posXString);
 	xmlUtils.createDomElement(doc, vectorElement, PsaiXmlConstants::ELEMENT_VECTOR_Y, posYString);
@@ -59,7 +63,7 @@ DOMElement& PsaiXmlGenerator::addClientNumberElement(DOMDocument& doc, DOMElemen
 	return xmlUtils.createDomElement(doc, parentElement, PsaiXmlConstants::ELEMENT_CLIENT_NUM, stringUtils.convertToString(clientNumber));
 }
 
-String PsaiXmlGenerator::toXml(const psChatMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psChatMessage& msg)
 {
 	String xmlString;
 
@@ -96,7 +100,7 @@ String PsaiXmlGenerator::toXml(const psChatMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psPlaySoundMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psPlaySoundMessage& msg)
 {
 	String xmlString;
 
@@ -117,7 +121,7 @@ String PsaiXmlGenerator::toXml(const psPlaySoundMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
 {
 	String xmlString;
 
@@ -140,7 +144,7 @@ String PsaiXmlGenerator::toXml(const psSoundEventMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psPersistItem& msg)
+std::string PsaiXmlGenerator::toXml(const psPersistItem& msg)
 {
 	String xmlString;
 
@@ -190,7 +194,7 @@ String PsaiXmlGenerator::toXml(const psPersistItem& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psPersistActor& msg)
+std::string PsaiXmlGenerator::toXml(const psPersistActor& msg)
 {
 	String xmlString;
 
@@ -207,7 +211,7 @@ String PsaiXmlGenerator::toXml(const psPersistActor& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psPersistActionLocation& msg)
+std::string PsaiXmlGenerator::toXml(const psPersistActionLocation& msg)
 {
 	String xmlString;
 
@@ -231,7 +235,7 @@ String PsaiXmlGenerator::toXml(const psPersistActionLocation& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psRemoveObject& msg)
+std::string PsaiXmlGenerator::toXml(const psRemoveObject& msg)
 {
 	String xmlString;
 
@@ -249,7 +253,7 @@ String PsaiXmlGenerator::toXml(const psRemoveObject& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psDRMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psDRMessage& msg)
 {
 	String xmlString;
 
@@ -264,7 +268,7 @@ String PsaiXmlGenerator::toXml(const psDRMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psStatDRMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psStatDRMessage& msg)
 {
 	String xmlString;
 
@@ -279,7 +283,7 @@ String PsaiXmlGenerator::toXml(const psStatDRMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psCombatEventMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psCombatEventMessage& msg)
 {
 	String xmlString;
 
@@ -303,7 +307,7 @@ String PsaiXmlGenerator::toXml(const psCombatEventMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psModeMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psModeMessage& msg)
 {
 	String xmlString;
 
@@ -318,7 +322,7 @@ String PsaiXmlGenerator::toXml(const psModeMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psMoveLockMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psMoveLockMessage& msg)
 {
 	String xmlString;
 
@@ -333,7 +337,7 @@ String PsaiXmlGenerator::toXml(const psMoveLockMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psNewSectorMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psNewSectorMessage& msg)
 {
 	String xmlString;
 
@@ -348,7 +352,7 @@ String PsaiXmlGenerator::toXml(const psNewSectorMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psEffectMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psEffectMessage& msg)
 {
 	String xmlString;
 
@@ -363,7 +367,7 @@ String PsaiXmlGenerator::toXml(const psEffectMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psStopEffectMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psStopEffectMessage& msg)
 {
 	String xmlString;
 
@@ -378,7 +382,7 @@ String PsaiXmlGenerator::toXml(const psStopEffectMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psSpellCastMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psSpellCastMessage& msg)
 {
 	String xmlString;
 
@@ -393,7 +397,7 @@ String PsaiXmlGenerator::toXml(const psSpellCastMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psSpellCancelMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psSpellCancelMessage& msg)
 {
 	String xmlString;
 
@@ -408,7 +412,7 @@ String PsaiXmlGenerator::toXml(const psSpellCancelMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psStatsMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psStatsMessage& msg)
 {
 	String xmlString;
 
@@ -423,7 +427,7 @@ String PsaiXmlGenerator::toXml(const psStatsMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psSystemMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psSystemMessage& msg)
 {
 	String xmlString;
 
@@ -438,7 +442,7 @@ String PsaiXmlGenerator::toXml(const psSystemMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psWeatherMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psWeatherMessage& msg)
 {
 	String xmlString;
 
@@ -453,7 +457,7 @@ String PsaiXmlGenerator::toXml(const psWeatherMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psCharacterDetailsMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psCharacterDetailsMessage& msg)
 {
 	String xmlString;
 
@@ -468,7 +472,7 @@ String PsaiXmlGenerator::toXml(const psCharacterDetailsMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psGUIInventoryMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psGUIInventoryMessage& msg)
 {
 	String xmlString;
 
@@ -483,7 +487,7 @@ String PsaiXmlGenerator::toXml(const psGUIInventoryMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psGUIActiveMagicMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psGUIActiveMagicMessage& msg)
 {
 	String xmlString;
 
@@ -498,7 +502,7 @@ String PsaiXmlGenerator::toXml(const psGUIActiveMagicMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psGUIInteractMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psGUIInteractMessage& msg)
 {
 	String xmlString;
 
@@ -513,7 +517,7 @@ String PsaiXmlGenerator::toXml(const psGUIInteractMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psGUIMerchantMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psGUIMerchantMessage& msg)
 {
 	String xmlString;
 
@@ -528,7 +532,7 @@ String PsaiXmlGenerator::toXml(const psGUIMerchantMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psGUISkillMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psGUISkillMessage& msg)
 {
 	String xmlString;
 
@@ -543,7 +547,7 @@ String PsaiXmlGenerator::toXml(const psGUISkillMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psGUITargetUpdateMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psGUITargetUpdateMessage& msg)
 {
 	String xmlString;
 
@@ -558,7 +562,7 @@ String PsaiXmlGenerator::toXml(const psGUITargetUpdateMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psLootMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psLootMessage& msg)
 {
 	String xmlString;
 
@@ -573,7 +577,7 @@ String PsaiXmlGenerator::toXml(const psLootMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psQuestListMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psQuestListMessage& msg)
 {
 	String xmlString;
 
@@ -588,7 +592,7 @@ String PsaiXmlGenerator::toXml(const psQuestListMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psQuestRewardMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psQuestRewardMessage& msg)
 {
 	String xmlString;
 
@@ -603,7 +607,7 @@ String PsaiXmlGenerator::toXml(const psQuestRewardMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psUpdateObjectNameMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psUpdateObjectNameMessage& msg)
 {
 	String xmlString;
 
@@ -618,7 +622,7 @@ String PsaiXmlGenerator::toXml(const psUpdateObjectNameMessage& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psViewItemDescription& msg)
+std::string PsaiXmlGenerator::toXml(const psViewItemDescription& msg)
 {
 	String xmlString;
 
@@ -633,7 +637,7 @@ String PsaiXmlGenerator::toXml(const psViewItemDescription& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psViewItemUpdate& msg)
+std::string PsaiXmlGenerator::toXml(const psViewItemUpdate& msg)
 {
 	String xmlString;
 
@@ -648,7 +652,7 @@ String PsaiXmlGenerator::toXml(const psViewItemUpdate& msg)
 	return xmlString;
 }
 
-String PsaiXmlGenerator::toXml(const psEquipmentMessage& msg)
+std::string PsaiXmlGenerator::toXml(const psEquipmentMessage& msg)
 {
 	String xmlString;
 

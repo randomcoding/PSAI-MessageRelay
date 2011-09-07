@@ -55,7 +55,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
-					<value>-q -s CRYSTAL.DIR=${CRYSTAL_BASE_DIR} CAL3D.DIR=${CAL3D_BASE_DIR} PS.DIR=${PS_BASE_DIR} GTEST.DIR=${GTEST_BASE_DIR} all</value>
+					<value>-q -sCRYSTAL.DIR=${CRYSTAL_BASE_DIR} -sCAL3D.DIR=${CAL3D_BASE_DIR} -sPS.DIR=${PS_BASE_DIR} -sGTEST.DIR=${GTEST_BASE_DIR} psailib</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.stopOnError</key>

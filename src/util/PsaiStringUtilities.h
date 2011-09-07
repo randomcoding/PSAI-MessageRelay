@@ -10,7 +10,7 @@
 #ifndef PSAISTRINGUTILITIES_H_
 #define PSAISTRINGUTILITIES_H_
 
-class string;
+#include <string>
 
 typedef std::string String;
 
