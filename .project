@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>PsaiMessageRedirector</name>
-	<comment></comment>
+	<name>PsaiMessageRelay</name>
+	<comment>The Message relay component for the PSAI Project.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
