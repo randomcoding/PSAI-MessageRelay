@@ -292,7 +292,6 @@ class XmlGeneratorTest: public testing::Test
 			xml.append(getOpenTag(PsaiXmlConstants::TYPE_PERSIST_ITEM_MESSAGE));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_NAME, itemName));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FACT_NAME, factionName));
-			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FILE_NAME, fileName));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FLAGS, getStringUtils().convertToString(persistItemFlags)));
 			xml.append(getTextTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_ID, defaultEid.Unbox()));
 			xml.append(getOpenTag(PsaiXmlConstants::ELEMENT_PERSIST_ITEM_POSITION));

@@ -7,8 +7,8 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.release.1342493057" moduleId="org.eclipse.cdt.core.settings" name="PSAI Build">
 				<macros>
 					<stringMacro name="CAL3D_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/cal3d"/>
-					<stringMacro name="PS_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/planeshift"/>
 					<stringMacro name="GTEST_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/google-test"/>
+					<stringMacro name="PS_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/planeshift"/>
 					<stringMacro name="CRYSTAL_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/crystalspace"/>
 				</macros>
 				<externalSettings/>
@@ -127,8 +127,8 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.release.1342493057.1427727025" moduleId="org.eclipse.cdt.core.settings" name="PSAI Lib Build">
 				<macros>
 					<stringMacro name="CAL3D_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/cal3d"/>
-					<stringMacro name="GTEST_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/google-test"/>
 					<stringMacro name="PS_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/planeshift"/>
+					<stringMacro name="GTEST_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/google-test"/>
 					<stringMacro name="CRYSTAL_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/crystalspace"/>
 				</macros>
 				<externalSettings/>
@@ -244,8 +244,8 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.release.1342493057.1178637835" moduleId="org.eclipse.cdt.core.settings" name="PSAI Tests">
 				<macros>
 					<stringMacro name="CAL3D_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/cal3d"/>
-					<stringMacro name="GTEST_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/google-test"/>
 					<stringMacro name="PS_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/planeshift"/>
+					<stringMacro name="GTEST_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/google-test"/>
 					<stringMacro name="CRYSTAL_BASE_DIR" type="VALUE_PATH_DIR" value="/home/tim/development/code/psai/crystalspace"/>
 				</macros>
 				<externalSettings/>

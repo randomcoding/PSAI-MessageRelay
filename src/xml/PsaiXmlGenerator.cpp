@@ -162,9 +162,6 @@ std::string PsaiXmlGenerator::toXml(const psPersistItem& msg)
 		String factName(msg.factname.GetDataSafe());
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FACT_NAME, factName);
 
-		/*String fileName(msg.filename.GetDataSafe());
-		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FILE_NAME, fileName);*/
-
 		String flags = stringUtils.convertToString(msg.flags);
 		xmlUtils.createDomElement(doc, messageElement, PsaiXmlConstants::ELEMENT_PERSIST_ITEM_FLAGS, flags);
 
