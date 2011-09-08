@@ -142,6 +142,8 @@ class XmlGeneratorTest: public testing::Test
 			iObjectRegistry* objectRegistry = csInitializer::CreateObjectRegistry();
 			psLinearMovement* linearMovement = new psLinearMovement(objectRegistry);
 			linearMovement->SetPathSector(XmlGeneratorTest::sector.c_str());
+
+			return psLinearMovement;
 		}
 
 		String getXmlStringStartForMessageType(String messageType)
