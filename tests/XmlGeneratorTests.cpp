@@ -143,7 +143,7 @@ class XmlGeneratorTest: public testing::Test
 			psLinearMovement* linearMovement = new psLinearMovement(objectRegistry);
 			linearMovement->SetPathSector(XmlGeneratorTest::sector.c_str());
 
-			return psLinearMovement;
+			return linearMovement;
 		}
 
 		String getXmlStringStartForMessageType(String messageType)
@@ -483,7 +483,7 @@ TEST_F(XmlGeneratorTest, testChatMessageToXml)
 
 	String chatXml = getGenerator().toXml(msg);
 
-	ASSERT_STREQ(getExpectedXmlStringForChatMessageToXml().c_str(), chatXml.c_str())<< "Xml generated from psChatMessage was not the same as expected";
+	ASSERT_STREQ(getExpectedXmlStringForChatMessageToXml().c_str(), chatXml.c_str());
 }
 
 TEST_F(XmlGeneratorTest, testPlaySoundMessageToXml)

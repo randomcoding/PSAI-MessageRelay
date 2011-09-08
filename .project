@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>PsaiMessageRelay</name>
-	<comment>The Message relay component for the PSAI Project.</comment>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -31,7 +31,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/PsaiMessageRedirector/}</value>
+					<value>${workspace_loc:/PsaiMessageRelay/Release}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
@@ -55,7 +55,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
-					<value>-q -sCRYSTAL.DIR=${CRYSTAL_BASE_DIR} -sCAL3D.DIR=${CAL3D_BASE_DIR} -sPS.DIR=${PS_BASE_DIR} -sGTEST.DIR=${GTEST_BASE_DIR} all</value>
+					<value>-aq -sCRYSTAL.DIR=${CS_DIR} -sCAL3D.DIR=${CAL3D_DIR} -sPS.DIR=${PS_DIR} -sGTEST.DIR=${GTEST_BASE_DIR}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.stopOnError</key>
@@ -69,14 +69,15 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
 			<arguments>
 			</arguments>
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.cdt.core.ccnature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
 </projectDescription>

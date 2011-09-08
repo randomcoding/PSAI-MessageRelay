@@ -52,8 +52,8 @@ class psViewItemDescription;
 class psViewItemUpdate;
 class psEquipmentMessage;
 class PsaiXmlGenerator;
-class NetBase::AccessPointers;
 
+#include <net/netbase.h>
 
 class PsaiMessageRedirector: public psClientNetSubscriber
 {
