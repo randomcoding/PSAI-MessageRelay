@@ -28,7 +28,7 @@
 					<folderInfo id="cdt.managedbuild.config.gnu.exe.release.1342493057." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.exe.release.147699127" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.release.1962868766" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/PsaiMessageRedirector/}" command="jam" id="cdt.managedbuild.target.gnu.builder.exe.release.777111791" incrementalBuildTarget="-q -s CRYSTAL.DIR=${CRYSTAL_BASE_DIR} CAL3D.DIR=${CAL3D_BASE_DIR} PS.DIR=${PS_BASE_DIR} GTEST.DIR=${GTEST_BASE_DIR} all" keepEnvironmentInBuildfile="true" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
+							<builder buildPath="${workspace_loc:/PsaiMessageRedirector/}" command="jam" id="cdt.managedbuild.target.gnu.builder.exe.release.777111791" incrementalBuildTarget="-q -sCRYSTAL.DIR=${CRYSTAL_BASE_DIR} -sCAL3D.DIR=${CAL3D_BASE_DIR} -sPS.DIR=${PS_BASE_DIR} -sGTEST.DIR=${GTEST_BASE_DIR} all" keepEnvironmentInBuildfile="true" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1804326035" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1944722990" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
 								<option id="gnu.cpp.compiler.exe.release.option.optimization.level.18046520" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
@@ -51,6 +51,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.830716654" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -75,6 +76,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1363997412" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -107,6 +109,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.173137458" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -167,6 +170,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/tools&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.830660026" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -190,6 +194,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/tools&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1412295669" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -221,6 +226,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/tools&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1216851677" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -259,7 +265,7 @@
 					<folderInfo id="cdt.managedbuild.config.gnu.exe.release.1342493057.1178637835." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.exe.release.404744936" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.release.1527895145" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/PsaiMessageRedirector/}" command="jam" id="cdt.managedbuild.target.gnu.builder.exe.release.1137324904" incrementalBuildTarget="-q -s CRYSTAL.DIR=${CRYSTAL_BASE_DIR} CAL3D.DIR=${CAL3D_BASE_DIR} PS.DIR=${PS_BASE_DIR} GTEST.DIR=${GTEST_BASE_DIR} tests" keepEnvironmentInBuildfile="true" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
+							<builder buildPath="${workspace_loc:/PsaiMessageRedirector/}" command="jam" id="cdt.managedbuild.target.gnu.builder.exe.release.1137324904" incrementalBuildTarget="-q -sCRYSTAL.DIR=${CRYSTAL_BASE_DIR} -sCAL3D.DIR=${CAL3D_BASE_DIR} -sPS.DIR=${PS_BASE_DIR} -sGTEST.DIR=${GTEST_BASE_DIR} tests" keepEnvironmentInBuildfile="true" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.283097247" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1938551756" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
 								<option id="gnu.cpp.compiler.exe.release.option.optimization.level.1896136281" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
@@ -282,6 +288,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.288720193" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -306,6 +313,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.493726617" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -338,6 +346,7 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_BASE_DIR}/src/npcclient&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.472908253" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

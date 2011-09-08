@@ -6,6 +6,7 @@
  */
 
 #include <cssysdef.h>
+#include <psconfig.h>
 #include <cstring>
 #include <csutil/strhashr.h>
 #include <iutil/objreg.h>
@@ -82,7 +83,7 @@ class XmlGeneratorTest: public testing::Test
 		static String equipmentParts;
 		static uint8_t counter;
 		static EID mappedEid;
-		static csStringHashReversible* msgStringsHashReversable;
+		//static csStringHashReversible* msgStringsHashReversable;
 		static psLinearMovement* linearMovement;
 		static uint8_t movementMode;
 		static uint8_t serverMode;
@@ -113,6 +114,8 @@ class XmlGeneratorTest: public testing::Test
 		static float damage;
 		static int attackAnimation;
 		static int defenseAnimation;
+
+		static NetBase::AccessPointers* accessPointers;
 
 	protected:
 		// no set up yet
@@ -417,6 +420,8 @@ float XmlGeneratorTest::defaultYRotation = 34.5;
 float XmlGeneratorTest::defaultZRotation = 54.3;
 EID XmlGeneratorTest::objectEid(44);
 
+NetBase::AccessPointers* XmlGeneratorTest::accessPointers = new NetBase::AccessPointers();
+
 // persist actor message
 int XmlGeneratorTest::actorType = 98;
 int XmlGeneratorTest::masqueradeType = 45;
@@ -438,7 +443,7 @@ String XmlGeneratorTest::texParts("Tex Parts");
 String XmlGeneratorTest::equipmentParts("Equipment Parts");
 uint8_t XmlGeneratorTest::counter = 2;
 EID XmlGeneratorTest::mappedEid(43);
-csStringHashReversible* XmlGeneratorTest::msgStringsHashReversable = new csStringHashReversible(10);
+//csStringHashReversible* XmlGeneratorTest::msgStringsHashReversable = new csStringHashReversible(10);
 uint8_t XmlGeneratorTest::movementMode = 5;
 uint8_t XmlGeneratorTest::serverMode = 3;
 PID XmlGeneratorTest::playerId(123);
@@ -527,8 +532,10 @@ TEST_F(XmlGeneratorTest, testPersistItemMessageToXml)
 TEST_F(XmlGeneratorTest, DISABLED_testPersistActorMessageToXml)
 {
 	psLinearMovement* linearMove = createLinearMovement();
+    float scale = 1.0;
+    float mountScale = 1.0;
 	psPersistActor msg(defaultClientNum, actorType, masqueradeType, control, actorName.c_str(), guildName.c_str(), factionName.c_str(),
-			matName.c_str(), raceName.c_str(), mountFactionName.c_str(), mounterAnim.c_str(), gender, helmGroup.c_str(), bracerGroup.c_str(),
+			matName.c_str(), raceName.c_str(), mountFactionName.c_str(), mounterAnim.c_str(), gender, scale, mountScale, helmGroup.c_str(), bracerGroup.c_str(),
 			beltGroup.c_str(), cloakGroup.c_str(), collisionTop, collisionBottom, collisionOffset, texParts.c_str(), equipmentParts.c_str(), counter,
 			mappedEid, msgStrings, linearMove, movementMode, serverMode, playerId, groupId, ownerEid, persistActorMessageFlags);
 
@@ -587,8 +594,7 @@ TEST_F(XmlGeneratorTest, testRemoveObjectMessageToXml)
 // Disabled for the same reason as testPersistActorMessageToXml
 TEST_F(XmlGeneratorTest, DISABLED_testDeadReckoningMessageToXml)
 {
-	psDRMessage msg(defaultClientNum, mappedEid, true, movementMode, counter, position, yRot, iSec, sector.c_str(), velocity, worldVelocity,
-			ang_velocity, msgStrings, msgStringsHashReversable);
+	psDRMessage msg(defaultClientNum, mappedEid, true, movementMode, counter, position, yRot, iSec, sector.c_str(), velocity, worldVelocity, ang_velocity, accessPointers);
 
 	msg.entityid = mappedEid;
 	msg.on_ground = true;

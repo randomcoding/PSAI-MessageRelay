@@ -26,6 +26,7 @@ IncludeDir tests xml ;
 IncludeDir $(TOP) .. cal3d src ;
 IncludeDir $(TOP) .. cal3d include ;
 IncludeDir $(TOP) .. crystalspace include ;
+IncludeDir $(GTEST.INCLUDE_DIR) ;
 
 # PlaneShift include directories
 IncludeDir $(TOP) .. planeshift include ;

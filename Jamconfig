@@ -50,10 +50,13 @@ COMPILER.CFLAGS.VISIBILITY_DEFAULT ?= -fvisibility=default ;
 # set this to debug or optimize depending on whether or not you configured PlaneShift with debug or not
 PS.BUILD.TYPE ?= optimize ;
 
+# set the version of the Crystal Space library.
+CS.VERSION ?= 2.1 ;
+
 CRYSTAL.AVAILABLE ?= yes ;
 CRYSTAL.VERSION ?= 1.4 ;
 CRYSTAL.CFLAGS ?= -I$(CRYSTAL.DIR)/include ;
-CRYSTAL.LFLAGS ?= -L$(CRYSTAL.DIR)/out/linux/optimize/libs -lcrystalspace-1.9 -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
+CRYSTAL.LFLAGS ?= -L$(CRYSTAL.DIR)/out/linux/optimize/libs -lcrystalspace-$(CS.VERSION) -lz -lpthread -lc -lm -ldl -lnsl -L/usr/local/lib ;
 CRYSTAL.INCLUDE_DIR ?= $(CRYSTAL.DIR)/include ;
 CRYSTAL.AVAILABLE_LIBS ?= crystalspace crystalspace_opengl ;
 CRYSTAL.STATICDEPS ?= $(CRYSTAL.DIR)/pace/out/linux/optimize/libs/crystalspace_staticplugins.jam ;
