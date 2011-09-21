@@ -1,5 +1,15 @@
 SubDir TOP tests message ;
 
-Library psaimessagetests : [ Wildcard *.cpp *.h ] 	: noinstall ;
+if $(GTEST.AVAILABLE) = "yes"
+{
+	Application psaimessagetests : [ Wildcard *.cpp *.h ] ;
+	
+	ExternalLibs psaimessagetests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;
+	
+	LinkWith psaimessagetests : psaibase ;
+	# psaiutiltests psaixmltests psaimessagetests ;
+}
 
-ExternalLibs psaimessagetests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;
+#Library psaimessagetests : [ Wildcard *.cpp *.h ] 	: noinstall ;
+
+#ExternalLibs psaimessagetests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;

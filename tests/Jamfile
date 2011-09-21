@@ -3,7 +3,7 @@ SubDir TOP tests ;
 
 #SubInclude TOP tests xml ;
 #SubInclude TOP tests util ;
-#SubInclude TOP tests message ;
+SubInclude TOP tests message ;
 
 if $(GTEST.AVAILABLE) = "yes"
 {
