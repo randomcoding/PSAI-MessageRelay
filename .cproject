@@ -232,16 +232,12 @@
 					<folderInfo id="cdt.managedbuild.config.gnu.exe.release.2037715.419727640." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.exe.release.490841008" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.release.299203798" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/PsaiMessageRelay/Release}" command="jam" id="cdt.managedbuild.target.gnu.builder.exe.release.449681526" incrementalBuildTarget="-q -sCRYSTAL.DIR=${CS_DIR} -sCAL3D.DIR=${CAL3D_DIR} -sPS.DIR=${PS_DIR} -sGTEST.DIR=${GTEST_BASE_DIR} tests" keepEnvironmentInBuildfile="true" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
+							<builder buildPath="${workspace_loc:/PsaiMessageRelay/Release}" command="jam" id="cdt.managedbuild.target.gnu.builder.exe.release.449681526" incrementalBuildTarget="-q -d4 -sCRYSTAL.DIR=${CS_DIR} -sCAL3D.DIR=${CAL3D_DIR} -sPS.DIR=${PS_DIR} -sGTEST.DIR=${GTEST_BASE_DIR} tests" keepEnvironmentInBuildfile="true" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.2118398161" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1058279051" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
 								<option id="gnu.cpp.compiler.exe.release.option.optimization.level.1401760312" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.exe.release.option.debugging.level.542254674" name="Debug Level" superClass="gnu.cpp.compiler.exe.release.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1035283386" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/message}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/util}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/xml}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CAL3D_DIR}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CS_DIR}/include&quot;"/>
@@ -255,6 +251,10 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/tools&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/npcclient&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/message}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/util}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/xml}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1700441347" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -262,10 +262,6 @@
 								<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.exe.release.option.optimization.level.1051871666" name="Optimization Level" superClass="gnu.c.compiler.exe.release.option.optimization.level" valueType="enumerated"/>
 								<option id="gnu.c.compiler.exe.release.option.debugging.level.2088750920" name="Debug Level" superClass="gnu.c.compiler.exe.release.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1899806949" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/message}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/util}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/xml}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CAL3D_DIR}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CS_DIR}/include&quot;"/>
@@ -279,6 +275,10 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/tools&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/npcclient&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/message}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/util}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/xml}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.2014337593" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -330,19 +330,25 @@
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.2037715;cdt.managedbuild.config.gnu.exe.release.2037715.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.1145201787;cdt.managedbuild.tool.gnu.c.compiler.input.1367613894">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.53958849;cdt.managedbuild.config.gnu.exe.release.53958849.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1933184706;cdt.managedbuild.tool.gnu.cpp.compiler.input.1936974696">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.2037715;cdt.managedbuild.config.gnu.exe.release.2037715.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.252470047;cdt.managedbuild.tool.gnu.cpp.compiler.input.1357762477">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.53958849;cdt.managedbuild.config.gnu.exe.release.53958849.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1933184706;cdt.managedbuild.tool.gnu.cpp.compiler.input.1936974696">
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.2037715;cdt.managedbuild.config.gnu.exe.release.2037715.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.1145201787;cdt.managedbuild.tool.gnu.c.compiler.input.1367613894">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.2037715.419727640;cdt.managedbuild.config.gnu.exe.release.2037715.419727640.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1058279051;cdt.managedbuild.tool.gnu.cpp.compiler.input.1700441347">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.1785922407;cdt.managedbuild.config.gnu.exe.release.1785922407.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.1370553727;cdt.managedbuild.tool.gnu.c.compiler.input.450197567">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.53958849;cdt.managedbuild.config.gnu.exe.release.53958849.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.367756076;cdt.managedbuild.tool.gnu.c.compiler.input.2063921351">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.2037715.419727640;cdt.managedbuild.config.gnu.exe.release.2037715.419727640.;cdt.managedbuild.tool.gnu.c.compiler.exe.release.337239863;cdt.managedbuild.tool.gnu.c.compiler.input.2014337593">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.release.1785922407;cdt.managedbuild.config.gnu.exe.release.1785922407.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1398375136;cdt.managedbuild.tool.gnu.cpp.compiler.input.668578695">

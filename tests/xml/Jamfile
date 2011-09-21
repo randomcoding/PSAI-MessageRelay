@@ -1,0 +1,5 @@
+SubDir TOP tests xml ;
+
+Library psaixmltests : [ Wildcard *.cpp *.h ] : noinstall ;
+
+ExternalLibs psaixmltests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;

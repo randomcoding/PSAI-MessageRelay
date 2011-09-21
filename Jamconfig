@@ -98,7 +98,7 @@ PS_ALL.LFLAGS ?= -L$(PS.LIB_DIR) -lgui-$(PS.VERSION) -lpsengine-$(PS.VERSION) -l
 
 GTEST.AVAILABLE ?= yes ;
 GTEST.CFLAGS ?= -I$(GTEST.DIR)/include ;
-GTEST.LFLAGS ?= -L$(GTEST.DIR)/lib -lgtest ;
+GTEST.LFLAGS ?= -L$(GTEST.DIR)/lib -lgtest -lgtest_main ;
 GTEST.INCLUDE_DIR ?= $(GTEST.DIR)/include ;
 
 XML_LIBS.AVAILABLE ?= yes ;

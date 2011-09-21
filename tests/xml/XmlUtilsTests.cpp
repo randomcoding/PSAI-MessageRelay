@@ -14,8 +14,11 @@
 
 #include <xml/PsaiXmlUtils.h>
 
-class XmlUtilsTest: public testing::Test
+class XmlUtilsTest: public ::testing::Test
 {
+	public:
+		virtual ~XmlUtilsTest() {}
+
 	protected:
 
 		// no setup

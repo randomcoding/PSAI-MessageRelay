@@ -1,13 +1,18 @@
 # Jamfile for tests directory call all sub tests directory and then
 SubDir TOP tests ;
 
+#SubInclude TOP tests xml ;
+#SubInclude TOP tests util ;
+#SubInclude TOP tests message ;
+
 if $(GTEST.AVAILABLE) = "yes"
 {
-	Application psaitests : [ Wildcard *.cpp *.h ] : console ;
+	Application psaitests : [ Wildcard *.cpp *.h ] ;
 	
 	ExternalLibs psaitests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;
 	
 	LinkWith psaitests : psaibase ;
+	# psaiutiltests psaixmltests psaimessagetests ;
 }
 
 CompileGroups psaitests : tests ;

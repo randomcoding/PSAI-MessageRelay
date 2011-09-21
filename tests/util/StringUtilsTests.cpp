@@ -9,9 +9,12 @@
 
 #include <util/PsaiStringUtilities.h>
 
-class StringUtilsTest: public testing::Test
+class StringUtilsTest: public ::testing::Test
 {
 	public:
+
+		virtual ~ StringUtilsTest() {}
+
 		const PsaiStringUtilities& getStringUtils()
 		{
 			return PsaiStringUtilities::getStringUtils();

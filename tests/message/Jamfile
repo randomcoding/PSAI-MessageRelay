@@ -1,0 +1,5 @@
+SubDir TOP tests message ;
+
+Library psaimessagetests : [ Wildcard *.cpp *.h ] 	: noinstall ;
+
+ExternalLibs psaimessagetests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;

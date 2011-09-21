@@ -38,9 +38,12 @@ XERCES_CPP_NAMESPACE_USE
 
 CS_IMPLEMENT_APPLICATION
 
-class XmlGeneratorTest: public testing::Test
+class XmlGeneratorTest: public ::testing::Test
 {
 	public:
+
+	virtual ~XmlGeneratorTest() {}
+
 		// Declarations of test values
 		static String itemName;
 		static String factionName;
