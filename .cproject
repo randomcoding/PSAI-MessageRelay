@@ -251,10 +251,6 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/tools&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/npcclient&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/message}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/util}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/xml}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1700441347" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -275,10 +271,6 @@
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/tools&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/worldeditor&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PS_DIR}/src/npcclient&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/message}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/util}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRelay/src/xml}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.2014337593" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -291,10 +283,6 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.exe.release.1089132769" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.release">
 								<option id="gnu.both.asm.option.include.paths.2132792425" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/message}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/util}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PsaiMessageRedirector/src/xml}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${GTEST_BASE_DIR}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CAL3D_DIR}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CS_DIR}/include&quot;"/>
