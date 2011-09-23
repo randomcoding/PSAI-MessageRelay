@@ -1,18 +1,24 @@
-# Jamfile for tests directory call all sub tests directory and then
-SubDir TOP tests ;
+#################################################################
+# Builds the tests application, if the GTEST.AVAILABLE flag in $(TOP) jamfile is set to 'yes'
+#
+# For some reason, i am not able to use SubDir rules to include files in sub directories
+# into a the application.
+# Jam will build the fine and link them to the application, but the tests are not
+# registered with Google Test and therefore do not run.
+#
+# The solution I found is to include a wildcard entry for each sub directory (see below)
+#################################################################
 
-#SubInclude TOP tests xml ;
-#SubInclude TOP tests util ;
-SubInclude TOP tests message ;
+SubDir TOP tests ;
 
 if $(GTEST.AVAILABLE) = "yes"
 {
-	Application psaitests : [ Wildcard *.cpp *.h ] ;
+	# for each subdirectory to compile into the psaitests application add a new [ Wildcard <dirname> : *.cpp ] entry
+	Application psaitests : [ Wildcard message : *.cpp ] [ Wildcard xml : *.cpp ] [ Wildcard util : *.cpp ] : noinstall : console ;
 	
 	ExternalLibs psaitests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;
 	
 	LinkWith psaitests : psaibase ;
-	# psaiutiltests psaixmltests psaimessagetests ;
 }
 
 CompileGroups psaitests : tests ;

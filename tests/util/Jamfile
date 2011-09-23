@@ -1,5 +1,0 @@
-SubDir TOP tests util ;
-
-Library psaiutiltests : [ Wildcard *.cpp *.h ] : noinstall ;
-
-ExternalLibs psaiutiltests : CAL3D CRYSTAL PS_ALL XML_LIBS GTEST ;
